@@ -1,0 +1,3 @@
+java.base:17.35
+java.security.sasl:17.35
+java.logging:17.35
