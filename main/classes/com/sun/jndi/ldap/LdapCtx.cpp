@@ -1971,7 +1971,7 @@ $String* LdapCtx::concatNames($String* lesser, $String* greater) {
 	$init(LdapCtx);
 	if (lesser == nullptr || $nc(lesser)->isEmpty()) {
 		return greater;
-	} else if (greater == nullptr || greater->isEmpty()) {
+	} else if (greater == nullptr || $nc(greater)->isEmpty()) {
 		return lesser;
 	} else {
 		return ($str({lesser, ","_s, greater}));

@@ -289,7 +289,7 @@ $Object* Obj::decodeObject($Attributes* attrs) {
 				return $of(decodeRmiObject(var$0, $cast($String, $($nc(attr)->get())), codebases));
 			}
 		}
-		$assign(attr, attrs->get($nc(Obj::JAVA_ATTRIBUTES)->get(Obj::OBJECT_CLASS)));
+		$assign(attr, $nc(attrs)->get($nc(Obj::JAVA_ATTRIBUTES)->get(Obj::OBJECT_CLASS)));
 		bool var$1 = attr != nullptr;
 		if (var$1) {
 			bool var$2 = attr->contains($nc(Obj::JAVA_OBJECT_CLASSES)->get(Obj::REF_OBJECT));

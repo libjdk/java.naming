@@ -609,7 +609,7 @@ $SearchControls* ldapURLContext::setSearchControlsUsingURL($LdapURL* url) {
 	$var($String, attributes, url->getAttributes());
 	if (scope == nullptr) {
 		cons->setSearchScope($SearchControls::OBJECT_SCOPE);
-	} else if (scope->equals("sub"_s)) {
+	} else if ($nc(scope)->equals("sub"_s)) {
 		cons->setSearchScope($SearchControls::SUBTREE_SCOPE);
 	} else if (scope->equals("one"_s)) {
 		cons->setSearchScope($SearchControls::ONELEVEL_SCOPE);

@@ -492,7 +492,7 @@ bool AtomicContext::resolve_to_context($Name* name, $Continuation* cont) {
 			$var($Object, headCtx, a_lookup(head, cont));
 			if (headCtx != nullptr) {
 				$nc(cont)->setContinue(headCtx, head, static_cast<$Context*>(this), (tail == nullptr ? ""_s : tail));
-			} else if (cont->isContinue()) {
+			} else if ($nc(cont)->isContinue()) {
 				cont->appendRemainingComponent(tail);
 			}
 		} catch ($NamingException&) {
@@ -525,7 +525,7 @@ bool AtomicContext::resolve_to_penultimate_context($Name* name, $Continuation* c
 			$var($Object, headCtx, a_lookup(head, cont));
 			if (headCtx != nullptr) {
 				$nc(cont)->setContinue(headCtx, head, static_cast<$Context*>(this), tail);
-			} else if (cont->isContinue()) {
+			} else if ($nc(cont)->isContinue()) {
 				cont->appendRemainingComponent(tail);
 			}
 		} catch ($NamingException&) {

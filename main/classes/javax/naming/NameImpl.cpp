@@ -450,7 +450,7 @@ bool NameImpl::equals(Object$* obj) {
 					if (!($nc(my)->equalsIgnoreCase(his))) {
 						return false;
 					}
-				} else if (!(my->equals(his))) {
+				} else if (!($nc(my)->equals(his))) {
 					return false;
 				}
 			}
@@ -537,7 +537,7 @@ bool NameImpl::startsWith(int32_t posn, $Enumeration* prefix) {
 				if (!($nc(my)->equalsIgnoreCase(his))) {
 					return false;
 				}
-			} else if (!(my->equals(his))) {
+			} else if (!($nc(my)->equals(his))) {
 				return false;
 			}
 		}
@@ -566,7 +566,7 @@ bool NameImpl::endsWith(int32_t posn, $Enumeration* suffix) {
 				if (!($nc(my)->equalsIgnoreCase(his))) {
 					return false;
 				}
-			} else if (!(my->equals(his))) {
+			} else if (!($nc(my)->equals(his))) {
 				return false;
 			}
 		}

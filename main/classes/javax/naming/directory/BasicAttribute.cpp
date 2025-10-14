@@ -263,7 +263,7 @@ int32_t BasicAttribute::find(Object$* target) {
 				return i;
 			}
 		}
-	} else if ($nc((cl = $of(target)->getClass()))->isArray()) {
+	} else if ($nc((cl = $nc($of(target))->getClass()))->isArray()) {
 		int32_t ct = $nc(this->values)->size();
 		$var($Object, it, nullptr);
 		for (int32_t i = 0; i < ct; ++i) {
@@ -308,7 +308,7 @@ bool BasicAttribute::arrayEquals(Object$* a1, Object$* a2) {
 			if (!$equals(i1, i2)) {
 				return false;
 			}
-		} else if (!$of(i1)->equals(i2)) {
+		} else if (!$nc($of(i1))->equals(i2)) {
 			return false;
 		}
 	}

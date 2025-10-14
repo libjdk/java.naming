@@ -74,7 +74,7 @@ bool ContainmentFilter::contains($Attributes* superset, $Attributes* subset) {
 		$var($Attribute, fromSuper, $nc(superset)->get($($nc(target)->getID())));
 		if (fromSuper == nullptr) {
 			return false;
-		} else if (target->size() > 0) {
+		} else if ($nc(target)->size() > 0) {
 			$var($NamingEnumeration, vals, target->getAll());
 			while ($nc(vals)->hasMore()) {
 				if (!$nc(fromSuper)->contains($(vals->next()))) {

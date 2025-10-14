@@ -515,9 +515,9 @@ $LdapResult* LdapClient::authenticate(bool initial, $String* name$renamed, Objec
 				}
 				bool var$5 = initial && ($nc(res)->status == LdapClient::LDAP_PROTOCOL_ERROR) && (version == LdapClient::LDAP_VERSION3_VERSION2);
 				if (var$5) {
-					bool var$7 = authMechanism->equalsIgnoreCase("none"_s);
-					bool var$6 = var$7 || authMechanism->equalsIgnoreCase("anonymous"_s);
-					var$5 = (var$6 || authMechanism->equalsIgnoreCase("simple"_s));
+					bool var$7 = $nc(authMechanism)->equalsIgnoreCase("none"_s);
+					bool var$6 = var$7 || $nc(authMechanism)->equalsIgnoreCase("anonymous"_s);
+					var$5 = (var$6 || $nc(authMechanism)->equalsIgnoreCase("simple"_s));
 				}
 				if (var$5) {
 					$var($bytes, encodedPw, nullptr);

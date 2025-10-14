@@ -709,7 +709,7 @@ $NameParser* GenericURLContext::getNameParser($Name* name) {
 $String* GenericURLContext::composeName($String* name, $String* prefix) {
 	if ($nc(prefix)->isEmpty()) {
 		return name;
-	} else if (name->isEmpty()) {
+	} else if ($nc(name)->isEmpty()) {
 		return prefix;
 	} else {
 		return ($str({prefix, "/"_s, name}));
