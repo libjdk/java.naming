@@ -81,6 +81,7 @@ $Object* allocate$SaslInputStream($Class* clazz) {
 }
 
 void SaslInputStream::init$($SaslClient* sc, $InputStream* in) {
+	$useLocalCurrentObjectStackCache();
 	$InputStream::init$();
 	$set(this, lenBuf, $new($bytes, 4));
 	$set(this, buf, $new($bytes, 0));
@@ -134,6 +135,7 @@ int32_t SaslInputStream::read($bytes* inBuf, int32_t start, int32_t count) {
 }
 
 int32_t SaslInputStream::fill() {
+	$useLocalCurrentObjectStackCache();
 	int32_t actual = readFully(this->lenBuf, 4);
 	if (actual != 4) {
 		return -1;
@@ -170,6 +172,7 @@ int32_t SaslInputStream::available() {
 }
 
 void SaslInputStream::close() {
+	$useLocalCurrentObjectStackCache();
 	$var($SaslException, save, nullptr);
 	try {
 		$nc(this->sc)->dispose();

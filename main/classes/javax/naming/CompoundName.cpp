@@ -166,6 +166,7 @@ bool CompoundName::endsWith($Name* n) {
 }
 
 $Name* CompoundName::addAll($Name* suffix) {
+	$useLocalCurrentObjectStackCache();
 	if ($instanceOf(CompoundName, suffix)) {
 		$nc(this->impl)->addAll($($nc(suffix)->getAll()));
 		return this;
@@ -175,6 +176,7 @@ $Name* CompoundName::addAll($Name* suffix) {
 }
 
 $Name* CompoundName::addAll(int32_t posn, $Name* n) {
+	$useLocalCurrentObjectStackCache();
 	if ($instanceOf(CompoundName, n)) {
 		$nc(this->impl)->addAll(posn, $($nc(n)->getAll()));
 		return this;
@@ -198,6 +200,7 @@ $Object* CompoundName::remove(int32_t posn) {
 }
 
 void CompoundName::writeObject($ObjectOutputStream* s) {
+	$useLocalCurrentObjectStackCache();
 	$nc(s)->writeObject(this->mySyntax);
 	s->writeInt(size());
 	$var($Enumeration, comps, getAll());
@@ -207,6 +210,7 @@ void CompoundName::writeObject($ObjectOutputStream* s) {
 }
 
 void CompoundName::readObject($ObjectInputStream* s) {
+	$useLocalCurrentObjectStackCache();
 	$set(this, mySyntax, $cast($Properties, $nc(s)->readObject()));
 	$set(this, impl, $new($NameImpl, this->mySyntax));
 	int32_t n = s->readInt();

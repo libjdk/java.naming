@@ -143,6 +143,7 @@ $Object* allocate$NamingEventNotifier($Class* clazz) {
 }
 
 void NamingEventNotifier::init$($EventSupport* support, $LdapCtx* ctx, $NotifierArgs* info, $NamingListener* firstListener) {
+	$useLocalCurrentObjectStackCache();
 	$set(this, info, info);
 	$set(this, support, support);
 	$var($Control, psearch, nullptr);
@@ -177,6 +178,7 @@ bool NamingEventNotifier::hasNamingListeners() {
 }
 
 void NamingEventNotifier::run() {
+	$useLocalCurrentObjectStackCache();
 	{
 		$var($Throwable, var$0, nullptr);
 		try {
@@ -266,6 +268,7 @@ void NamingEventNotifier::stop() {
 }
 
 void NamingEventNotifier::fireObjectAdded($Binding* newBd, int64_t changeID) {
+	$useLocalCurrentObjectStackCache();
 	if (this->namingListeners == nullptr || $nc(this->namingListeners)->size() == 0) {
 		return;
 	}
@@ -274,6 +277,7 @@ void NamingEventNotifier::fireObjectAdded($Binding* newBd, int64_t changeID) {
 }
 
 void NamingEventNotifier::fireObjectRemoved($Binding* oldBd, int64_t changeID) {
+	$useLocalCurrentObjectStackCache();
 	if (this->namingListeners == nullptr || $nc(this->namingListeners)->size() == 0) {
 		return;
 	}
@@ -282,6 +286,7 @@ void NamingEventNotifier::fireObjectRemoved($Binding* oldBd, int64_t changeID) {
 }
 
 void NamingEventNotifier::fireObjectChanged($Binding* newBd, int64_t changeID) {
+	$useLocalCurrentObjectStackCache();
 	if (this->namingListeners == nullptr || $nc(this->namingListeners)->size() == 0) {
 		return;
 	}
@@ -292,6 +297,7 @@ void NamingEventNotifier::fireObjectChanged($Binding* newBd, int64_t changeID) {
 }
 
 void NamingEventNotifier::fireObjectRenamed($Binding* newBd, $String* oldDN, int64_t changeID) {
+	$useLocalCurrentObjectStackCache();
 	if (this->namingListeners == nullptr || $nc(this->namingListeners)->size() == 0) {
 		return;
 	}

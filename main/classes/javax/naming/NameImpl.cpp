@@ -147,6 +147,7 @@ int32_t NameImpl::skipSeparator($String* name, int32_t i) {
 }
 
 int32_t NameImpl::extractComp($String* name, int32_t i, int32_t len, $Vector* comps) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, beginQuote, nullptr);
 	$var($String, endQuote, nullptr);
 	bool start = true;
@@ -240,6 +241,7 @@ bool NameImpl::toBoolean($String* name) {
 }
 
 void NameImpl::recordNamingConvention($Properties* p) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, syntaxDirectionStr, $nc(p)->getProperty("jndi.syntax.direction"_s, "flat"_s));
 	if ($nc(syntaxDirectionStr)->equals("left_to_right"_s)) {
 		this->syntaxDirection = NameImpl::LEFT_TO_RIGHT;
@@ -301,6 +303,7 @@ void NameImpl::init$($Properties* syntax) {
 }
 
 void NameImpl::init$($Properties* syntax, $String* n) {
+	$useLocalCurrentObjectStackCache();
 	NameImpl::init$(syntax);
 	bool rToL = (this->syntaxDirection == NameImpl::RIGHT_TO_LEFT);
 	bool compsAllEmpty = true;
@@ -325,6 +328,7 @@ void NameImpl::init$($Properties* syntax, $String* n) {
 }
 
 void NameImpl::init$($Properties* syntax, $Enumeration* comps) {
+	$useLocalCurrentObjectStackCache();
 	NameImpl::init$(syntax);
 	while ($nc(comps)->hasMoreElements()) {
 		$nc(this->components)->addElement($cast($String, $(comps->nextElement())));
@@ -332,6 +336,7 @@ void NameImpl::init$($Properties* syntax, $Enumeration* comps) {
 }
 
 $String* NameImpl::stringifyComp($String* comp) {
+	$useLocalCurrentObjectStackCache();
 	int32_t len = $nc(comp)->length();
 	bool escapeSeparator = false;
 	bool escapeSeparator2 = false;
@@ -408,6 +413,7 @@ $String* NameImpl::stringifyComp($String* comp) {
 }
 
 $String* NameImpl::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuffer, answer, $new($StringBuffer));
 	$var($String, comp, nullptr);
 	bool compsAllEmpty = true;
@@ -433,6 +439,7 @@ $String* NameImpl::toString() {
 }
 
 bool NameImpl::equals(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if ((obj != nullptr) && ($instanceOf(NameImpl, obj))) {
 		$var(NameImpl, target, $cast(NameImpl, obj));
 		int32_t var$0 = target->size();
@@ -461,6 +468,7 @@ bool NameImpl::equals(Object$* obj) {
 }
 
 int32_t NameImpl::compareTo(NameImpl* obj) {
+	$useLocalCurrentObjectStackCache();
 	if (this == obj) {
 		return 0;
 	}
@@ -521,6 +529,7 @@ bool NameImpl::isEmpty() {
 }
 
 bool NameImpl::startsWith(int32_t posn, $Enumeration* prefix) {
+	$useLocalCurrentObjectStackCache();
 	if (posn < 0 || posn > size()) {
 		return false;
 	}
@@ -549,6 +558,7 @@ bool NameImpl::startsWith(int32_t posn, $Enumeration* prefix) {
 }
 
 bool NameImpl::endsWith(int32_t posn, $Enumeration* suffix) {
+	$useLocalCurrentObjectStackCache();
 	int32_t startIndex = size() - posn;
 	if (startIndex < 0 || startIndex > size()) {
 		return false;
@@ -578,6 +588,7 @@ bool NameImpl::endsWith(int32_t posn, $Enumeration* suffix) {
 }
 
 bool NameImpl::addAll($Enumeration* comps) {
+	$useLocalCurrentObjectStackCache();
 	bool added = false;
 	while ($nc(comps)->hasMoreElements()) {
 		try {
@@ -596,6 +607,7 @@ bool NameImpl::addAll($Enumeration* comps) {
 }
 
 bool NameImpl::addAll(int32_t posn, $Enumeration* comps) {
+	$useLocalCurrentObjectStackCache();
 	bool added = false;
 	for (int32_t i = posn; $nc(comps)->hasMoreElements(); ++i) {
 		try {
@@ -634,6 +646,7 @@ $Object* NameImpl::remove(int32_t posn) {
 }
 
 int32_t NameImpl::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	int32_t hash = 0;
 	{
 		$var($Enumeration, e, getAll());

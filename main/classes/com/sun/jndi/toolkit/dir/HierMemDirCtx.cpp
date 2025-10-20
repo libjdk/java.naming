@@ -280,6 +280,7 @@ $Object* HierMemDirCtx::lookup($Name* name) {
 }
 
 $Object* HierMemDirCtx::doLookup($Name* name$renamed, bool useFactory) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, name, name$renamed);
 	$var($Object, target, nullptr);
 	$assign(name, canonizeName(name));
@@ -345,6 +346,7 @@ void HierMemDirCtx::bind($Name* name, Object$* obj, $Attributes* attrs) {
 }
 
 void HierMemDirCtx::doBind($Name* name, Object$* obj$renamed, $Attributes* attrs$renamed, bool useFactory) {
+	$useLocalCurrentObjectStackCache();
 	$var($Object, obj, obj$renamed);
 	$var($Attributes, attrs, attrs$renamed);
 	if ($nc(name)->isEmpty()) {
@@ -363,6 +365,7 @@ void HierMemDirCtx::doBind($Name* name, Object$* obj$renamed, $Attributes* attrs
 }
 
 void HierMemDirCtx::doBindAux($Name* name, Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if (this->readOnlyEx != nullptr) {
 		$throw($cast($NamingException, $($nc(this->readOnlyEx)->fillInStackTrace())));
 	}
@@ -393,6 +396,7 @@ void HierMemDirCtx::rebind($Name* name, Object$* obj, $Attributes* attrs) {
 }
 
 void HierMemDirCtx::doRebind($Name* name, Object$* obj$renamed, $Attributes* attrs$renamed, bool useFactory) {
+	$useLocalCurrentObjectStackCache();
 	$var($Object, obj, obj$renamed);
 	$var($Attributes, attrs, attrs$renamed);
 	if ($nc(name)->isEmpty()) {
@@ -426,6 +430,7 @@ void HierMemDirCtx::unbind($String* name) {
 }
 
 void HierMemDirCtx::unbind($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->isEmpty()) {
 		$throwNew($InvalidNameException, "Cannot unbind empty name"_s);
 	} else {
@@ -442,11 +447,13 @@ void HierMemDirCtx::doUnbind($Name* name) {
 }
 
 void HierMemDirCtx::rename($String* oldname, $String* newname) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, var$0, $nc(this->myParser)->parse(oldname));
 	rename(var$0, $($nc(this->myParser)->parse(newname)));
 }
 
 void HierMemDirCtx::rename($Name* oldname, $Name* newname) {
+	$useLocalCurrentObjectStackCache();
 	bool var$0 = $nc(newname)->isEmpty();
 	if (var$0 || $nc(oldname)->isEmpty()) {
 		$throwNew($InvalidNameException, "Cannot rename empty name"_s);
@@ -460,6 +467,7 @@ void HierMemDirCtx::rename($Name* oldname, $Name* newname) {
 }
 
 void HierMemDirCtx::doRename($Name* oldname$renamed, $Name* newname$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, oldname, oldname$renamed);
 	$var($Name, newname, newname$renamed);
 	if (this->readOnlyEx != nullptr) {
@@ -508,11 +516,13 @@ void HierMemDirCtx::destroySubcontext($String* name) {
 }
 
 void HierMemDirCtx::destroySubcontext($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var(HierMemDirCtx, ctx, $cast(HierMemDirCtx, doLookup($(getInternalName(name)), false)));
 	$nc(ctx)->doDestroySubcontext($(getLeafName(name)));
 }
 
 void HierMemDirCtx::doDestroySubcontext($Name* name$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, name, name$renamed);
 	if (this->readOnlyEx != nullptr) {
 		$throw($cast($NamingException, $($nc(this->readOnlyEx)->fillInStackTrace())));
@@ -534,11 +544,13 @@ $DirContext* HierMemDirCtx::createSubcontext($String* name, $Attributes* attrs) 
 }
 
 $DirContext* HierMemDirCtx::createSubcontext($Name* name, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var(HierMemDirCtx, ctx, $cast(HierMemDirCtx, doLookup($(getInternalName(name)), false)));
 	return $nc(ctx)->doCreateSubcontext($(getLeafName(name)), attrs);
 }
 
 $DirContext* HierMemDirCtx::doCreateSubcontext($Name* name$renamed, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, name, name$renamed);
 	if (this->readOnlyEx != nullptr) {
 		$throw($cast($NamingException, $($nc(this->readOnlyEx)->fillInStackTrace())));
@@ -572,12 +584,14 @@ $NameParser* HierMemDirCtx::getNameParser($Name* name) {
 }
 
 $String* HierMemDirCtx::composeName($String* name, $String* prefix) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, var$0, static_cast<$Name*>($new($CompositeName, name)));
 	$var($Name, result, composeName(var$0, static_cast<$Name*>($$new($CompositeName, prefix))));
 	return $nc($of(result))->toString();
 }
 
 $Name* HierMemDirCtx::composeName($Name* name$renamed, $Name* prefix$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, prefix, prefix$renamed);
 	$var($Name, name, name$renamed);
 	$assign(name, canonizeName(name));
@@ -631,6 +645,7 @@ $Attributes* HierMemDirCtx::getAttributes($Name* name, $StringArray* attrIds) {
 }
 
 $Attributes* HierMemDirCtx::doGetAttributes($StringArray* attrIds) {
+	$useLocalCurrentObjectStackCache();
 	if (attrIds == nullptr) {
 		return doGetAttributes();
 	}
@@ -650,6 +665,7 @@ void HierMemDirCtx::modifyAttributes($String* name, int32_t mod_op, $Attributes*
 }
 
 void HierMemDirCtx::modifyAttributes($Name* name, int32_t mod_op, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if (attrs == nullptr || $nc(attrs)->size() == 0) {
 		$throwNew($IllegalArgumentException, "Cannot modify without an attribute"_s);
 	}
@@ -679,6 +695,7 @@ void HierMemDirCtx::doModifyAttributes($ModificationItemArray* mods) {
 
 $Attributes* HierMemDirCtx::applyMods($ModificationItemArray* mods, $Attributes* orig) {
 	$init(HierMemDirCtx);
+	$useLocalCurrentObjectStackCache();
 	$var($ModificationItem, mod, nullptr);
 	$var($Attribute, existingAttr, nullptr);
 	$var($Attribute, modAttr, nullptr);
@@ -749,6 +766,7 @@ $NamingEnumeration* HierMemDirCtx::search($String* name, $Attributes* matchingAt
 }
 
 $NamingEnumeration* HierMemDirCtx::search($Name* name, $Attributes* matchingAttributes, $StringArray* attributesToReturn) {
+	$useLocalCurrentObjectStackCache();
 	$var(HierMemDirCtx, target, $cast(HierMemDirCtx, doLookup(name, false)));
 	$var($SearchControls, cons, $new($SearchControls));
 	cons->setReturningAttributes(attributesToReturn);
@@ -757,6 +775,7 @@ $NamingEnumeration* HierMemDirCtx::search($Name* name, $Attributes* matchingAttr
 }
 
 $NamingEnumeration* HierMemDirCtx::search($Name* name, $String* filter, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContext, target, $cast($DirContext, doLookup(name, false)));
 	$var($SearchFilter, stringfilter, $new($SearchFilter, filter));
 	return $new($LazySearchEnumerationImpl, $$new($HierMemDirCtx$HierContextEnumerator, this, target, (cons != nullptr) ? $nc(cons)->getSearchScope() : $SearchControls::ONELEVEL_SCOPE), stringfilter, cons, this, this->myEnv, this->alwaysUseFactory);
@@ -780,6 +799,7 @@ HierMemDirCtx* HierMemDirCtx::createNewCtx() {
 }
 
 $Name* HierMemDirCtx::canonizeName($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, canonicalName, name);
 	if (!($instanceOf($HierarchicalName, name))) {
 		$assign(canonicalName, $new($HierarchicalName));

@@ -152,6 +152,7 @@ $DirContext* ComponentDirContext::c_getSchemaClassDefinition_nns($Name* name, $C
 }
 
 $Attributes* ComponentDirContext::p_getAttributes($Name* name, $StringArray* attrIds, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	$var($Attributes, answer, nullptr);
 	switch ($nc(res)->getStatus()) {
@@ -174,6 +175,7 @@ $Attributes* ComponentDirContext::p_getAttributes($Name* name, $StringArray* att
 }
 
 void ComponentDirContext::p_modifyAttributes($Name* name, int32_t mod_op, $Attributes* attrs, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
 	case $ComponentContext::TERMINAL_NNS_COMPONENT:
@@ -194,6 +196,7 @@ void ComponentDirContext::p_modifyAttributes($Name* name, int32_t mod_op, $Attri
 }
 
 void ComponentDirContext::p_modifyAttributes($Name* name, $ModificationItemArray* mods, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
 	case $ComponentContext::TERMINAL_NNS_COMPONENT:
@@ -214,6 +217,7 @@ void ComponentDirContext::p_modifyAttributes($Name* name, $ModificationItemArray
 }
 
 void ComponentDirContext::p_bind($Name* name, Object$* obj, $Attributes* attrs, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
 	case $ComponentContext::TERMINAL_NNS_COMPONENT:
@@ -234,6 +238,7 @@ void ComponentDirContext::p_bind($Name* name, Object$* obj, $Attributes* attrs, 
 }
 
 void ComponentDirContext::p_rebind($Name* name, Object$* obj, $Attributes* attrs, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
 	case $ComponentContext::TERMINAL_NNS_COMPONENT:
@@ -254,6 +259,7 @@ void ComponentDirContext::p_rebind($Name* name, Object$* obj, $Attributes* attrs
 }
 
 $DirContext* ComponentDirContext::p_createSubcontext($Name* name, $Attributes* attrs, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	$var($DirContext, answer, nullptr);
 	switch ($nc(res)->getStatus()) {
@@ -276,6 +282,7 @@ $DirContext* ComponentDirContext::p_createSubcontext($Name* name, $Attributes* a
 }
 
 $NamingEnumeration* ComponentDirContext::p_search($Name* name, $Attributes* matchingAttributes, $StringArray* attributesToReturn, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	$var($NamingEnumeration, answer, nullptr);
 	switch ($nc(res)->getStatus()) {
@@ -298,6 +305,7 @@ $NamingEnumeration* ComponentDirContext::p_search($Name* name, $Attributes* matc
 }
 
 $NamingEnumeration* ComponentDirContext::p_search($Name* name, $String* filter, $SearchControls* cons, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	$var($NamingEnumeration, answer, nullptr);
 	switch ($nc(res)->getStatus()) {
@@ -320,6 +328,7 @@ $NamingEnumeration* ComponentDirContext::p_search($Name* name, $String* filter, 
 }
 
 $NamingEnumeration* ComponentDirContext::p_search($Name* name, $String* filterExpr, $ObjectArray* filterArgs, $SearchControls* cons, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	$var($NamingEnumeration, answer, nullptr);
 	switch ($nc(res)->getStatus()) {
@@ -342,6 +351,7 @@ $NamingEnumeration* ComponentDirContext::p_search($Name* name, $String* filterEx
 }
 
 $DirContext* ComponentDirContext::p_getSchema($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContext, answer, nullptr);
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
@@ -364,6 +374,7 @@ $DirContext* ComponentDirContext::p_getSchema($Name* name, $Continuation* cont) 
 }
 
 $DirContext* ComponentDirContext::p_getSchemaClassDefinition($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContext, answer, nullptr);
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {

@@ -192,6 +192,7 @@ void LdapSearchEnumeration::init$($LdapCtx* homeCtx, $LdapResult* search_results
 }
 
 $NameClassPair* LdapSearchEnumeration::createItem($String* dn, $Attributes* attrs, $Vector* respCtls) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($Object, obj, nullptr);
 	$var($String, relStart, nullptr);

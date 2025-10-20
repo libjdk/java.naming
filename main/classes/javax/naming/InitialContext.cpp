@@ -164,6 +164,7 @@ $Context* InitialContext::getDefaultInitCtx() {
 }
 
 $Context* InitialContext::getURLOrDefaultInitCtx($String* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($NamingManager::hasInitialContextFactoryBuilder()) {
 		return getDefaultInitCtx();
 	}
@@ -178,6 +179,7 @@ $Context* InitialContext::getURLOrDefaultInitCtx($String* name) {
 }
 
 $Context* InitialContext::getURLOrDefaultInitCtx($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($NamingManager::hasInitialContextFactoryBuilder()) {
 		return getDefaultInitCtx();
 	}

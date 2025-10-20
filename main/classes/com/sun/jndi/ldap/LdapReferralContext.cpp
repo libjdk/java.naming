@@ -186,6 +186,7 @@ $Object* allocate$LdapReferralContext($Class* clazz) {
 }
 
 void LdapReferralContext::init$($LdapReferralException* ex, $Hashtable* env$renamed, $ControlArray* connCtls, $ControlArray* reqCtls, $String* nextName, bool skipThisReferral, int32_t handleReferrals) {
+	$useLocalCurrentObjectStackCache();
 	$var($Hashtable, env, env$renamed);
 	$set(this, refCtx, nullptr);
 	$set(this, urlName, nullptr);
@@ -268,6 +269,7 @@ void LdapReferralContext::init$($LdapReferralException* ex, $Hashtable* env$rena
 }
 
 void LdapReferralContext::initDefaults($String* referral, $String* nextName) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, urlString, nullptr);
 	try {
 		$var($LdapURL, url, $new($LdapURL, referral));
@@ -312,6 +314,7 @@ $Object* LdapReferralContext::lookup($String* name) {
 }
 
 $Object* LdapReferralContext::lookup($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -323,6 +326,7 @@ void LdapReferralContext::bind($String* name, Object$* obj) {
 }
 
 void LdapReferralContext::bind($Name* name, Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -334,6 +338,7 @@ void LdapReferralContext::rebind($String* name, Object$* obj) {
 }
 
 void LdapReferralContext::rebind($Name* name, Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -345,6 +350,7 @@ void LdapReferralContext::unbind($String* name) {
 }
 
 void LdapReferralContext::unbind($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -352,11 +358,13 @@ void LdapReferralContext::unbind($Name* name) {
 }
 
 void LdapReferralContext::rename($String* oldName, $String* newName) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, var$0, toName(oldName));
 	rename(var$0, $(toName(newName)));
 }
 
 void LdapReferralContext::rename($Name* oldName, $Name* newName) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -369,6 +377,7 @@ $NamingEnumeration* LdapReferralContext::list($String* name) {
 }
 
 $NamingEnumeration* LdapReferralContext::list($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -413,6 +422,7 @@ $NamingEnumeration* LdapReferralContext::listBindings($String* name) {
 }
 
 $NamingEnumeration* LdapReferralContext::listBindings($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -457,6 +467,7 @@ void LdapReferralContext::destroySubcontext($String* name) {
 }
 
 void LdapReferralContext::destroySubcontext($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -468,6 +479,7 @@ $Context* LdapReferralContext::createSubcontext($String* name) {
 }
 
 $Context* LdapReferralContext::createSubcontext($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -479,6 +491,7 @@ $Object* LdapReferralContext::lookupLink($String* name) {
 }
 
 $Object* LdapReferralContext::lookupLink($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -490,6 +503,7 @@ $NameParser* LdapReferralContext::getNameParser($String* name) {
 }
 
 $NameParser* LdapReferralContext::getNameParser($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -497,11 +511,13 @@ $NameParser* LdapReferralContext::getNameParser($Name* name) {
 }
 
 $String* LdapReferralContext::composeName($String* name, $String* prefix) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, var$0, toName(name));
 	return $nc($of($(composeName(var$0, $(toName(prefix))))))->toString();
 }
 
 $Name* LdapReferralContext::composeName($Name* name, $Name* prefix) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -509,6 +525,7 @@ $Name* LdapReferralContext::composeName($Name* name, $Name* prefix) {
 }
 
 $Object* LdapReferralContext::addToEnvironment($String* propName, Object$* propVal) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -516,6 +533,7 @@ $Object* LdapReferralContext::addToEnvironment($String* propName, Object$* propV
 }
 
 $Object* LdapReferralContext::removeFromEnvironment($String* propName) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -523,6 +541,7 @@ $Object* LdapReferralContext::removeFromEnvironment($String* propName) {
 }
 
 $Hashtable* LdapReferralContext::getEnvironment() {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -534,6 +553,7 @@ $Attributes* LdapReferralContext::getAttributes($String* name) {
 }
 
 $Attributes* LdapReferralContext::getAttributes($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -545,6 +565,7 @@ $Attributes* LdapReferralContext::getAttributes($String* name, $StringArray* att
 }
 
 $Attributes* LdapReferralContext::getAttributes($Name* name, $StringArray* attrIds) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -556,6 +577,7 @@ void LdapReferralContext::modifyAttributes($String* name, int32_t mod_op, $Attri
 }
 
 void LdapReferralContext::modifyAttributes($Name* name, int32_t mod_op, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -567,6 +589,7 @@ void LdapReferralContext::modifyAttributes($String* name, $ModificationItemArray
 }
 
 void LdapReferralContext::modifyAttributes($Name* name, $ModificationItemArray* mods) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -578,6 +601,7 @@ void LdapReferralContext::bind($String* name, Object$* obj, $Attributes* attrs) 
 }
 
 void LdapReferralContext::bind($Name* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -589,6 +613,7 @@ void LdapReferralContext::rebind($String* name, Object$* obj, $Attributes* attrs
 }
 
 void LdapReferralContext::rebind($Name* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -600,6 +625,7 @@ $DirContext* LdapReferralContext::createSubcontext($String* name, $Attributes* a
 }
 
 $DirContext* LdapReferralContext::createSubcontext($Name* name, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -611,6 +637,7 @@ $DirContext* LdapReferralContext::getSchema($String* name) {
 }
 
 $DirContext* LdapReferralContext::getSchema($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -622,6 +649,7 @@ $DirContext* LdapReferralContext::getSchemaClassDefinition($String* name) {
 }
 
 $DirContext* LdapReferralContext::getSchemaClassDefinition($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -629,18 +657,21 @@ $DirContext* LdapReferralContext::getSchemaClassDefinition($Name* name) {
 }
 
 $NamingEnumeration* LdapReferralContext::search($String* name, $Attributes* matchingAttributes) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, var$0, toName(name));
 	$var($String, var$1, $SearchFilter::format(matchingAttributes));
 	return search(var$0, var$1, $$new($SearchControls));
 }
 
 $NamingEnumeration* LdapReferralContext::search($Name* name, $Attributes* matchingAttributes) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, var$0, name);
 	$var($String, var$1, $SearchFilter::format(matchingAttributes));
 	return search(var$0, var$1, $$new($SearchControls));
 }
 
 $NamingEnumeration* LdapReferralContext::search($String* name, $Attributes* matchingAttributes, $StringArray* attributesToReturn) {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchControls, cons, $new($SearchControls));
 	cons->setReturningAttributes(attributesToReturn);
 	$var($Name, var$0, toName(name));
@@ -648,6 +679,7 @@ $NamingEnumeration* LdapReferralContext::search($String* name, $Attributes* matc
 }
 
 $NamingEnumeration* LdapReferralContext::search($Name* name, $Attributes* matchingAttributes, $StringArray* attributesToReturn) {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchControls, cons, $new($SearchControls));
 	cons->setReturningAttributes(attributesToReturn);
 	return search(name, $($SearchFilter::format(matchingAttributes)), cons);
@@ -658,6 +690,7 @@ $NamingEnumeration* LdapReferralContext::search($String* name, $String* filter, 
 }
 
 $NamingEnumeration* LdapReferralContext::search($Name* name, $String* filter, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -696,6 +729,7 @@ $NamingEnumeration* LdapReferralContext::search($String* name, $String* filterEx
 }
 
 $NamingEnumeration* LdapReferralContext::search($Name* name, $String* filterExpr, $ObjectArray* filterArgs, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -738,6 +772,7 @@ $NamingEnumeration* LdapReferralContext::search($Name* name, $String* filterExpr
 }
 
 $String* LdapReferralContext::getNameInNamespace() {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -745,6 +780,7 @@ $String* LdapReferralContext::getNameInNamespace() {
 }
 
 $ExtendedResponse* LdapReferralContext::extendedOperation($ExtendedRequest* request) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -755,6 +791,7 @@ $ExtendedResponse* LdapReferralContext::extendedOperation($ExtendedRequest* requ
 }
 
 $LdapContext* LdapReferralContext::newInstance($ControlArray* requestControls) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -765,6 +802,7 @@ $LdapContext* LdapReferralContext::newInstance($ControlArray* requestControls) {
 }
 
 void LdapReferralContext::reconnect($ControlArray* connCtls) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -775,6 +813,7 @@ void LdapReferralContext::reconnect($ControlArray* connCtls) {
 }
 
 $ControlArray* LdapReferralContext::getConnectControls() {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -785,6 +824,7 @@ $ControlArray* LdapReferralContext::getConnectControls() {
 }
 
 void LdapReferralContext::setRequestControls($ControlArray* requestControls) {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -795,6 +835,7 @@ void LdapReferralContext::setRequestControls($ControlArray* requestControls) {
 }
 
 $ControlArray* LdapReferralContext::getRequestControls() {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -805,6 +846,7 @@ $ControlArray* LdapReferralContext::getRequestControls() {
 }
 
 $ControlArray* LdapReferralContext::getResponseControls() {
+	$useLocalCurrentObjectStackCache();
 	if (this->skipThisReferral) {
 		$throw(($cast($NamingException, $($nc(($($nc(this->refEx)->appendUnprocessedReferrals(nullptr))))->fillInStackTrace()))));
 	}
@@ -823,6 +865,7 @@ $Name* LdapReferralContext::overrideName($Name* name) {
 }
 
 $SearchControls* LdapReferralContext::overrideAttributesAndScope($SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchControls, urlCons, nullptr);
 	if ((this->urlScope != nullptr) || (this->urlAttrs != nullptr)) {
 		int32_t var$0 = $nc(cons)->getSearchScope();

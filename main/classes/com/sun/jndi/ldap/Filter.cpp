@@ -228,6 +228,7 @@ void Filter::encodeFilter($BerEncoder* ber, $bytes* filter, int32_t filterStart,
 
 $bytes* Filter::unescapeFilterValue($bytes* orig, int32_t start, int32_t end) {
 	$init(Filter);
+	$useLocalCurrentObjectStackCache();
 	bool escape = false;
 	bool escStart = false;
 	int32_t ival = 0;
@@ -305,6 +306,7 @@ int32_t Filter::findUnescaped($bytes* str, char16_t ch, int32_t start, int32_t e
 
 void Filter::encodeSimpleFilter($BerEncoder* ber, $bytes* filter, int32_t filtStart, int32_t filtEnd) {
 	$init(Filter);
+	$useLocalCurrentObjectStackCache();
 	$var($String, type, nullptr);
 	$var($String, value, nullptr);
 	int32_t valueStart = 0;
@@ -462,6 +464,7 @@ void Filter::encodeSimpleFilter($BerEncoder* ber, $bytes* filter, int32_t filtSt
 
 void Filter::encodeSubstringFilter($BerEncoder* ber, $bytes* filter, int32_t typeStart, int32_t typeEnd, int32_t valueStart, int32_t valueEnd) {
 	$init(Filter);
+	$useLocalCurrentObjectStackCache();
 	$nc(ber)->beginSeq(Filter::LDAP_FILTER_SUBSTRINGS);
 	ber->encodeOctetString(filter, $Ber::ASN_OCTET_STR, typeStart, typeEnd - typeStart);
 	ber->beginSeq($LdapClient::LBER_SEQUENCE);
@@ -528,6 +531,7 @@ $ints* Filter::findRightParen($bytes* filter, $ints* filtOffset, int32_t end) {
 
 void Filter::encodeFilterList($BerEncoder* ber, $bytes* filter, int32_t filterType, int32_t start, int32_t end) {
 	$init(Filter);
+	$useLocalCurrentObjectStackCache();
 	$var($ints, filtOffset, $new($ints, 1));
 	int32_t listNumber = 0;
 	for (filtOffset->set(0, start); filtOffset->get(0) < end; ++(*filtOffset)[0]) {

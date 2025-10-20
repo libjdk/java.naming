@@ -85,6 +85,7 @@ $Object* Rdn$RdnEntry::getValue() {
 }
 
 int32_t Rdn$RdnEntry::compareTo(Rdn$RdnEntry* that) {
+	$useLocalCurrentObjectStackCache();
 	int32_t diff = $nc(this->type)->compareToIgnoreCase($nc(that)->type);
 	if (diff != 0) {
 		return diff;
@@ -96,6 +97,7 @@ int32_t Rdn$RdnEntry::compareTo(Rdn$RdnEntry* that) {
 }
 
 bool Rdn$RdnEntry::equals(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if ($equals(obj, this)) {
 		return true;
 	}
@@ -108,6 +110,7 @@ bool Rdn$RdnEntry::equals(Object$* obj) {
 }
 
 int32_t Rdn$RdnEntry::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	$init($Locale);
 	int32_t var$0 = $($nc(this->type)->toUpperCase($Locale::ENGLISH))->hashCode();
 	return (var$0 + $nc($(getValueComparable()))->hashCode());

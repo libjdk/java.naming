@@ -148,6 +148,7 @@ bool ContextEnumerator::hasMoreElements() {
 }
 
 $Object* ContextEnumerator::nextElement() {
+	$useLocalCurrentObjectStackCache();
 	try {
 		return $of(next());
 	} catch ($NamingException&) {
@@ -177,6 +178,7 @@ bool ContextEnumerator::hasMoreChildren() {
 }
 
 $Binding* ContextEnumerator::getNextChild() {
+	$useLocalCurrentObjectStackCache();
 	$var($Binding, oldBinding, $cast($Binding, $nc(this->children)->next()));
 	$var($Binding, newBinding, nullptr);
 	bool var$0 = $nc(oldBinding)->isRelative();
@@ -203,6 +205,7 @@ $Binding* ContextEnumerator::getNextChild() {
 }
 
 bool ContextEnumerator::hasMoreDescendants() {
+	$useLocalCurrentObjectStackCache();
 	if (!this->currentReturned) {
 		if (ContextEnumerator::debug) {
 			$init($System);
@@ -249,6 +252,7 @@ $Binding* ContextEnumerator::getNextDescendant() {
 }
 
 void ContextEnumerator::prepNextChild() {
+	$useLocalCurrentObjectStackCache();
 	if (hasMoreChildren()) {
 		try {
 			$set(this, currentChild, getNextChild());

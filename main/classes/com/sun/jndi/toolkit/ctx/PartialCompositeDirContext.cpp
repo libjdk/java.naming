@@ -297,6 +297,7 @@ $Attributes* PartialCompositeDirContext::getAttributes($String* name, $StringArr
 }
 
 $Attributes* PartialCompositeDirContext::getAttributes($Name* name, $StringArray* attrIds) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeDirContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -322,6 +323,7 @@ void PartialCompositeDirContext::modifyAttributes($String* name, int32_t mod_op,
 }
 
 void PartialCompositeDirContext::modifyAttributes($Name* name, int32_t mod_op, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeDirContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -345,6 +347,7 @@ void PartialCompositeDirContext::modifyAttributes($String* name, $ModificationIt
 }
 
 void PartialCompositeDirContext::modifyAttributes($Name* name, $ModificationItemArray* mods) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeDirContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -368,6 +371,7 @@ void PartialCompositeDirContext::bind($String* name, Object$* obj, $Attributes* 
 }
 
 void PartialCompositeDirContext::bind($Name* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeDirContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -391,6 +395,7 @@ void PartialCompositeDirContext::rebind($String* name, Object$* obj, $Attributes
 }
 
 void PartialCompositeDirContext::rebind($Name* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeDirContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -414,6 +419,7 @@ $DirContext* PartialCompositeDirContext::createSubcontext($String* name, $Attrib
 }
 
 $DirContext* PartialCompositeDirContext::createSubcontext($Name* name, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeDirContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -447,6 +453,7 @@ $NamingEnumeration* PartialCompositeDirContext::search($String* name, $Attribute
 }
 
 $NamingEnumeration* PartialCompositeDirContext::search($Name* name, $Attributes* matchingAttributes, $StringArray* attributesToReturn) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeDirContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -472,6 +479,7 @@ $NamingEnumeration* PartialCompositeDirContext::search($String* name, $String* f
 }
 
 $NamingEnumeration* PartialCompositeDirContext::search($Name* name, $String* filter, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeDirContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -497,6 +505,7 @@ $NamingEnumeration* PartialCompositeDirContext::search($String* name, $String* f
 }
 
 $NamingEnumeration* PartialCompositeDirContext::search($Name* name, $String* filterExpr, $ObjectArray* filterArgs, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeDirContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -522,6 +531,7 @@ $DirContext* PartialCompositeDirContext::getSchema($String* name) {
 }
 
 $DirContext* PartialCompositeDirContext::getSchema($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeDirContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -547,6 +557,7 @@ $DirContext* PartialCompositeDirContext::getSchemaClassDefinition($String* name)
 }
 
 $DirContext* PartialCompositeDirContext::getSchemaClassDefinition($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeDirContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -569,6 +580,7 @@ $DirContext* PartialCompositeDirContext::getSchemaClassDefinition($Name* name) {
 
 PartialCompositeDirContext* PartialCompositeDirContext::getPCDirContext($Continuation* cont) {
 	$init(PartialCompositeDirContext);
+	$useLocalCurrentObjectStackCache();
 	$var($PartialCompositeContext, pctx, $PartialCompositeContext::getPCContext(cont));
 	if (!($instanceOf(PartialCompositeDirContext, pctx))) {
 		$throw($($nc(cont)->fillInException($$new($NotContextException, "Resolved object is not a DirContext."_s))));
@@ -577,67 +589,79 @@ PartialCompositeDirContext* PartialCompositeDirContext::getPCDirContext($Continu
 }
 
 $StringHeadTail* PartialCompositeDirContext::c_parseComponent($String* inputName, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($OperationNotSupportedException, e, $new($OperationNotSupportedException));
 	$throw($($nc(cont)->fillInException(e)));
 	$shouldNotReachHere();
 }
 
 $Object* PartialCompositeDirContext::a_lookup($String* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($OperationNotSupportedException, e, $new($OperationNotSupportedException));
 	$throw($($nc(cont)->fillInException(e)));
 	$shouldNotReachHere();
 }
 
 $Object* PartialCompositeDirContext::a_lookupLink($String* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($OperationNotSupportedException, e, $new($OperationNotSupportedException));
 	$throw($($nc(cont)->fillInException(e)));
 	$shouldNotReachHere();
 }
 
 $NamingEnumeration* PartialCompositeDirContext::a_list($Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($OperationNotSupportedException, e, $new($OperationNotSupportedException));
 	$throw($($nc(cont)->fillInException(e)));
 	$shouldNotReachHere();
 }
 
 $NamingEnumeration* PartialCompositeDirContext::a_listBindings($Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($OperationNotSupportedException, e, $new($OperationNotSupportedException));
 	$throw($($nc(cont)->fillInException(e)));
 	$shouldNotReachHere();
 }
 
 void PartialCompositeDirContext::a_bind($String* name, Object$* obj, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($OperationNotSupportedException, e, $new($OperationNotSupportedException));
 	$throw($($nc(cont)->fillInException(e)));
 }
 
 void PartialCompositeDirContext::a_rebind($String* name, Object$* obj, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($OperationNotSupportedException, e, $new($OperationNotSupportedException));
 	$throw($($nc(cont)->fillInException(e)));
 }
 
 void PartialCompositeDirContext::a_unbind($String* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($OperationNotSupportedException, e, $new($OperationNotSupportedException));
 	$throw($($nc(cont)->fillInException(e)));
 }
 
 void PartialCompositeDirContext::a_destroySubcontext($String* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($OperationNotSupportedException, e, $new($OperationNotSupportedException));
 	$throw($($nc(cont)->fillInException(e)));
 }
 
 $Context* PartialCompositeDirContext::a_createSubcontext($String* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($OperationNotSupportedException, e, $new($OperationNotSupportedException));
 	$throw($($nc(cont)->fillInException(e)));
 	$shouldNotReachHere();
 }
 
 void PartialCompositeDirContext::a_rename($String* oldname, $Name* newname, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($OperationNotSupportedException, e, $new($OperationNotSupportedException));
 	$throw($($nc(cont)->fillInException(e)));
 }
 
 $NameParser* PartialCompositeDirContext::a_getNameParser($Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($OperationNotSupportedException, e, $new($OperationNotSupportedException));
 	$throw($($nc(cont)->fillInException(e)));
 	$shouldNotReachHere();

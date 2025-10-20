@@ -117,6 +117,7 @@ void Pool::init$(int32_t initSize, int32_t prefSize, int32_t maxSize) {
 }
 
 $PooledConnection* Pool::getPooledConnection(Object$* id, int64_t timeout, $PooledConnectionFactory* factory) {
+	$useLocalCurrentObjectStackCache();
 	d("get(): "_s, id);
 	if (Pool::debug) {
 		$synchronized(this->map) {
@@ -146,6 +147,7 @@ $Connections* Pool::getConnections(Object$* id) {
 }
 
 void Pool::expire(int64_t threshold) {
+	$useLocalCurrentObjectStackCache();
 	$var($Collection, copy, nullptr);
 	$synchronized(this->map) {
 		$assign(copy, static_cast<$Collection*>(static_cast<$AbstractCollection*>(static_cast<$AbstractList*>($new($ArrayList, $($nc(this->map)->values()))))));
@@ -173,6 +175,7 @@ void Pool::expire(int64_t threshold) {
 
 void Pool::expungeStaleConnections() {
 	$init(Pool);
+	$useLocalCurrentObjectStackCache();
 	$var($ConnectionsWeakRef, releaseRef, nullptr);
 	while (($assign(releaseRef, $cast($ConnectionsWeakRef, $nc(Pool::queue)->poll()))) != nullptr) {
 		$var($Connections, conns, $nc(releaseRef)->getConnections());
@@ -187,6 +190,7 @@ void Pool::expungeStaleConnections() {
 }
 
 void Pool::showStats($PrintStream* out) {
+	$useLocalCurrentObjectStackCache();
 	$var($Object, id, nullptr);
 	$var($Connections, conns, nullptr);
 	$nc(out)->println("===== Pool start ======================"_s);
@@ -212,6 +216,7 @@ void Pool::showStats($PrintStream* out) {
 }
 
 $String* Pool::toString() {
+	$useLocalCurrentObjectStackCache();
 	$synchronized(this->map) {
 		$var($String, var$0, $$str({$($Object::toString()), " "_s}));
 		return $concat(var$0, $($nc($of(this->map))->toString()));
@@ -219,6 +224,7 @@ $String* Pool::toString() {
 }
 
 void Pool::d($String* msg, int32_t i) {
+	$useLocalCurrentObjectStackCache();
 	if (Pool::debug) {
 		$init($System);
 		$nc($System::err)->println($$str({this, "."_s, msg, $$str(i)}));

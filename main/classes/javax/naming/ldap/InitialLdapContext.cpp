@@ -395,6 +395,7 @@ void InitialLdapContext::init$() {
 }
 
 void InitialLdapContext::init$($Hashtable* environment, $ControlArray* connCtls) {
+	$useLocalCurrentObjectStackCache();
 	$InitialDirContext::init$(true);
 	$var($Hashtable, env, (environment == nullptr) ? $new($Hashtable, 11) : $cast($Hashtable, $nc(environment)->clone()));
 	if (connCtls != nullptr) {

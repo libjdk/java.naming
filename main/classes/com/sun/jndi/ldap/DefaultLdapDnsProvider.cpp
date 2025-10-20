@@ -59,6 +59,7 @@ void DefaultLdapDnsProvider::init$() {
 }
 
 $Optional* DefaultLdapDnsProvider::lookupEndpoints($String* url, $Map* env) {
+	$useLocalCurrentObjectStackCache();
 	if (url == nullptr || env == nullptr) {
 		$throwNew($NullPointerException);
 	}

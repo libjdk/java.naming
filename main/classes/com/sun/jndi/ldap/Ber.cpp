@@ -106,6 +106,7 @@ void Ber::init$() {
 }
 
 void Ber::dumpBER($OutputStream* outStream, $String* tag, $bytes* bytes, int32_t from, int32_t to) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		$nc(outStream)->write((int32_t)u'\n');
 		outStream->write($($nc(tag)->getBytes("UTF8"_s)));

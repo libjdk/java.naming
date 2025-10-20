@@ -97,6 +97,7 @@ void HierMemDirCtx$FlatBindings::init$($HierMemDirCtx* this$0, $Hashtable* bindi
 }
 
 $Object* HierMemDirCtx$FlatBindings::next() {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, name, $cast($Name, $nc(this->names)->nextElement()));
 	$var($HierMemDirCtx, obj, $cast($HierMemDirCtx, $nc(this->bds)->get(name)));
 	$var($Object, answer, obj);

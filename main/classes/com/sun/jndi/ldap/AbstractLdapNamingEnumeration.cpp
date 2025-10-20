@@ -127,6 +127,7 @@ $Object* allocate$AbstractLdapNamingEnumeration($Class* clazz) {
 }
 
 void AbstractLdapNamingEnumeration::init$($LdapCtx* homeCtx, $LdapResult* answer, $Name* listArg, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	this->cleaned = false;
 	$set(this, entries, nullptr);
 	this->limit = 0;
@@ -175,6 +176,7 @@ bool AbstractLdapNamingEnumeration::hasMoreElements() {
 }
 
 void AbstractLdapNamingEnumeration::getNextBatch() {
+	$useLocalCurrentObjectStackCache();
 	$set(this, res, $nc(this->homeCtx)->getSearchReply(this->enumClnt, this->res));
 	if (this->res == nullptr) {
 		this->limit = (this->posn = 0);
@@ -228,6 +230,7 @@ $Object* AbstractLdapNamingEnumeration::next() {
 }
 
 bool AbstractLdapNamingEnumeration::hasMoreImpl() {
+	$useLocalCurrentObjectStackCache();
 	if (this->posn == this->limit) {
 		getNextBatch();
 	}
@@ -260,6 +263,7 @@ bool AbstractLdapNamingEnumeration::hasMoreImpl() {
 }
 
 $NameClassPair* AbstractLdapNamingEnumeration::nextImpl() {
+	$useLocalCurrentObjectStackCache();
 	try {
 		return nextAux();
 	} catch ($NamingException&) {
@@ -283,6 +287,7 @@ $NameClassPair* AbstractLdapNamingEnumeration::nextAux() {
 }
 
 $String* AbstractLdapNamingEnumeration::getAtom($String* dn) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($Name, parsed, $new($LdapName, dn));
 		return parsed->get(parsed->size() - 1);
@@ -306,6 +311,7 @@ void AbstractLdapNamingEnumeration::setNamingException($NamingException* e) {
 }
 
 bool AbstractLdapNamingEnumeration::hasMoreReferrals() {
+	$useLocalCurrentObjectStackCache();
 	bool var$0 = (this->refEx != nullptr);
 	if (var$0) {
 		bool var$1 = $nc(this->refEx)->hasMoreReferrals();

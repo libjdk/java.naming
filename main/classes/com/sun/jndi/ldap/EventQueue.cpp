@@ -128,6 +128,7 @@ $EventQueue$QueueElement* EventQueue::dequeue() {
 }
 
 void EventQueue::run() {
+	$useLocalCurrentObjectStackCache();
 	$var($EventQueue$QueueElement, qe, nullptr);
 	try {
 		while (($assign(qe, dequeue())) != nullptr) {

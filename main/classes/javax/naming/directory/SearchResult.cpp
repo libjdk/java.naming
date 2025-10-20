@@ -80,6 +80,7 @@ void SearchResult::setAttributes($Attributes* attrs) {
 }
 
 $String* SearchResult::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($String, var$0, $$str({$($Binding::toString()), ":"_s}));
 	return $concat(var$0, $(getAttributes()));
 }

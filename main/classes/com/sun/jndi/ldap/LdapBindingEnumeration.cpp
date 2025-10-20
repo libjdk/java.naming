@@ -170,6 +170,7 @@ void LdapBindingEnumeration::init$($LdapCtx* homeCtx, $LdapResult* answer, $Name
 }
 
 $NameClassPair* LdapBindingEnumeration::createItem($String* dn, $Attributes* attrs, $Vector* respCtls) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($Object, obj, nullptr);
 	$var($String, atom, getAtom(dn));

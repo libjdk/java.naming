@@ -77,6 +77,7 @@ void SearchFilter$CompoundFilter::init$($SearchFilter* this$0, bool polarity) {
 }
 
 void SearchFilter$CompoundFilter::parse() {
+	$useLocalCurrentObjectStackCache();
 	this->this$0->consumeChar();
 	while (this->this$0->getCurrentChar() != u')') {
 		$var($SearchFilter$StringFilter, filter, this->this$0->createNextFilter());
@@ -86,6 +87,7 @@ void SearchFilter$CompoundFilter::parse() {
 }
 
 bool SearchFilter$CompoundFilter::check($Attributes* targetAttrs) {
+	$useLocalCurrentObjectStackCache();
 	for (int32_t i = 0; i < $nc(this->subFilters)->size(); ++i) {
 		$var($SearchFilter$StringFilter, filter, $cast($SearchFilter$StringFilter, $nc(this->subFilters)->elementAt(i)));
 		if ($nc(filter)->check(targetAttrs) != this->polarity) {

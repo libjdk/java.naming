@@ -101,6 +101,7 @@ $Debug* LDAPCertStore::debug = nullptr;
 $Cache* LDAPCertStore::certStoreCache = nullptr;
 
 void LDAPCertStore::init$($CertStoreParameters* params) {
+	$useLocalCurrentObjectStackCache();
 	$CertStoreSpi::init$(params);
 	$var($String, serverName, nullptr);
 	int32_t port = 0;
@@ -155,6 +156,7 @@ $LDAPCertStoreImpl* LDAPCertStore::getInstance($LDAPCertStoreParameters* params)
 	$load(LDAPCertStore);
 	$synchronized(class$) {
 		$init(LDAPCertStore);
+		$useLocalCurrentObjectStackCache();
 		$var($String, serverName, $nc(params)->getServerName());
 		int32_t port = params->getPort();
 		$var($LDAPCertStore$Key, k, $new($LDAPCertStore$Key, serverName, port));
@@ -173,6 +175,7 @@ $LDAPCertStoreImpl* LDAPCertStore::getInstance($LDAPCertStoreParameters* params)
 
 $Collection* LDAPCertStore::engineGetCertificates($CertSelector* selector$renamed) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($CertSelector, selector, selector$renamed);
 		if (LDAPCertStore::debug != nullptr) {
 			$nc(LDAPCertStore::debug)->println($$str({"LDAPCertStore.engineGetCertificates() selector: "_s, $($String::valueOf($of(selector)))}));
@@ -188,6 +191,7 @@ $Collection* LDAPCertStore::engineGetCertificates($CertSelector* selector$rename
 
 $Collection* LDAPCertStore::engineGetCRLs($CRLSelector* selector$renamed) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($CRLSelector, selector, selector$renamed);
 		if (LDAPCertStore::debug != nullptr) {
 			$nc(LDAPCertStore::debug)->println($$str({"LDAPCertStore.engineGetCRLs() selector: "_s, selector}));

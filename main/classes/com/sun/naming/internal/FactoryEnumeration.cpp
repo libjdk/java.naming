@@ -75,6 +75,7 @@ void FactoryEnumeration::init$($List* factories, $ClassLoader* loader) {
 }
 
 $Object* FactoryEnumeration::next() {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$synchronized(this->factories) {
 		$var($NamedWeakReference, ref, $cast($NamedWeakReference, $nc(this->factories)->get(this->posn++)));

@@ -87,6 +87,7 @@ void LdapNamingEnumeration::init$($LdapCtx* homeCtx, $LdapResult* answer, $Name*
 }
 
 $NameClassPair* LdapNamingEnumeration::createItem($String* dn, $Attributes* attrs, $Vector* respCtls) {
+	$useLocalCurrentObjectStackCache();
 	$var($Attribute, attr, nullptr);
 	$var($String, className, nullptr);
 	$init($Obj);

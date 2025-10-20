@@ -161,6 +161,7 @@ void AtomicContext::init$() {
 }
 
 $Object* AtomicContext::a_resolveIntermediate_nns($String* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($Object, obj, a_lookup(name, cont));
 		if (obj != nullptr && $of(this)->getClass()->isInstance(obj)) {
@@ -240,6 +241,7 @@ bool AtomicContext::isEmpty($String* name) {
 }
 
 $Object* AtomicContext::c_lookup($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($Object, ret, nullptr);
 	if (resolve_to_penultimate_context(name, cont)) {
 		$assign(ret, a_lookup($($nc($of(name))->toString()), cont));
@@ -318,6 +320,7 @@ $NameParser* AtomicContext::c_getNameParser($Name* name, $Continuation* cont) {
 }
 
 $Object* AtomicContext::c_resolveIntermediate_nns($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	if (this->_contextType == $PartialCompositeContext::_ATOMIC) {
 		$var($Object, ret, nullptr);
 		if (resolve_to_penultimate_context_nns(name, cont)) {
@@ -334,6 +337,7 @@ $Object* AtomicContext::c_resolveIntermediate_nns($Name* name, $Continuation* co
 }
 
 $Object* AtomicContext::c_lookup_nns($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	if (this->_contextType == $PartialCompositeContext::_ATOMIC) {
 		$var($Object, ret, nullptr);
 		if (resolve_to_penultimate_context_nns(name, cont)) {
@@ -448,6 +452,7 @@ $NameParser* AtomicContext::c_getNameParser_nns($Name* name, $Continuation* cont
 }
 
 void AtomicContext::a_processJunction_nns($String* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->isEmpty()) {
 		$var($NameNotFoundException, e, $new($NameNotFoundException));
 		$nc(cont)->setErrorNNS($of(this), name);
@@ -468,6 +473,7 @@ void AtomicContext::a_processJunction_nns($String* name, $Continuation* cont) {
 }
 
 void AtomicContext::a_processJunction_nns($Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($RefAddr, addr, $new($AtomicContext$2, this, "nns"_s));
 	$var($Reference, ref, $new($Reference, "java.lang.Object"_s, addr));
 	$init($PartialCompositeContext);
@@ -475,6 +481,7 @@ void AtomicContext::a_processJunction_nns($Continuation* cont) {
 }
 
 bool AtomicContext::resolve_to_context($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, target, $nc($of(name))->toString());
 	$var($StringHeadTail, ht, c_parseComponent(target, cont));
 	$var($String, tail, $nc(ht)->getTail());
@@ -508,6 +515,7 @@ bool AtomicContext::resolve_to_context($Name* name, $Continuation* cont) {
 }
 
 bool AtomicContext::resolve_to_penultimate_context($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, target, $nc($of(name))->toString());
 	if (AtomicContext::debug > 0) {
 		$init($System);
@@ -541,6 +549,7 @@ bool AtomicContext::resolve_to_penultimate_context($Name* name, $Continuation* c
 }
 
 bool AtomicContext::resolve_to_penultimate_context_nns($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		if (AtomicContext::debug > 0) {
 			$init($System);
@@ -560,6 +569,7 @@ bool AtomicContext::resolve_to_penultimate_context_nns($Name* name, $Continuatio
 }
 
 void AtomicContext::resolve_to_nns_and_continue($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	if (AtomicContext::debug > 0) {
 		$init($System);
 		$nc($System::out)->println($$str({"RESOLVE TO NNS AND CONTINUE"_s, $($nc($of(name))->toString())}));

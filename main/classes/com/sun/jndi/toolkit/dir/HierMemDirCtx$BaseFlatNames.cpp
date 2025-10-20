@@ -91,6 +91,7 @@ bool HierMemDirCtx$BaseFlatNames::hasMore() {
 }
 
 $Object* HierMemDirCtx$BaseFlatNames::nextElement() {
+	$useLocalCurrentObjectStackCache();
 	try {
 		return $of(next());
 	} catch ($NamingException&) {

@@ -129,6 +129,7 @@ void ContinuationContext::init$($CannotProceedException* cpe, $Hashtable* env) {
 }
 
 $Context* ContinuationContext::getTargetContext() {
+	$useLocalCurrentObjectStackCache();
 	if (this->contCtx == nullptr) {
 		if ($nc(this->cpe)->getResolvedObj() == nullptr) {
 			$throw($cast($NamingException, $($nc(this->cpe)->fillInStackTrace())));
@@ -284,6 +285,7 @@ $String* ContinuationContext::getNameInNamespace() {
 }
 
 $ResolveResult* ContinuationContext::resolveToClass($Name* name, $Class* contextType) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(this->cpe)->getResolvedObj() == nullptr) {
 		$throw($cast($NamingException, $($nc(this->cpe)->fillInStackTrace())));
 	}
@@ -297,6 +299,7 @@ $ResolveResult* ContinuationContext::resolveToClass($Name* name, $Class* context
 }
 
 $ResolveResult* ContinuationContext::resolveToClass($String* name, $Class* contextType) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(this->cpe)->getResolvedObj() == nullptr) {
 		$throw($cast($NamingException, $($nc(this->cpe)->fillInStackTrace())));
 	}

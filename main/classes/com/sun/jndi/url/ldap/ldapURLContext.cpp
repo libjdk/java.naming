@@ -139,6 +139,7 @@ $ResolveResult* ldapURLContext::getRootURLContext($String* name, $Hashtable* env
 }
 
 $Name* ldapURLContext::getURLSuffix($String* prefix, $String* url) {
+	$useLocalCurrentObjectStackCache();
 	$var($LdapURL, ldapUrl, $new($LdapURL, url));
 	$var($String, dn, ldapUrl->getDN() != nullptr ? ldapUrl->getDN() : ""_s);
 	$var($CompositeName, remaining, $new($CompositeName));
@@ -157,6 +158,7 @@ $Object* ldapURLContext::lookup($String* name) {
 }
 
 $Object* ldapURLContext::lookup($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -173,6 +175,7 @@ void ldapURLContext::bind($String* name, Object$* obj) {
 }
 
 void ldapURLContext::bind($Name* name, Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -189,6 +192,7 @@ void ldapURLContext::rebind($String* name, Object$* obj) {
 }
 
 void ldapURLContext::rebind($Name* name, Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -205,6 +209,7 @@ void ldapURLContext::unbind($String* name) {
 }
 
 void ldapURLContext::unbind($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -223,6 +228,7 @@ void ldapURLContext::rename($String* oldName, $String* newName) {
 }
 
 void ldapURLContext::rename($Name* oldName, $Name* newName) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(oldName)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(oldName))->toString()));
 	} else if ($LdapURL::hasQueryComponents($($nc(newName)->get(0)))) {
@@ -241,6 +247,7 @@ $NamingEnumeration* ldapURLContext::list($String* name) {
 }
 
 $NamingEnumeration* ldapURLContext::list($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -257,6 +264,7 @@ $NamingEnumeration* ldapURLContext::listBindings($String* name) {
 }
 
 $NamingEnumeration* ldapURLContext::listBindings($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -273,6 +281,7 @@ void ldapURLContext::destroySubcontext($String* name) {
 }
 
 void ldapURLContext::destroySubcontext($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -289,6 +298,7 @@ $Context* ldapURLContext::createSubcontext($String* name) {
 }
 
 $Context* ldapURLContext::createSubcontext($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -305,6 +315,7 @@ $Object* ldapURLContext::lookupLink($String* name) {
 }
 
 $Object* ldapURLContext::lookupLink($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -321,6 +332,7 @@ $NameParser* ldapURLContext::getNameParser($String* name) {
 }
 
 $NameParser* ldapURLContext::getNameParser($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -339,6 +351,7 @@ $String* ldapURLContext::composeName($String* name, $String* prefix) {
 }
 
 $Name* ldapURLContext::composeName($Name* name, $Name* prefix) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else if ($LdapURL::hasQueryComponents($($nc(prefix)->get(0)))) {
@@ -357,6 +370,7 @@ $Attributes* ldapURLContext::getAttributes($String* name) {
 }
 
 $Attributes* ldapURLContext::getAttributes($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -373,6 +387,7 @@ $Attributes* ldapURLContext::getAttributes($String* name, $StringArray* attrIds)
 }
 
 $Attributes* ldapURLContext::getAttributes($Name* name, $StringArray* attrIds) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -389,6 +404,7 @@ void ldapURLContext::modifyAttributes($String* name, int32_t mod_op, $Attributes
 }
 
 void ldapURLContext::modifyAttributes($Name* name, int32_t mod_op, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -405,6 +421,7 @@ void ldapURLContext::modifyAttributes($String* name, $ModificationItemArray* mod
 }
 
 void ldapURLContext::modifyAttributes($Name* name, $ModificationItemArray* mods) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -421,6 +438,7 @@ void ldapURLContext::bind($String* name, Object$* obj, $Attributes* attrs) {
 }
 
 void ldapURLContext::bind($Name* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -437,6 +455,7 @@ void ldapURLContext::rebind($String* name, Object$* obj, $Attributes* attrs) {
 }
 
 void ldapURLContext::rebind($Name* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -453,6 +472,7 @@ $DirContext* ldapURLContext::createSubcontext($String* name, $Attributes* attrs)
 }
 
 $DirContext* ldapURLContext::createSubcontext($Name* name, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -469,6 +489,7 @@ $DirContext* ldapURLContext::getSchema($String* name) {
 }
 
 $DirContext* ldapURLContext::getSchema($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -485,6 +506,7 @@ $DirContext* ldapURLContext::getSchemaClassDefinition($String* name) {
 }
 
 $DirContext* ldapURLContext::getSchemaClassDefinition($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($LdapURL::hasQueryComponents($($nc(name)->get(0)))) {
 		$throwNew($InvalidNameException, $($nc($of(name))->toString()));
 	} else {
@@ -501,6 +523,7 @@ $NamingEnumeration* ldapURLContext::search($String* name, $Attributes* matchingA
 }
 
 $NamingEnumeration* ldapURLContext::search($Name* name, $Attributes* matchingAttributes) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return search($(name->get(0)), matchingAttributes);
 	} else if ($LdapURL::hasQueryComponents($(name->get(0)))) {
@@ -519,6 +542,7 @@ $NamingEnumeration* ldapURLContext::search($String* name, $Attributes* matchingA
 }
 
 $NamingEnumeration* ldapURLContext::search($Name* name, $Attributes* matchingAttributes, $StringArray* attributesToReturn) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return search($(name->get(0)), matchingAttributes, attributesToReturn);
 	} else if ($LdapURL::hasQueryComponents($(name->get(0)))) {
@@ -537,6 +561,7 @@ $NamingEnumeration* ldapURLContext::search($String* name, $String* filter, $Sear
 }
 
 $NamingEnumeration* ldapURLContext::search($Name* name, $String* filter, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return search($(name->get(0)), filter, cons);
 	} else if ($LdapURL::hasQueryComponents($(name->get(0)))) {
@@ -555,6 +580,7 @@ $NamingEnumeration* ldapURLContext::search($String* name, $String* filterExpr, $
 }
 
 $NamingEnumeration* ldapURLContext::search($Name* name, $String* filterExpr, $ObjectArray* filterArgs, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return search($(name->get(0)), filterExpr, filterArgs, cons);
 	} else if ($LdapURL::hasQueryComponents($(name->get(0)))) {
@@ -565,6 +591,7 @@ $NamingEnumeration* ldapURLContext::search($Name* name, $String* filterExpr, $Ob
 }
 
 $NamingEnumeration* ldapURLContext::searchUsingURL($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($LdapURL, url, $new($LdapURL, name));
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
@@ -604,6 +631,7 @@ $String* ldapURLContext::setFilterUsingURL($LdapURL* url) {
 
 $SearchControls* ldapURLContext::setSearchControlsUsingURL($LdapURL* url) {
 	$init(ldapURLContext);
+	$useLocalCurrentObjectStackCache();
 	$var($SearchControls, cons, $new($SearchControls));
 	$var($String, scope, $nc(url)->getScope());
 	$var($String, attributes, url->getAttributes());

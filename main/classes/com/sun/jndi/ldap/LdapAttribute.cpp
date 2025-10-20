@@ -140,6 +140,7 @@ void LdapAttribute::writeObject($ObjectOutputStream* out) {
 }
 
 void LdapAttribute::setBaseCtxInfo() {
+	$useLocalCurrentObjectStackCache();
 	$var($Hashtable, realEnv, nullptr);
 	$var($Hashtable, secureEnv, nullptr);
 	if (this->baseCtx != nullptr) {
@@ -166,6 +167,7 @@ void LdapAttribute::setBaseCtxInfo() {
 }
 
 $DirContext* LdapAttribute::getAttributeSyntaxDefinition() {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContext, schema, $nc($(getBaseCtx()))->getSchema(this->rdn));
 	$init($LdapSchemaParser);
 	$var($DirContext, attrDef, $cast($DirContext, $nc(schema)->lookup($$str({$LdapSchemaParser::ATTRIBUTE_DEFINITION_NAME, "/"_s, $(getID())}))));
@@ -178,6 +180,7 @@ $DirContext* LdapAttribute::getAttributeSyntaxDefinition() {
 }
 
 $DirContext* LdapAttribute::getAttributeDefinition() {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContext, schema, $nc($(getBaseCtx()))->getSchema(this->rdn));
 	$init($LdapSchemaParser);
 	return $cast($DirContext, $nc(schema)->lookup($$str({$LdapSchemaParser::ATTRIBUTE_DEFINITION_NAME, "/"_s, $(getID())})));

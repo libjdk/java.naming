@@ -96,6 +96,7 @@ $DirContext* DirectoryManager::getContinuationDirContext($CannotProceedException
 
 $Object* DirectoryManager::getObjectInstance(Object$* refInfo, $Name* name, $Context* nameCtx, $Hashtable* environment, $Attributes* attrs) {
 	$init(DirectoryManager);
+	$useLocalCurrentObjectStackCache();
 	$var($ObjectFactory, factory, nullptr);
 	$var($ObjectFactoryBuilder, builder, getObjectFactoryBuilder());
 	if (builder != nullptr) {
@@ -136,6 +137,7 @@ $Object* DirectoryManager::getObjectInstance(Object$* refInfo, $Name* name, $Con
 
 $Object* DirectoryManager::createObjectFromFactories(Object$* obj, $Name* name, $Context* nameCtx, $Hashtable* environment, $Attributes* attrs) {
 	$init(DirectoryManager);
+	$useLocalCurrentObjectStackCache();
 	$init($Context);
 	$var($FactoryEnumeration, factories, $ResourceManager::getFactories($Context::OBJECT_FACTORIES, environment, nameCtx));
 	if (factories == nullptr) {
@@ -156,6 +158,7 @@ $Object* DirectoryManager::createObjectFromFactories(Object$* obj, $Name* name, 
 
 $DirStateFactory$Result* DirectoryManager::getStateToBind(Object$* obj, $Name* name, $Context* nameCtx, $Hashtable* environment, $Attributes* attrs) {
 	$init(DirectoryManager);
+	$useLocalCurrentObjectStackCache();
 	$init($Context);
 	$var($FactoryEnumeration, factories, $ResourceManager::getFactories($Context::STATE_FACTORIES, environment, nameCtx));
 	if (factories == nullptr) {

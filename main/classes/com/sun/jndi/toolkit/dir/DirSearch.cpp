@@ -65,12 +65,14 @@ void DirSearch::init$() {
 }
 
 $NamingEnumeration* DirSearch::search($DirContext* ctx, $Attributes* matchingAttributes, $StringArray* attributesToReturn) {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchControls, cons, $new($SearchControls, $SearchControls::ONELEVEL_SCOPE, 0, 0, attributesToReturn, false, false));
 	$var($NamingEnumeration, var$0, static_cast<$NamingEnumeration*>($new($ContextEnumerator, ctx, $SearchControls::ONELEVEL_SCOPE)));
 	return $new($LazySearchEnumerationImpl, var$0, $$new($ContainmentFilter, matchingAttributes), cons);
 }
 
 $NamingEnumeration* DirSearch::search($DirContext* ctx, $String* filter, $SearchControls* cons$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchControls, cons, cons$renamed);
 	if (cons == nullptr) {
 		$assign(cons, $new($SearchControls));

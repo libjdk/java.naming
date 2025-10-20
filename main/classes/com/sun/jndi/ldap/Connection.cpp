@@ -254,6 +254,7 @@ bool Connection::IS_HOSTNAME_VERIFICATION_DISABLED = false;
 
 bool Connection::hostnameVerificationDisabledValue() {
 	$init(Connection);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($PrivilegedAction, act, static_cast<$PrivilegedAction*>($new(Connection$$Lambda$lambda$hostnameVerificationDisabledValue$0)));
 	$var($String, prop, $cast($String, $AccessController::doPrivileged(act)));
@@ -272,6 +273,7 @@ void Connection::setBound() {
 }
 
 void Connection::init$($LdapClient* parent, $String* host, int32_t port, $String* socketFactory, int32_t connectTimeout, int32_t readTimeout, $OutputStream* trace) {
+	$useLocalCurrentObjectStackCache();
 	this->v3 = true;
 	this->bound = false;
 	$set(this, traceFile, nullptr);
@@ -321,6 +323,7 @@ $InetSocketAddress* Connection::createInetSocketAddress($String* host, int32_t p
 }
 
 $Socket* Connection::createSocket($String* host, int32_t port, $String* socketFactory, int32_t connectTimeout) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($Socket, socket, nullptr);
 	if (socketFactory != nullptr) {
@@ -379,6 +382,7 @@ $LdapRequest* Connection::writeRequest($BerEncoder* ber, int32_t msgId, bool pau
 }
 
 $LdapRequest* Connection::writeRequest($BerEncoder* ber, int32_t msgId, bool pauseAfterReceipt, int32_t replyQueueCapacity) {
+	$useLocalCurrentObjectStackCache();
 	$var($LdapRequest, req, $new($LdapRequest, msgId, pauseAfterReceipt, replyQueueCapacity));
 	addRequest(req);
 	if (this->traceFile != nullptr) {
@@ -403,6 +407,7 @@ $LdapRequest* Connection::writeRequest($BerEncoder* ber, int32_t msgId, bool pau
 }
 
 $BerDecoder* Connection::readReply($LdapRequest* ldr) {
+	$useLocalCurrentObjectStackCache();
 	$var($BerDecoder, rber, nullptr);
 	$synchronized(this) {
 		if (this->sock == nullptr) {
@@ -460,6 +465,7 @@ $LdapRequest* Connection::findRequest(int32_t msgId) {
 
 void Connection::removeRequest($LdapRequest* req) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($LdapRequest, ldr, this->pendingRequests);
 		$var($LdapRequest, ldrprev, nullptr);
 		while (ldr != nullptr) {
@@ -479,6 +485,7 @@ void Connection::removeRequest($LdapRequest* req) {
 }
 
 void Connection::abandonRequest($LdapRequest* ldr, $ControlArray* reqCtls) {
+	$useLocalCurrentObjectStackCache();
 	removeRequest(ldr);
 	$var($BerEncoder, ber, $new($BerEncoder, 256));
 	int32_t abandonMsgId = getMsgId();
@@ -517,6 +524,7 @@ void Connection::abandonOutstandingReqs($ControlArray* reqCtls) {
 }
 
 void Connection::ldapUnbind($ControlArray* reqCtls) {
+	$useLocalCurrentObjectStackCache();
 	$var($BerEncoder, ber, $new($BerEncoder, 256));
 	int32_t unbindMsgId = getMsgId();
 	try {
@@ -545,6 +553,7 @@ void Connection::ldapUnbind($ControlArray* reqCtls) {
 }
 
 void Connection::cleanup($ControlArray* reqCtls, bool notifyParent) {
+	$useLocalCurrentObjectStackCache();
 	bool nparent = false;
 	$synchronized(this) {
 		this->useable = false;
@@ -658,6 +667,7 @@ void Connection::pauseReader() {
 }
 
 void Connection::run() {
+	$useLocalCurrentObjectStackCache();
 	$var($bytes, inbuf, nullptr);
 	int32_t inMsgId = 0;
 	int32_t bytesread = 0;
@@ -819,6 +829,7 @@ void Connection::setHandshakeCompletedListener($SSLSocket* sslSocket) {
 }
 
 $X509Certificate* Connection::getTlsServerCertificate() {
+	$useLocalCurrentObjectStackCache();
 	try {
 		if (isTlsConnection() && this->tlsHandshakeListener != nullptr) {
 			return $cast($X509Certificate, $nc($nc(this->tlsHandshakeListener)->tlsHandshakeCompleted)->get());

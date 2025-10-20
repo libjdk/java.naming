@@ -66,6 +66,7 @@ void DefaultResponseControlFactory::init$() {
 }
 
 $Control* DefaultResponseControlFactory::getControlInstance($Control* ctl) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, id, $nc(ctl)->getID());
 	try {
 		$init($SortResponseControl);

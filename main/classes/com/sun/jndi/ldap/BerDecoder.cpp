@@ -156,6 +156,7 @@ int32_t BerDecoder::parseInt() {
 }
 
 int32_t BerDecoder::parseIntWithTag(int32_t tag) {
+	$useLocalCurrentObjectStackCache();
 	if (parseByte() != tag) {
 		$var($String, s, nullptr);
 		if (this->offset > 0) {
@@ -189,6 +190,7 @@ $String* BerDecoder::parseString(bool decodeUTF8) {
 }
 
 $String* BerDecoder::parseStringWithTag(int32_t tag, bool decodeUTF8, $ints* rlen) {
+	$useLocalCurrentObjectStackCache();
 	int32_t st = 0;
 	int32_t origOffset = this->offset;
 	if ((st = parseByte()) != tag) {
@@ -228,6 +230,7 @@ $String* BerDecoder::parseStringWithTag(int32_t tag, bool decodeUTF8, $ints* rle
 }
 
 $bytes* BerDecoder::parseOctetString(int32_t tag, $ints* rlen) {
+	$useLocalCurrentObjectStackCache();
 	int32_t origOffset = this->offset;
 	int32_t st = 0;
 	if ((st = parseByte()) != tag) {

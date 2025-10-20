@@ -97,6 +97,7 @@ int32_t BinaryRefAddr::hashCode() {
 }
 
 $String* BinaryRefAddr::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuilder, str, $new($StringBuilder, $$str({"Address Type: "_s, this->addrType, "\n"_s})));
 	str->append("AddressContents: "_s);
 	for (int32_t i = 0; i < $nc(this->buf)->length && i < 32; ++i) {

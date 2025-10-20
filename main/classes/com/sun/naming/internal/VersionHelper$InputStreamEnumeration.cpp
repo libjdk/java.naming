@@ -175,6 +175,7 @@ void VersionHelper$InputStreamEnumeration::close() {
 }
 
 $InputStream* VersionHelper$InputStreamEnumeration::lambda$getNextElement$0() {
+	$useLocalCurrentObjectStackCache();
 	while ($nc(this->urls)->hasMoreElements()) {
 		try {
 			return $nc(($cast($URL, $($nc(this->urls)->nextElement()))))->openStream();

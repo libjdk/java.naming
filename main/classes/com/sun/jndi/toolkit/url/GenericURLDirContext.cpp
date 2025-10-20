@@ -266,6 +266,7 @@ void GenericURLDirContext::init$($Hashtable* env) {
 }
 
 $DirContext* GenericURLDirContext::getContinuationDirContext($Name* n) {
+	$useLocalCurrentObjectStackCache();
 	$var($Object, obj, lookup($($nc(n)->get(0))));
 	$var($CannotProceedException, cpe, $new($CannotProceedException));
 	cpe->setResolvedObj(obj);
@@ -274,6 +275,7 @@ $DirContext* GenericURLDirContext::getContinuationDirContext($Name* n) {
 }
 
 $Attributes* GenericURLDirContext::getAttributes($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	{
@@ -300,6 +302,7 @@ $Attributes* GenericURLDirContext::getAttributes($String* name) {
 }
 
 $Attributes* GenericURLDirContext::getAttributes($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return getAttributes($(name->get(0)));
 	} else {
@@ -329,6 +332,7 @@ $Attributes* GenericURLDirContext::getAttributes($Name* name) {
 }
 
 $Attributes* GenericURLDirContext::getAttributes($String* name, $StringArray* attrIds) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	{
@@ -355,6 +359,7 @@ $Attributes* GenericURLDirContext::getAttributes($String* name, $StringArray* at
 }
 
 $Attributes* GenericURLDirContext::getAttributes($Name* name, $StringArray* attrIds) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return getAttributes($(name->get(0)), attrIds);
 	} else {
@@ -384,6 +389,7 @@ $Attributes* GenericURLDirContext::getAttributes($Name* name, $StringArray* attr
 }
 
 void GenericURLDirContext::modifyAttributes($String* name, int32_t mod_op, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	{
@@ -402,6 +408,7 @@ void GenericURLDirContext::modifyAttributes($String* name, int32_t mod_op, $Attr
 }
 
 void GenericURLDirContext::modifyAttributes($Name* name, int32_t mod_op, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		modifyAttributes($(name->get(0)), mod_op, attrs);
 	} else {
@@ -423,6 +430,7 @@ void GenericURLDirContext::modifyAttributes($Name* name, int32_t mod_op, $Attrib
 }
 
 void GenericURLDirContext::modifyAttributes($String* name, $ModificationItemArray* mods) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	{
@@ -441,6 +449,7 @@ void GenericURLDirContext::modifyAttributes($String* name, $ModificationItemArra
 }
 
 void GenericURLDirContext::modifyAttributes($Name* name, $ModificationItemArray* mods) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		modifyAttributes($(name->get(0)), mods);
 	} else {
@@ -462,6 +471,7 @@ void GenericURLDirContext::modifyAttributes($Name* name, $ModificationItemArray*
 }
 
 void GenericURLDirContext::bind($String* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	{
@@ -480,6 +490,7 @@ void GenericURLDirContext::bind($String* name, Object$* obj, $Attributes* attrs)
 }
 
 void GenericURLDirContext::bind($Name* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		bind($(name->get(0)), obj, attrs);
 	} else {
@@ -501,6 +512,7 @@ void GenericURLDirContext::bind($Name* name, Object$* obj, $Attributes* attrs) {
 }
 
 void GenericURLDirContext::rebind($String* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	{
@@ -519,6 +531,7 @@ void GenericURLDirContext::rebind($String* name, Object$* obj, $Attributes* attr
 }
 
 void GenericURLDirContext::rebind($Name* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		rebind($(name->get(0)), obj, attrs);
 	} else {
@@ -540,6 +553,7 @@ void GenericURLDirContext::rebind($Name* name, Object$* obj, $Attributes* attrs)
 }
 
 $DirContext* GenericURLDirContext::createSubcontext($String* name, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	{
@@ -566,6 +580,7 @@ $DirContext* GenericURLDirContext::createSubcontext($String* name, $Attributes* 
 }
 
 $DirContext* GenericURLDirContext::createSubcontext($Name* name, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return createSubcontext($(name->get(0)), attrs);
 	} else {
@@ -595,12 +610,14 @@ $DirContext* GenericURLDirContext::createSubcontext($Name* name, $Attributes* at
 }
 
 $DirContext* GenericURLDirContext::getSchema($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	return $nc(ctx)->getSchema($(res->getRemainingName()));
 }
 
 $DirContext* GenericURLDirContext::getSchema($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return getSchema($(name->get(0)));
 	} else {
@@ -630,6 +647,7 @@ $DirContext* GenericURLDirContext::getSchema($Name* name) {
 }
 
 $DirContext* GenericURLDirContext::getSchemaClassDefinition($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	{
@@ -656,6 +674,7 @@ $DirContext* GenericURLDirContext::getSchemaClassDefinition($String* name) {
 }
 
 $DirContext* GenericURLDirContext::getSchemaClassDefinition($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return getSchemaClassDefinition($(name->get(0)));
 	} else {
@@ -685,6 +704,7 @@ $DirContext* GenericURLDirContext::getSchemaClassDefinition($Name* name) {
 }
 
 $NamingEnumeration* GenericURLDirContext::search($String* name, $Attributes* matchingAttributes) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	{
@@ -711,6 +731,7 @@ $NamingEnumeration* GenericURLDirContext::search($String* name, $Attributes* mat
 }
 
 $NamingEnumeration* GenericURLDirContext::search($Name* name, $Attributes* matchingAttributes) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return search($(name->get(0)), matchingAttributes);
 	} else {
@@ -740,6 +761,7 @@ $NamingEnumeration* GenericURLDirContext::search($Name* name, $Attributes* match
 }
 
 $NamingEnumeration* GenericURLDirContext::search($String* name, $Attributes* matchingAttributes, $StringArray* attributesToReturn) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	{
@@ -766,6 +788,7 @@ $NamingEnumeration* GenericURLDirContext::search($String* name, $Attributes* mat
 }
 
 $NamingEnumeration* GenericURLDirContext::search($Name* name, $Attributes* matchingAttributes, $StringArray* attributesToReturn) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return search($(name->get(0)), matchingAttributes, attributesToReturn);
 	} else {
@@ -795,6 +818,7 @@ $NamingEnumeration* GenericURLDirContext::search($Name* name, $Attributes* match
 }
 
 $NamingEnumeration* GenericURLDirContext::search($String* name, $String* filter, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	{
@@ -821,6 +845,7 @@ $NamingEnumeration* GenericURLDirContext::search($String* name, $String* filter,
 }
 
 $NamingEnumeration* GenericURLDirContext::search($Name* name, $String* filter, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return search($(name->get(0)), filter, cons);
 	} else {
@@ -850,6 +875,7 @@ $NamingEnumeration* GenericURLDirContext::search($Name* name, $String* filter, $
 }
 
 $NamingEnumeration* GenericURLDirContext::search($String* name, $String* filterExpr, $ObjectArray* filterArgs, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($DirContext, ctx, $cast($DirContext, $nc(res)->getResolvedObj()));
 	{
@@ -876,6 +902,7 @@ $NamingEnumeration* GenericURLDirContext::search($String* name, $String* filterE
 }
 
 $NamingEnumeration* GenericURLDirContext::search($Name* name, $String* filterExpr, $ObjectArray* filterArgs, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return search($(name->get(0)), filterExpr, filterArgs, cons);
 	} else {

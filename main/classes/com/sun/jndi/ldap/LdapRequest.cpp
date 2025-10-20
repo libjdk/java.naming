@@ -144,6 +144,7 @@ bool LdapRequest::addReplyBer($BerDecoder* ber) {
 }
 
 $BerDecoder* LdapRequest::getReplyBer(int64_t millis) {
+	$useLocalCurrentObjectStackCache();
 	if (this->cancelled) {
 		$throwNew($CommunicationException, $$str({"Request: "_s, $$str(this->msgId), " cancelled"_s}));
 	}

@@ -136,6 +136,7 @@ void LDAPCertStoreImpl$LDAPRequest::init$($LDAPCertStoreImpl* this$0, $String* n
 }
 
 $String* LDAPCertStoreImpl$LDAPRequest::checkName($String* name) {
+	$useLocalCurrentObjectStackCache();
 	if (name == nullptr) {
 		$throwNew($CertStoreException, "Name absent"_s);
 	}
@@ -158,6 +159,7 @@ void LDAPCertStoreImpl$LDAPRequest::addRequestedAttribute($String* attrId) {
 }
 
 $byteArray2* LDAPCertStoreImpl$LDAPRequest::getValues($String* attrId) {
+	$useLocalCurrentObjectStackCache();
 	$init($LDAPCertStoreImpl);
 	if ($LDAPCertStoreImpl::debug != nullptr && $Debug::isVerbose() && ((this->this$0->cacheHits + this->this$0->cacheMisses) % 50 == 0)) {
 		$nc($LDAPCertStoreImpl::debug)->println($$str({"LDAPRequest Cache hits: "_s, $$str(this->this$0->cacheHits), "; misses: "_s, $$str(this->this$0->cacheMisses)}));
@@ -175,6 +177,7 @@ $byteArray2* LDAPCertStoreImpl$LDAPRequest::getValues($String* attrId) {
 }
 
 $Map* LDAPCertStoreImpl$LDAPRequest::getValueMap() {
+	$useLocalCurrentObjectStackCache();
 	if (this->valueMap != nullptr) {
 		return this->valueMap;
 	}
@@ -276,6 +279,7 @@ void LDAPCertStoreImpl$LDAPRequest::cacheAttribute($String* attrId, $byteArray2*
 }
 
 $byteArray2* LDAPCertStoreImpl$LDAPRequest::getAttributeValues($Attribute* attr) {
+	$useLocalCurrentObjectStackCache();
 	$var($byteArray2, values, nullptr);
 	if (attr == nullptr) {
 		$init($LDAPCertStoreImpl);

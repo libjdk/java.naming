@@ -76,6 +76,7 @@ void Rfc2253Parser::init$($String* name) {
 }
 
 $List* Rfc2253Parser::parseDn() {
+	$useLocalCurrentObjectStackCache();
 	this->cur = 0;
 	$var($ArrayList, rdns, $new($ArrayList, this->len / 3 + 10));
 	if (this->len == 0) {
@@ -98,6 +99,7 @@ $Rdn* Rfc2253Parser::parseRdn() {
 }
 
 $Rdn* Rfc2253Parser::parseRdn($Rdn* rdn$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($Rdn, rdn, rdn$renamed);
 	$assign(rdn, doParse(rdn));
 	if (this->cur < this->len) {
@@ -107,6 +109,7 @@ $Rdn* Rfc2253Parser::parseRdn($Rdn* rdn$renamed) {
 }
 
 $Rdn* Rfc2253Parser::doParse($Rdn* rdn) {
+	$useLocalCurrentObjectStackCache();
 	while (this->cur < this->len) {
 		consumeWhitespace();
 		$var($String, attrType, parseAttrType());

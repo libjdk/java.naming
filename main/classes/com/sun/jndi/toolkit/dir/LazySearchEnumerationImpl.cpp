@@ -140,6 +140,7 @@ bool LazySearchEnumerationImpl::hasMoreElements() {
 }
 
 $Object* LazySearchEnumerationImpl::nextElement() {
+	$useLocalCurrentObjectStackCache();
 	try {
 		return $of(findNextMatch(true));
 	} catch ($NamingException&) {
@@ -160,6 +161,7 @@ void LazySearchEnumerationImpl::close() {
 }
 
 $SearchResult* LazySearchEnumerationImpl::findNextMatch(bool remove) {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchResult, answer, nullptr);
 	if (this->nextMatch != nullptr) {
 		$assign(answer, this->nextMatch);

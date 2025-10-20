@@ -101,6 +101,7 @@ $String* LdapName$TypeAndValue::toString() {
 }
 
 int32_t LdapName$TypeAndValue::compareTo(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	$var(LdapName$TypeAndValue, that, $cast(LdapName$TypeAndValue, obj));
 	int32_t diff = $nc(this->type)->compareToIgnoreCase($nc(that)->type);
 	if (diff != 0) {
@@ -113,6 +114,7 @@ int32_t LdapName$TypeAndValue::compareTo(Object$* obj) {
 }
 
 bool LdapName$TypeAndValue::equals(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if (!($instanceOf(LdapName$TypeAndValue, obj))) {
 		return false;
 	}
@@ -126,6 +128,7 @@ bool LdapName$TypeAndValue::equals(Object$* obj) {
 }
 
 int32_t LdapName$TypeAndValue::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	$init($Locale);
 	int32_t var$0 = $($nc(this->type)->toUpperCase($Locale::ENGLISH))->hashCode();
 	return (var$0 + $nc($(getValueComparable()))->hashCode());
@@ -161,6 +164,7 @@ $String* LdapName$TypeAndValue::escapeValue(Object$* val) {
 }
 
 $String* LdapName$TypeAndValue::escapeStringValue($String* val) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, escapees, ",=+<>#;\"\\"_s);
 	$var($chars, chars, $nc(val)->toCharArray());
 	$var($StringBuffer, buf, $new($StringBuffer, 2 * val->length()));
@@ -187,6 +191,7 @@ $String* LdapName$TypeAndValue::escapeStringValue($String* val) {
 }
 
 $String* LdapName$TypeAndValue::escapeBinaryValue($bytes* val) {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuffer, buf, $new($StringBuffer, 1 + 2 * $nc(val)->length));
 	buf->append("#"_s);
 	for (int32_t i = 0; i < $nc(val)->length; ++i) {
@@ -199,6 +204,7 @@ $String* LdapName$TypeAndValue::escapeBinaryValue($bytes* val) {
 }
 
 $Object* LdapName$TypeAndValue::unescapeValue($String* val) {
+	$useLocalCurrentObjectStackCache();
 	$var($chars, chars, $nc(val)->toCharArray());
 	int32_t beg = 0;
 	int32_t end = chars->length;
@@ -254,6 +260,7 @@ $Object* LdapName$TypeAndValue::unescapeValue($String* val) {
 }
 
 $bytes* LdapName$TypeAndValue::decodeHexPairs($chars* chars, int32_t beg, int32_t end) {
+	$useLocalCurrentObjectStackCache();
 	$var($bytes, bytes, $new($bytes, (end - beg) / 2));
 	for (int32_t i = 0; beg + 1 < end; ++i) {
 		int32_t hi = $Character::digit($nc(chars)->get(beg), 16);
@@ -271,6 +278,7 @@ $bytes* LdapName$TypeAndValue::decodeHexPairs($chars* chars, int32_t beg, int32_
 }
 
 $bytes* LdapName$TypeAndValue::getUtf8Octets($chars* chars, int32_t beg, int32_t end) {
+	$useLocalCurrentObjectStackCache();
 	$var($bytes, utf8, $new($bytes, (end - beg) / 3));
 	int32_t len = 0;
 	while (true) {

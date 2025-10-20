@@ -119,6 +119,7 @@ void NamingException::setResolvedObj(Object$* obj) {
 }
 
 void NamingException::appendRemainingComponent($String* name) {
+	$useLocalCurrentObjectStackCache();
 	if (name != nullptr) {
 		try {
 			if (this->remainingName == nullptr) {
@@ -133,6 +134,7 @@ void NamingException::appendRemainingComponent($String* name) {
 }
 
 void NamingException::appendRemainingName($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (name == nullptr) {
 		return;
 	}
@@ -169,6 +171,7 @@ $Throwable* NamingException::initCause($Throwable* cause) {
 }
 
 $String* NamingException::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($String, answer, $Exception::toString());
 	if (this->rootException != nullptr) {
 		$plusAssign(answer, $$str({" [Root exception is "_s, this->rootException, "]"_s}));

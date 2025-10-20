@@ -146,6 +146,7 @@ void ResourceManager::init$() {
 
 $Hashtable* ResourceManager::getInitialEnvironment($Hashtable* env$renamed) {
 	$init(ResourceManager);
+	$useLocalCurrentObjectStackCache();
 	$var($Hashtable, env, env$renamed);
 	$init($VersionHelper);
 	$var($StringArray, props, $VersionHelper::PROPS);
@@ -172,6 +173,7 @@ $Hashtable* ResourceManager::getInitialEnvironment($Hashtable* env$renamed) {
 
 $String* ResourceManager::getProperty($String* propName, $Hashtable* env, $Context* ctx, bool concat) {
 	$init(ResourceManager);
+	$useLocalCurrentObjectStackCache();
 	$var($String, val1, (env != nullptr) ? $cast($String, $nc(env)->get(propName)) : ($String*)nullptr);
 	if ((ctx == nullptr) || ((val1 != nullptr) && !concat)) {
 		return val1;
@@ -188,6 +190,7 @@ $String* ResourceManager::getProperty($String* propName, $Hashtable* env, $Conte
 
 $FactoryEnumeration* ResourceManager::getFactories($String* propName, $Hashtable* env, $Context* ctx) {
 	$init(ResourceManager);
+	$useLocalCurrentObjectStackCache();
 	$var($String, facProp, getProperty(propName, env, ctx, true));
 	if (facProp == nullptr) {
 		return nullptr;
@@ -225,6 +228,7 @@ $FactoryEnumeration* ResourceManager::getFactories($String* propName, $Hashtable
 
 $Object* ResourceManager::getFactory($String* propName, $Hashtable* env, $Context* ctx, $String* classSuffix, $String* defaultPkgPrefix) {
 	$init(ResourceManager);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($String, facProp, getProperty(propName, env, ctx, true));
 	if (facProp != nullptr) {
@@ -281,6 +285,7 @@ $Object* ResourceManager::getFactory($String* propName, $Hashtable* env, $Contex
 
 $Hashtable* ResourceManager::getProviderResource(Object$* obj) {
 	$init(ResourceManager);
+	$useLocalCurrentObjectStackCache();
 	if (obj == nullptr) {
 		return ($new($Hashtable, 1));
 	}
@@ -309,6 +314,7 @@ $Hashtable* ResourceManager::getProviderResource(Object$* obj) {
 
 $Hashtable* ResourceManager::getApplicationResources() {
 	$init(ResourceManager);
+	$useLocalCurrentObjectStackCache();
 	$var($ClassLoader, cl, $nc(ResourceManager::helper)->getContextClassLoader());
 	$synchronized(ResourceManager::propertiesCache) {
 		$var($Hashtable, result, $cast($Hashtable, $nc(ResourceManager::propertiesCache)->get(cl)));
@@ -391,6 +397,7 @@ $Hashtable* ResourceManager::getApplicationResources() {
 
 void ResourceManager::mergeTables($Hashtable* props1, $Hashtable* props2) {
 	$init(ResourceManager);
+	$useLocalCurrentObjectStackCache();
 	{
 		$var($Iterator, i$, $nc($($nc(props2)->keySet()))->iterator());
 		for (; $nc(i$)->hasNext();) {

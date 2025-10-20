@@ -57,6 +57,7 @@ $Object* allocate$ModificationItem($Class* clazz) {
 }
 
 void ModificationItem::init$(int32_t mod_op, $Attribute* attr) {
+	$useLocalCurrentObjectStackCache();
 	switch (mod_op) {
 	case $DirContext::ADD_ATTRIBUTE:
 		{}
@@ -87,6 +88,7 @@ $Attribute* ModificationItem::getAttribute() {
 }
 
 $String* ModificationItem::toString() {
+	$useLocalCurrentObjectStackCache();
 	switch (this->mod_op) {
 	case $DirContext::ADD_ATTRIBUTE:
 		{

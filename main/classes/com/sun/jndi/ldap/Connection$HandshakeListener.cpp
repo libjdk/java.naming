@@ -90,6 +90,7 @@ void Connection$HandshakeListener::init$($Connection* this$0) {
 }
 
 void Connection$HandshakeListener::handshakeCompleted($HandshakeCompletedEvent* event) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($X509Certificate, tlsServerCert, nullptr);
 		$var($CertificateArray, certs, nullptr);

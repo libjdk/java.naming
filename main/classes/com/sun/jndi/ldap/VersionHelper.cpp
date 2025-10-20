@@ -248,6 +248,7 @@ bool VersionHelper::isSerialDataAllowed() {
 }
 
 $ClassLoader* VersionHelper::getURLClassLoader($StringArray* url) {
+	$useLocalCurrentObjectStackCache();
 	$var($ClassLoader, parent, getContextClassLoader());
 	if (url != nullptr && VersionHelper::trustURLCodebase) {
 		return $URLClassLoader::newInstance($(getUrlArray(url)), parent);
@@ -262,6 +263,7 @@ $Class* VersionHelper::loadClass($String* className) {
 }
 
 $Thread* VersionHelper::createThread($Runnable* r) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($AccessControlContext, acc, $AccessController::getContext());
 	$var($PrivilegedAction, act, static_cast<$PrivilegedAction*>($new(VersionHelper$$Lambda$lambda$createThread$1$1, r, acc)));
@@ -269,6 +271,7 @@ $Thread* VersionHelper::createThread($Runnable* r) {
 }
 
 $ClassLoader* VersionHelper::getContextClassLoader() {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($PrivilegedAction, act, static_cast<$PrivilegedAction*>($new(VersionHelper$$Lambda$getContextClassLoader$2, static_cast<$Thread*>($($Thread::currentThread())))));
 	return $cast($ClassLoader, $AccessController::doPrivileged(act));
@@ -276,6 +279,7 @@ $ClassLoader* VersionHelper::getContextClassLoader() {
 
 $URLArray* VersionHelper::getUrlArray($StringArray* url) {
 	$init(VersionHelper);
+	$useLocalCurrentObjectStackCache();
 	$var($URLArray, urlArray, $new($URLArray, $nc(url)->length));
 	for (int32_t i = 0; i < urlArray->length; ++i) {
 		urlArray->set(i, $$new($URL, url->get(i)));
@@ -294,6 +298,7 @@ $String* VersionHelper::lambda$getPrivilegedProperty$0($String* propertyName, $S
 }
 
 void clinit$VersionHelper($Class* class$) {
+	$useLocalCurrentObjectStackCache();
 	$assignStatic(VersionHelper::helper, $new(VersionHelper));
 	{
 		$var($String, trust, VersionHelper::getPrivilegedProperty("com.sun.jndi.ldap.object.trustURLCodebase"_s, "false"_s));

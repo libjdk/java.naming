@@ -97,6 +97,7 @@ $String* TlsChannelBinding::CHANNEL_BINDING = nullptr;
 
 $TlsChannelBinding$TlsChannelBindingType* TlsChannelBinding::parseType($String* cbType) {
 	$init(TlsChannelBinding);
+	$useLocalCurrentObjectStackCache();
 	if (cbType != nullptr) {
 		$init($TlsChannelBinding$TlsChannelBindingType);
 		if (cbType->equals($($TlsChannelBinding$TlsChannelBindingType::TLS_SERVER_END_POINT->getName()))) {
@@ -110,6 +111,7 @@ $TlsChannelBinding$TlsChannelBindingType* TlsChannelBinding::parseType($String* 
 
 TlsChannelBinding* TlsChannelBinding::create($X509Certificate* serverCertificate) {
 	$init(TlsChannelBinding);
+	$useLocalCurrentObjectStackCache();
 	try {
 		$init($TlsChannelBinding$TlsChannelBindingType);
 		$var($bytes, prefix, $($nc($($TlsChannelBinding$TlsChannelBindingType::TLS_SERVER_END_POINT->getName()))->concat(":"_s))->getBytes());

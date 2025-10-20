@@ -101,6 +101,7 @@ void EventSupport::init$($LdapCtx* ctx) {
 
 void EventSupport::addNamingListener($String* nm, int32_t scope, $NamingListener* l) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		if ($instanceOf($ObjectChangeListener, l) || $instanceOf($NamespaceChangeListener, l)) {
 			$var($NotifierArgs, args, $new($NotifierArgs, nm, scope, l));
 			$var($NamingEventNotifier, notifier, $cast($NamingEventNotifier, $nc(this->notifiers)->get(args)));
@@ -122,6 +123,7 @@ void EventSupport::addNamingListener($String* nm, int32_t scope, $NamingListener
 
 void EventSupport::addNamingListener($String* nm, $String* filter, $SearchControls* ctls, $NamingListener* l) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		if ($instanceOf($ObjectChangeListener, l) || $instanceOf($NamespaceChangeListener, l)) {
 			$var($NotifierArgs, args, $new($NotifierArgs, nm, filter, ctls, l));
 			$var($NamingEventNotifier, notifier, $cast($NamingEventNotifier, $nc(this->notifiers)->get(args)));
@@ -143,6 +145,7 @@ void EventSupport::addNamingListener($String* nm, $String* filter, $SearchContro
 
 void EventSupport::removeNamingListener($NamingListener* l) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($Iterator, iterator, $nc($($nc(this->notifiers)->values()))->iterator());
 		while ($nc(iterator)->hasNext()) {
 			$var($NamingEventNotifier, notifier, $cast($NamingEventNotifier, iterator->next()));
@@ -176,6 +179,7 @@ void EventSupport::removeDeadNotifier($NotifierArgs* info) {
 
 void EventSupport::fireUnsolicited(Object$* obj) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		if (this->unsolicited == nullptr || $nc(this->unsolicited)->size() == 0) {
 			return;
 		}
@@ -192,6 +196,7 @@ void EventSupport::fireUnsolicited(Object$* obj) {
 
 void EventSupport::cleanup() {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		if (this->notifiers != nullptr) {
 			{
 				$var($Iterator, i$, $nc($($nc(this->notifiers)->values()))->iterator());

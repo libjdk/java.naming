@@ -227,6 +227,7 @@ void LdapSchemaParser::init$(bool netscapeBug) {
 
 void LdapSchemaParser::LDAP2JNDISchema($Attributes* schemaAttrs, $LdapSchemaCtx* schemaRoot) {
 	$init(LdapSchemaParser);
+	$useLocalCurrentObjectStackCache();
 	$var($Attribute, objectClassesAttr, nullptr);
 	$var($Attribute, attributeDefAttr, nullptr);
 	$var($Attribute, syntaxDefAttr, nullptr);
@@ -251,6 +252,7 @@ void LdapSchemaParser::LDAP2JNDISchema($Attributes* schemaAttrs, $LdapSchemaCtx*
 
 $DirContext* LdapSchemaParser::objectDescs2ClassDefs($Attribute* objDescsAttr, $LdapSchemaCtx* schemaRoot) {
 	$init(LdapSchemaParser);
+	$useLocalCurrentObjectStackCache();
 	$var($NamingEnumeration, objDescs, nullptr);
 	$var($Attributes, objDef, nullptr);
 	$var($LdapSchemaCtx, classDefTree, nullptr);
@@ -275,6 +277,7 @@ $DirContext* LdapSchemaParser::objectDescs2ClassDefs($Attribute* objDescsAttr, $
 
 $DirContext* LdapSchemaParser::attrDescs2AttrDefs($Attribute* attributeDescAttr, $LdapSchemaCtx* schemaRoot) {
 	$init(LdapSchemaParser);
+	$useLocalCurrentObjectStackCache();
 	$var($NamingEnumeration, attrDescs, nullptr);
 	$var($Attributes, attrDef, nullptr);
 	$var($LdapSchemaCtx, attrDefTree, nullptr);
@@ -299,6 +302,7 @@ $DirContext* LdapSchemaParser::attrDescs2AttrDefs($Attribute* attributeDescAttr,
 
 $DirContext* LdapSchemaParser::syntaxDescs2SyntaxDefs($Attribute* syntaxDescAttr, $LdapSchemaCtx* schemaRoot) {
 	$init(LdapSchemaParser);
+	$useLocalCurrentObjectStackCache();
 	$var($NamingEnumeration, syntaxDescs, nullptr);
 	$var($Attributes, syntaxDef, nullptr);
 	$var($LdapSchemaCtx, syntaxDefTree, nullptr);
@@ -323,6 +327,7 @@ $DirContext* LdapSchemaParser::syntaxDescs2SyntaxDefs($Attribute* syntaxDescAttr
 
 $DirContext* LdapSchemaParser::matchRuleDescs2MatchRuleDefs($Attribute* matchRuleDescAttr, $LdapSchemaCtx* schemaRoot) {
 	$init(LdapSchemaParser);
+	$useLocalCurrentObjectStackCache();
 	$var($NamingEnumeration, matchRuleDescs, nullptr);
 	$var($Attributes, matchRuleDef, nullptr);
 	$var($LdapSchemaCtx, matchRuleDefTree, nullptr);
@@ -347,6 +352,7 @@ $DirContext* LdapSchemaParser::matchRuleDescs2MatchRuleDefs($Attribute* matchRul
 
 $ObjectArray* LdapSchemaParser::desc2Def($String* desc) {
 	$init(LdapSchemaParser);
+	$useLocalCurrentObjectStackCache();
 	$var($Attributes, attrs, $new($BasicAttributes, $LdapClient::caseIgnore));
 	$var($Attribute, attr, nullptr);
 	$var($ints, pos, $new($ints, {1}));
@@ -394,6 +400,7 @@ void LdapSchemaParser::skipWhitespace($String* string, $ints* pos) {
 
 $Attribute* LdapSchemaParser::readNumericOID($String* string, $ints* pos) {
 	$init(LdapSchemaParser);
+	$useLocalCurrentObjectStackCache();
 	int32_t begin = 0;
 	int32_t end = 0;
 	$var($String, value, nullptr);
@@ -410,6 +417,7 @@ $Attribute* LdapSchemaParser::readNumericOID($String* string, $ints* pos) {
 
 $Attribute* LdapSchemaParser::readNextTag($String* string, $ints* pos) {
 	$init(LdapSchemaParser);
+	$useLocalCurrentObjectStackCache();
 	$var($Attribute, attr, nullptr);
 	$var($String, tagName, nullptr);
 	$var($StringArray, values, nullptr);
@@ -467,6 +475,7 @@ $StringArray* LdapSchemaParser::readTag($String* tag, $String* string, $ints* po
 
 $StringArray* LdapSchemaParser::readQDString($String* string, $ints* pos) {
 	$init(LdapSchemaParser);
+	$useLocalCurrentObjectStackCache();
 	int32_t begin = 0;
 	int32_t end = 0;
 	begin = $nc(string)->indexOf((int32_t)LdapSchemaParser::SINGLE_QUOTE, $nc(pos)->get(0)) + 1;
@@ -507,6 +516,7 @@ $StringArray* LdapSchemaParser::readQDescrs($String* string, $ints* pos) {
 
 $StringArray* LdapSchemaParser::readQDescrList($String* string, $ints* pos) {
 	$init(LdapSchemaParser);
+	$useLocalCurrentObjectStackCache();
 	int32_t begin = 0;
 	int32_t end = 0;
 	$var($Vector, values, $new($Vector, 5));
@@ -533,6 +543,7 @@ $StringArray* LdapSchemaParser::readQDescrList($String* string, $ints* pos) {
 
 $StringArray* LdapSchemaParser::readWOID($String* string, $ints* pos) {
 	$init(LdapSchemaParser);
+	$useLocalCurrentObjectStackCache();
 	skipWhitespace(string, pos);
 	if ($nc(string)->charAt($nc(pos)->get(0)) == LdapSchemaParser::SINGLE_QUOTE) {
 		return readQDString(string, pos);
@@ -550,6 +561,7 @@ $StringArray* LdapSchemaParser::readWOID($String* string, $ints* pos) {
 
 $StringArray* LdapSchemaParser::readOIDs($String* string, $ints* pos) {
 	$init(LdapSchemaParser);
+	$useLocalCurrentObjectStackCache();
 	skipWhitespace(string, pos);
 	if ($nc(string)->charAt($nc(pos)->get(0)) != LdapSchemaParser::OID_LIST_BEGIN) {
 		return readWOID(string, pos);
@@ -591,6 +603,7 @@ $StringArray* LdapSchemaParser::readOIDs($String* string, $ints* pos) {
 }
 
 $String* LdapSchemaParser::classDef2ObjectDesc($Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuilder, objectDesc, $new($StringBuilder, "( "_s));
 	$var($Attribute, attr, nullptr);
 	int32_t count = 0;
@@ -675,6 +688,7 @@ $String* LdapSchemaParser::classDef2ObjectDesc($Attributes* attrs) {
 }
 
 $String* LdapSchemaParser::attrDef2AttrDesc($Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuilder, attrDesc, $new($StringBuilder, "( "_s));
 	$var($Attribute, attr, nullptr);
 	int32_t count = 0;
@@ -777,6 +791,7 @@ $String* LdapSchemaParser::attrDef2AttrDesc($Attributes* attrs) {
 }
 
 $String* LdapSchemaParser::syntaxDef2SyntaxDesc($Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuilder, syntaxDesc, $new($StringBuilder, "( "_s));
 	$var($Attribute, attr, nullptr);
 	int32_t count = 0;
@@ -813,6 +828,7 @@ $String* LdapSchemaParser::syntaxDef2SyntaxDesc($Attributes* attrs) {
 }
 
 $String* LdapSchemaParser::matchRuleDef2MatchRuleDesc($Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuilder, matchRuleDesc, $new($StringBuilder, "( "_s));
 	$var($Attribute, attr, nullptr);
 	int32_t count = 0;
@@ -869,6 +885,7 @@ $String* LdapSchemaParser::matchRuleDef2MatchRuleDesc($Attributes* attrs) {
 }
 
 $String* LdapSchemaParser::writeNumericOID($Attribute* nOIDAttr) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(nOIDAttr)->size() != 1) {
 		$throwNew($InvalidAttributeValueException, "A class definition must have exactly one numeric OID"_s);
 	}
@@ -876,6 +893,7 @@ $String* LdapSchemaParser::writeNumericOID($Attribute* nOIDAttr) {
 }
 
 $String* LdapSchemaParser::writeWOID($Attribute* attr) {
+	$useLocalCurrentObjectStackCache();
 	if (this->netscapeBug) {
 		return writeQDString(attr);
 	} else {
@@ -886,6 +904,7 @@ $String* LdapSchemaParser::writeWOID($Attribute* attr) {
 }
 
 $String* LdapSchemaParser::writeQDString($Attribute* qdStringAttr) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(qdStringAttr)->size() != 1) {
 		$throwNew($InvalidAttributeValueException, $$str({$(qdStringAttr->getID()), " must have exactly one value"_s}));
 	}
@@ -900,6 +919,7 @@ $String* LdapSchemaParser::writeQDStrings($Attribute* attr) {
 }
 
 $String* LdapSchemaParser::writeQDescrs($Attribute* attr) {
+	$useLocalCurrentObjectStackCache();
 	switch ($nc(attr)->size()) {
 	case 0:
 		{
@@ -927,6 +947,7 @@ $String* LdapSchemaParser::writeQDescrs($Attribute* attr) {
 }
 
 $String* LdapSchemaParser::writeOIDs($Attribute* oidsAttr) {
+	$useLocalCurrentObjectStackCache();
 	switch ($nc(oidsAttr)->size()) {
 	case 0:
 		{
@@ -959,28 +980,33 @@ $String* LdapSchemaParser::writeOIDs($Attribute* oidsAttr) {
 }
 
 $String* LdapSchemaParser::writeBoolean($Attribute* booleanAttr) {
+	$useLocalCurrentObjectStackCache();
 	return $str({$($nc(booleanAttr)->getID()), $$str(LdapSchemaParser::WHSP)});
 }
 
 $Attribute* LdapSchemaParser::stringifyObjDesc($Attributes* classDefAttrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($Attribute, objDescAttr, $new($BasicAttribute, LdapSchemaParser::OBJECTCLASSDESC_ATTR_ID));
 	objDescAttr->add($(classDef2ObjectDesc(classDefAttrs)));
 	return objDescAttr;
 }
 
 $Attribute* LdapSchemaParser::stringifyAttrDesc($Attributes* attrDefAttrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($Attribute, attrDescAttr, $new($BasicAttribute, LdapSchemaParser::ATTRIBUTEDESC_ATTR_ID));
 	attrDescAttr->add($(attrDef2AttrDesc(attrDefAttrs)));
 	return attrDescAttr;
 }
 
 $Attribute* LdapSchemaParser::stringifySyntaxDesc($Attributes* syntaxDefAttrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($Attribute, syntaxDescAttr, $new($BasicAttribute, LdapSchemaParser::SYNTAXDESC_ATTR_ID));
 	syntaxDescAttr->add($(syntaxDef2SyntaxDesc(syntaxDefAttrs)));
 	return syntaxDescAttr;
 }
 
 $Attribute* LdapSchemaParser::stringifyMatchRuleDesc($Attributes* matchRuleDefAttrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($Attribute, matchRuleDescAttr, $new($BasicAttribute, LdapSchemaParser::MATCHRULEDESC_ATTR_ID));
 	matchRuleDescAttr->add($(matchRuleDef2MatchRuleDesc(matchRuleDefAttrs)));
 	return matchRuleDescAttr;

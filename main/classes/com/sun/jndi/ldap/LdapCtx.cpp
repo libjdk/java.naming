@@ -982,6 +982,7 @@ $Control* LdapCtx::manageReferralControl = nullptr;
 $HierMemDirCtx* LdapCtx::EMPTY_SCHEMA = nullptr;
 
 void LdapCtx::init$($String* dn, $String* host, int32_t port_number, $Hashtable* props, bool useSsl) {
+	$useLocalCurrentObjectStackCache();
 	$ComponentDirContext::init$();
 	$set(this, hostname, nullptr);
 	$set(this, clnt, nullptr);
@@ -1119,6 +1120,7 @@ void LdapCtx::c_bind($Name* name, Object$* obj, $Continuation* cont) {
 }
 
 void LdapCtx::c_bind($Name* name, Object$* obj, $Attributes* attrs$renamed, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($Attributes, attrs, attrs$renamed);
 	$nc(cont)->setError($of(this), name);
 	$var($Attributes, inputAttrs, attrs);
@@ -1194,6 +1196,7 @@ void LdapCtx::c_rebind($Name* name, Object$* obj, $Continuation* cont) {
 }
 
 void LdapCtx::c_rebind($Name* name, Object$* obj, $Attributes* attrs$renamed, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($Attributes, attrs, attrs$renamed);
 	$nc(cont)->setError($of(this), name);
 	$var($Attributes, inputAttrs, attrs);
@@ -1318,6 +1321,7 @@ void LdapCtx::c_rebind($Name* name, Object$* obj, $Attributes* attrs$renamed, $C
 }
 
 void LdapCtx::c_unbind($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$nc(cont)->setError($of(this), name);
 	try {
 		ensureOpen();
@@ -1379,6 +1383,7 @@ void LdapCtx::c_unbind($Name* name, $Continuation* cont) {
 }
 
 void LdapCtx::c_rename($Name* oldName, $Name* newName, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, oldParsed, nullptr);
 	$var($Name, newParsed, nullptr);
 	$var($Name, oldParent, nullptr);
@@ -1474,6 +1479,7 @@ $Context* LdapCtx::c_createSubcontext($Name* name, $Continuation* cont) {
 }
 
 $DirContext* LdapCtx::c_createSubcontext($Name* name, $Attributes* attrs$renamed, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($Attributes, attrs, attrs$renamed);
 	$nc(cont)->setError($of(this), name);
 	$var($Attributes, inputAttrs, attrs);
@@ -1549,6 +1555,7 @@ $DirContext* LdapCtx::c_createSubcontext($Name* name, $Attributes* attrs$renamed
 }
 
 void LdapCtx::c_destroySubcontext($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$nc(cont)->setError($of(this), name);
 	try {
 		ensureOpen();
@@ -1611,6 +1618,7 @@ void LdapCtx::c_destroySubcontext($Name* name, $Continuation* cont) {
 
 $Attributes* LdapCtx::addRdnAttributes($String* dn, $Attributes* attrs$renamed, bool directUpdate) {
 	$init(LdapCtx);
+	$useLocalCurrentObjectStackCache();
 	$var($Attributes, attrs, attrs$renamed);
 	if ($nc(dn)->isEmpty()) {
 		return attrs;
@@ -1654,6 +1662,7 @@ bool LdapCtx::containsIgnoreCase($NamingEnumeration* enumStr, $String* str) {
 }
 
 void LdapCtx::adjustDeleteStatus($String* fname, $LdapResult* answer) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(answer)->status == $LdapClient::LDAP_NO_SUCH_OBJECT && answer->matchedDN != nullptr) {
 		try {
 			$var($Name, orig, $nc(LdapCtx::parser)->parse(fname));
@@ -1670,6 +1679,7 @@ void LdapCtx::adjustDeleteStatus($String* fname, $LdapResult* answer) {
 
 $Vector* LdapCtx::appendVector($Vector* v1$renamed, $Vector* v2) {
 	$init(LdapCtx);
+	$useLocalCurrentObjectStackCache();
 	$var($Vector, v1, v1$renamed);
 	if (v1 == nullptr) {
 		$assign(v1, v2);
@@ -1686,6 +1696,7 @@ $Object* LdapCtx::c_lookupLink($Name* name, $Continuation* cont) {
 }
 
 $Object* LdapCtx::c_lookup($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$nc(cont)->setError($of(this), name);
 	$var($Object, obj, nullptr);
 	$var($Attributes, attrs, nullptr);
@@ -1775,6 +1786,7 @@ $Object* LdapCtx::c_lookup($Name* name, $Continuation* cont) {
 }
 
 $NamingEnumeration* LdapCtx::c_list($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchControls, cons, $new($SearchControls));
 	$var($StringArray, classAttrs, $new($StringArray, 2));
 	$init($Obj);
@@ -1848,6 +1860,7 @@ $NamingEnumeration* LdapCtx::c_list($Name* name, $Continuation* cont) {
 }
 
 $NamingEnumeration* LdapCtx::c_listBindings($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchControls, cons, $new($SearchControls));
 	cons->setReturningAttributes(nullptr);
 	cons->setReturningObjFlag(true);
@@ -1926,6 +1939,7 @@ $String* LdapCtx::getNameInNamespace() {
 }
 
 $Name* LdapCtx::composeName($Name* name$renamed, $Name* prefix$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, prefix, prefix$renamed);
 	$var($Name, name, name$renamed);
 	$var($Name, result, nullptr);
@@ -1979,6 +1993,7 @@ $String* LdapCtx::concatNames($String* lesser, $String* greater) {
 }
 
 $Attributes* LdapCtx::c_getAttributes($Name* name, $StringArray* attrIds, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$nc(cont)->setError($of(this), name);
 	$var($SearchControls, cons, $new($SearchControls));
 	cons->setSearchScope($SearchControls::OBJECT_SCOPE);
@@ -2047,6 +2062,7 @@ $Attributes* LdapCtx::c_getAttributes($Name* name, $StringArray* attrIds, $Conti
 }
 
 void LdapCtx::c_modifyAttributes($Name* name, int32_t mod_op, $Attributes* attrs, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$nc(cont)->setError($of(this), name);
 	try {
 		ensureOpen();
@@ -2119,6 +2135,7 @@ void LdapCtx::c_modifyAttributes($Name* name, int32_t mod_op, $Attributes* attrs
 }
 
 void LdapCtx::c_modifyAttributes($Name* name, $ModificationItemArray* mods, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$nc(cont)->setError($of(this), name);
 	try {
 		ensureOpen();
@@ -2212,6 +2229,7 @@ int32_t LdapCtx::convertToLdapModCode(int32_t mod_op) {
 }
 
 $DirContext* LdapCtx::c_getSchema($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$nc(cont)->setError($of(this), name);
 	try {
 		return getSchemaTree(name);
@@ -2223,6 +2241,7 @@ $DirContext* LdapCtx::c_getSchema($Name* name, $Continuation* cont) {
 }
 
 $DirContext* LdapCtx::c_getSchemaClassDefinition($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$nc(cont)->setError($of(this), name);
 	try {
 		$var($Attribute, objectClassAttr, $nc($(c_getAttributes(name, $$new($StringArray, {"objectclass"_s}), cont)))->get("objectclass"_s));
@@ -2252,6 +2271,7 @@ $DirContext* LdapCtx::c_getSchemaClassDefinition($Name* name, $Continuation* con
 }
 
 $DirContext* LdapCtx::getSchemaTree($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, subschemasubentry, getSchemaEntry(name, true));
 	$var($DirContext, schemaTree, $cast($DirContext, $nc(this->schemaTrees)->get(subschemasubentry)));
 	if (schemaTree == nullptr) {
@@ -2262,6 +2282,7 @@ $DirContext* LdapCtx::getSchemaTree($Name* name) {
 }
 
 $DirContext* LdapCtx::buildSchemaTree($String* subschemasubentry) {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchControls, constraints, $new($SearchControls, $SearchControls::OBJECT_SCOPE, 0, 0, LdapCtx::SCHEMA_ATTRIBUTES, true, false));
 	$var($Name, sse, ($$new($CompositeName))->add(subschemasubentry));
 	$var($NamingEnumeration, results, searchAux(sse, "(objectClass=subschema)"_s, constraints, false, true, $$new($Continuation)));
@@ -2278,6 +2299,7 @@ $DirContext* LdapCtx::buildSchemaTree($String* subschemasubentry) {
 }
 
 $String* LdapCtx::getSchemaEntry($Name* name, bool relative) {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchControls, constraints, $new($SearchControls, $SearchControls::OBJECT_SCOPE, 0, 0, $$new($StringArray, {"subschemasubentry"_s}), false, false));
 	$var($NamingEnumeration, results, nullptr);
 	try {
@@ -2309,6 +2331,7 @@ $String* LdapCtx::getSchemaEntry($Name* name, bool relative) {
 }
 
 void LdapCtx::setParents($Attributes* attrs, $Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($NamingEnumeration, ae, $nc(attrs)->getAll());
 	while ($nc(ae)->hasMore()) {
 		$nc(($cast($LdapAttribute, $(ae->next()))))->setParent(static_cast<$DirContext*>(static_cast<$PartialCompositeDirContext*>(static_cast<$ComponentDirContext*>(this))), name);
@@ -2327,6 +2350,7 @@ $NamingEnumeration* LdapCtx::c_search($Name* name, $Attributes* matchingAttribut
 }
 
 $NamingEnumeration* LdapCtx::c_search($Name* name, $Attributes* matchingAttributes, $StringArray* attributesToReturn, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchControls, cons, $new($SearchControls));
 	cons->setReturningAttributes(attributesToReturn);
 	$var($String, filter, nullptr);
@@ -2345,6 +2369,7 @@ $NamingEnumeration* LdapCtx::c_search($Name* name, $String* filter, $SearchContr
 }
 
 $NamingEnumeration* LdapCtx::c_search($Name* name, $String* filterExpr, $ObjectArray* filterArgs, $SearchControls* cons, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, strfilter, nullptr);
 	try {
 		$assign(strfilter, $SearchFilter::format(filterExpr, filterArgs));
@@ -2357,6 +2382,7 @@ $NamingEnumeration* LdapCtx::c_search($Name* name, $String* filterExpr, $ObjectA
 }
 
 $NamingEnumeration* LdapCtx::searchAux($Name* name, $String* filter, $SearchControls* cons$renamed, bool relative, bool waitForReply, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchControls, cons, cons$renamed);
 	$var($LdapResult, answer, nullptr);
 	$var($StringArray, tokens, $new($StringArray, 2));
@@ -2459,6 +2485,7 @@ $NamingEnumeration* LdapCtx::searchAux($Name* name, $String* filter, $SearchCont
 }
 
 $LdapResult* LdapCtx::getSearchReply($LdapClient* eClnt, $LdapResult* res) {
+	$useLocalCurrentObjectStackCache();
 	if (this->clnt != eClnt) {
 		$throwNew($CommunicationException, "Context\'s connection changed; unable to continue enumeration"_s);
 	}
@@ -2482,6 +2509,7 @@ $LdapResult* LdapCtx::doSearchOnce($Name* name, $String* filter, $SearchControls
 }
 
 $LdapResult* LdapCtx::doSearch($Name* name, $String* filter, $SearchControls* cons, bool relative, bool waitForReply) {
+	$useLocalCurrentObjectStackCache();
 	ensureOpen();
 	try {
 		int32_t scope = 0;
@@ -2549,6 +2577,7 @@ bool LdapCtx::searchToCompare($String* filter, $SearchControls* cons, $StringArr
 
 bool LdapCtx::filterToAssertion($String* filter, $StringArray* tokens) {
 	$init(LdapCtx);
+	$useLocalCurrentObjectStackCache();
 	$var($StringTokenizer, assertionTokenizer, $new($StringTokenizer, filter, "="_s));
 	if (assertionTokenizer->countTokens() != 2) {
 		return false;
@@ -2585,6 +2614,7 @@ bool LdapCtx::filterToAssertion($String* filter, $StringArray* tokens) {
 }
 
 $LdapResult* LdapCtx::compare($Name* name, $String* type, $String* value) {
+	$useLocalCurrentObjectStackCache();
 	ensureOpen();
 	$var($String, nm, fullyQualifiedName(name));
 	$var($LdapResult, answer, $nc(this->clnt)->compare(nm, type, value, this->reqCtls));
@@ -2594,6 +2624,7 @@ $LdapResult* LdapCtx::compare($Name* name, $String* type, $String* value) {
 
 $SearchControls* LdapCtx::cloneSearchControls($SearchControls* cons) {
 	$init(LdapCtx);
+	$useLocalCurrentObjectStackCache();
 	if (cons == nullptr) {
 		return nullptr;
 	}
@@ -3093,6 +3124,7 @@ void LdapCtx::setDomainName($String* domainName) {
 }
 
 void LdapCtx::initEnv() {
+	$useLocalCurrentObjectStackCache();
 	if (this->envprops == nullptr) {
 		setReferralMode(nullptr, false);
 		return;
@@ -3138,6 +3170,7 @@ void LdapCtx::setBatchSize($String* batchSizeProp) {
 }
 
 void LdapCtx::setReferralMode($String* ref, bool update) {
+	$useLocalCurrentObjectStackCache();
 	if (ref != nullptr) {
 		{
 			$var($String, s88545$, ref);
@@ -3211,6 +3244,7 @@ void LdapCtx::setReferralMode($String* ref, bool update) {
 }
 
 void LdapCtx::setDerefAliases($String* deref) {
+	$useLocalCurrentObjectStackCache();
 	if (deref != nullptr) {
 		{
 			$var($String, s89925$, deref);
@@ -3337,6 +3371,7 @@ void LdapCtx::setReadTimeout($String* readTimeoutProp) {
 
 $Vector* LdapCtx::extractURLs($String* refString) {
 	$init(LdapCtx);
+	$useLocalCurrentObjectStackCache();
 	int32_t separator = 0;
 	int32_t urlCount = 0;
 	while ((separator = $nc(refString)->indexOf((int32_t)u'\n', separator)) >= 0) {
@@ -3361,6 +3396,7 @@ $Vector* LdapCtx::extractURLs($String* refString) {
 }
 
 void LdapCtx::setBinaryAttributes($String* attrIds) {
+	$useLocalCurrentObjectStackCache();
 	if (attrIds == nullptr) {
 		$set(this, binaryAttrs, nullptr);
 	} else {
@@ -3417,6 +3453,7 @@ $String* LdapCtx::getMechsAllowedToSendCredentials() {
 
 $Set* LdapCtx::getMechsFromPropertyValue($String* propValue) {
 	$init(LdapCtx);
+	$useLocalCurrentObjectStackCache();
 	if (propValue == nullptr || $nc(propValue)->isBlank()) {
 		return $Collections::emptySet();
 	}
@@ -3428,6 +3465,7 @@ bool LdapCtx::isConnectionEncrypted() {
 }
 
 void LdapCtx::ensureCanTransmitCredentials($String* authMechanism) {
+	$useLocalCurrentObjectStackCache();
 	bool var$0 = "none"_s->equalsIgnoreCase(authMechanism);
 	if (var$0 || "anonymous"_s->equalsIgnoreCase(authMechanism)) {
 		return;
@@ -3487,6 +3525,7 @@ void LdapCtx::ensureOpen(bool startTLS) {
 }
 
 void LdapCtx::connect(bool startTLS) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, user, nullptr);
 	$var($Object, passwd, nullptr);
 	$var($String, secProtocol, nullptr);
@@ -3603,6 +3642,7 @@ void LdapCtx::processReturnCode($LdapResult* answer) {
 }
 
 void LdapCtx::processReturnCode($LdapResult* answer, $Name* remainName) {
+	$useLocalCurrentObjectStackCache();
 	$var($LdapResult, var$0, answer);
 	$var($Name, var$1, ($$new($CompositeName))->add(this->currentDN));
 	$var($Name, var$2, remainName);
@@ -3611,6 +3651,7 @@ void LdapCtx::processReturnCode($LdapResult* answer, $Name* remainName) {
 }
 
 void LdapCtx::processReturnCode($LdapResult* res, $Name* resolvedName, Object$* resolvedObj, $Name* remainName, $Hashtable* envprops, $String* fullDN) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, msg, $LdapClient::getErrorMessage($nc(res)->status, res->errorMessage));
 	$var($NamingException, e, nullptr);
 	$var($LdapReferralException, r, nullptr);
@@ -3760,6 +3801,7 @@ void LdapCtx::processReturnCode($LdapResult* res, $Name* resolvedName, Object$* 
 
 $NamingException* LdapCtx::mapErrorCode(int32_t errorCode, $String* errorMessage) {
 	$init(LdapCtx);
+	$useLocalCurrentObjectStackCache();
 	if (errorCode == $LdapClient::LDAP_SUCCESS) {
 		return nullptr;
 	}
@@ -3938,6 +3980,7 @@ $NamingException* LdapCtx::mapErrorCode(int32_t errorCode, $String* errorMessage
 }
 
 $ExtendedResponse* LdapCtx::extendedOperation($ExtendedRequest* request) {
+	$useLocalCurrentObjectStackCache();
 	bool startTLS = ($nc($($nc(request)->getID()))->equals(LdapCtx::STARTTLS_REQ_OID));
 	ensureOpen(startTLS);
 	try {
@@ -4025,6 +4068,7 @@ $ControlArray* LdapCtx::getResponseControls() {
 }
 
 $ControlArray* LdapCtx::convertControls($Vector* ctls) {
+	$useLocalCurrentObjectStackCache();
 	int32_t count = $nc(ctls)->size();
 	if (count == 0) {
 		return nullptr;
@@ -4094,6 +4138,7 @@ void LdapCtx::addNamingListener($Name* nm, int32_t scope, $NamingListener* l) {
 }
 
 void LdapCtx::addNamingListener($String* nm, int32_t scope, $NamingListener* l) {
+	$useLocalCurrentObjectStackCache();
 	if (this->eventSupport == nullptr) {
 		$set(this, eventSupport, $new($EventSupport, this));
 	}
@@ -4114,6 +4159,7 @@ void LdapCtx::removeNamingListener($NamingListener* l) {
 }
 
 void LdapCtx::addNamingListener($String* nm, $String* filter, $SearchControls* ctls, $NamingListener* l) {
+	$useLocalCurrentObjectStackCache();
 	if (this->eventSupport == nullptr) {
 		$set(this, eventSupport, $new($EventSupport, this));
 	}
@@ -4134,6 +4180,7 @@ void LdapCtx::addNamingListener($Name* nm, $String* filter, $ObjectArray* filter
 }
 
 void LdapCtx::addNamingListener($String* nm, $String* filterExpr, $ObjectArray* filterArgs, $SearchControls* ctls, $NamingListener* l) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, strfilter, $SearchFilter::format(filterExpr, filterArgs));
 	addNamingListener($(getTargetName($$new($CompositeName, nm))), strfilter, ctls, l);
 }

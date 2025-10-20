@@ -108,6 +108,7 @@ bool Connections::debug = false;
 bool Connections::trace = false;
 
 void Connections::init$(Object$* id, int32_t initSize, int32_t prefSize, int32_t maxSize, $PooledConnectionFactory* factory) {
+	$useLocalCurrentObjectStackCache();
 	this->closed = false;
 	this->maxSize = maxSize;
 	if (maxSize > 0) {
@@ -131,6 +132,7 @@ void Connections::init$(Object$* id, int32_t initSize, int32_t prefSize, int32_t
 
 $PooledConnection* Connections::get(int64_t timeout, $PooledConnectionFactory* factory) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($PooledConnection, conn, nullptr);
 		int64_t start = (timeout > 0 ? $System::currentTimeMillis() : (int64_t)0);
 		int64_t waittime = timeout;
@@ -161,6 +163,7 @@ $PooledConnection* Connections::get(int64_t timeout, $PooledConnectionFactory* f
 }
 
 $PooledConnection* Connections::getOrCreateConnection($PooledConnectionFactory* factory) {
+	$useLocalCurrentObjectStackCache();
 	int32_t size = $nc(this->conns)->size();
 	$var($PooledConnection, conn, nullptr);
 	if (this->prefSize <= 0 || size >= this->prefSize) {
@@ -228,6 +231,7 @@ bool Connections::removePooledConnection($PooledConnection* conn) {
 }
 
 bool Connections::expire(int64_t threshold) {
+	$useLocalCurrentObjectStackCache();
 	$var($List, clonedConns, nullptr);
 	$synchronized(this) {
 		$assign(clonedConns, $new($ArrayList, static_cast<$Collection*>(this->conns)));
@@ -260,6 +264,7 @@ void Connections::close() {
 }
 
 $String* Connections::getStats() {
+	$useLocalCurrentObjectStackCache();
 	int32_t idle = 0;
 	int32_t busy = 0;
 	int32_t expired = 0;
@@ -299,12 +304,14 @@ void Connections::d($String* msg, Object$* o1) {
 }
 
 void Connections::d($String* msg, int32_t i) {
+	$useLocalCurrentObjectStackCache();
 	if (Connections::debug) {
 		d($$str({msg, $$str(i)}));
 	}
 }
 
 void Connections::d($String* msg) {
+	$useLocalCurrentObjectStackCache();
 	if (Connections::debug) {
 		$init($System);
 		$var($String, var$0, $$str({this, "."_s, msg, "; size: "_s}));

@@ -120,6 +120,7 @@ $String* GenericURLContext::getNameInNamespace() {
 }
 
 $Name* GenericURLContext::getURLSuffix($String* prefix, $String* url) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, suffix, $nc(url)->substring($nc(prefix)->length()));
 	if (suffix->length() == 0) {
 		return $new($CompositeName);
@@ -159,6 +160,7 @@ bool GenericURLContext::urlEquals($String* url1, $String* url2) {
 }
 
 $Context* GenericURLContext::getContinuationContext($Name* n) {
+	$useLocalCurrentObjectStackCache();
 	$var($Object, obj, lookup($($nc(n)->get(0))));
 	$var($CannotProceedException, cpe, $new($CannotProceedException));
 	cpe->setResolvedObj(obj);
@@ -167,6 +169,7 @@ $Context* GenericURLContext::getContinuationContext($Name* n) {
 }
 
 $Object* GenericURLContext::lookup($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($Context, ctx, $cast($Context, $nc(res)->getResolvedObj()));
 	{
@@ -193,6 +196,7 @@ $Object* GenericURLContext::lookup($String* name) {
 }
 
 $Object* GenericURLContext::lookup($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return $of(lookup($(name->get(0))));
 	} else {
@@ -222,6 +226,7 @@ $Object* GenericURLContext::lookup($Name* name) {
 }
 
 void GenericURLContext::bind($String* name, Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($Context, ctx, $cast($Context, $nc(res)->getResolvedObj()));
 	{
@@ -240,6 +245,7 @@ void GenericURLContext::bind($String* name, Object$* obj) {
 }
 
 void GenericURLContext::bind($Name* name, Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		bind($(name->get(0)), obj);
 	} else {
@@ -261,6 +267,7 @@ void GenericURLContext::bind($Name* name, Object$* obj) {
 }
 
 void GenericURLContext::rebind($String* name, Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($Context, ctx, $cast($Context, $nc(res)->getResolvedObj()));
 	{
@@ -279,6 +286,7 @@ void GenericURLContext::rebind($String* name, Object$* obj) {
 }
 
 void GenericURLContext::rebind($Name* name, Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		rebind($(name->get(0)), obj);
 	} else {
@@ -300,6 +308,7 @@ void GenericURLContext::rebind($Name* name, Object$* obj) {
 }
 
 void GenericURLContext::unbind($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($Context, ctx, $cast($Context, $nc(res)->getResolvedObj()));
 	{
@@ -318,6 +327,7 @@ void GenericURLContext::unbind($String* name) {
 }
 
 void GenericURLContext::unbind($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		unbind($(name->get(0)));
 	} else {
@@ -339,6 +349,7 @@ void GenericURLContext::unbind($Name* name) {
 }
 
 void GenericURLContext::rename($String* oldName, $String* newName) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, oldPrefix, getURLPrefix(oldName));
 	$var($String, newPrefix, getURLPrefix(newName));
 	if (!urlEquals(oldPrefix, newPrefix)) {
@@ -363,6 +374,7 @@ void GenericURLContext::rename($String* oldName, $String* newName) {
 }
 
 void GenericURLContext::rename($Name* name, $Name* newName) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		if ($nc(newName)->size() != 1) {
 			$throwNew($OperationNotSupportedException, $$str({"Renaming to a Name with more components not supported: "_s, newName}));
@@ -393,6 +405,7 @@ void GenericURLContext::rename($Name* name, $Name* newName) {
 }
 
 $NamingEnumeration* GenericURLContext::list($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($Context, ctx, $cast($Context, $nc(res)->getResolvedObj()));
 	{
@@ -419,6 +432,7 @@ $NamingEnumeration* GenericURLContext::list($String* name) {
 }
 
 $NamingEnumeration* GenericURLContext::list($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return list($(name->get(0)));
 	} else {
@@ -448,6 +462,7 @@ $NamingEnumeration* GenericURLContext::list($Name* name) {
 }
 
 $NamingEnumeration* GenericURLContext::listBindings($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($Context, ctx, $cast($Context, $nc(res)->getResolvedObj()));
 	{
@@ -474,6 +489,7 @@ $NamingEnumeration* GenericURLContext::listBindings($String* name) {
 }
 
 $NamingEnumeration* GenericURLContext::listBindings($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return listBindings($(name->get(0)));
 	} else {
@@ -503,6 +519,7 @@ $NamingEnumeration* GenericURLContext::listBindings($Name* name) {
 }
 
 void GenericURLContext::destroySubcontext($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($Context, ctx, $cast($Context, $nc(res)->getResolvedObj()));
 	{
@@ -521,6 +538,7 @@ void GenericURLContext::destroySubcontext($String* name) {
 }
 
 void GenericURLContext::destroySubcontext($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		destroySubcontext($(name->get(0)));
 	} else {
@@ -542,6 +560,7 @@ void GenericURLContext::destroySubcontext($Name* name) {
 }
 
 $Context* GenericURLContext::createSubcontext($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($Context, ctx, $cast($Context, $nc(res)->getResolvedObj()));
 	{
@@ -568,6 +587,7 @@ $Context* GenericURLContext::createSubcontext($String* name) {
 }
 
 $Context* GenericURLContext::createSubcontext($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return createSubcontext($(name->get(0)));
 	} else {
@@ -597,6 +617,7 @@ $Context* GenericURLContext::createSubcontext($Name* name) {
 }
 
 $Object* GenericURLContext::lookupLink($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($Context, ctx, $cast($Context, $nc(res)->getResolvedObj()));
 	{
@@ -623,6 +644,7 @@ $Object* GenericURLContext::lookupLink($String* name) {
 }
 
 $Object* GenericURLContext::lookupLink($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return $of(lookupLink($(name->get(0))));
 	} else {
@@ -652,6 +674,7 @@ $Object* GenericURLContext::lookupLink($Name* name) {
 }
 
 $NameParser* GenericURLContext::getNameParser($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($ResolveResult, res, getRootURLContext(name, this->myEnv));
 	$var($Context, ctx, $cast($Context, $nc(res)->getResolvedObj()));
 	{
@@ -678,6 +701,7 @@ $NameParser* GenericURLContext::getNameParser($String* name) {
 }
 
 $NameParser* GenericURLContext::getNameParser($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->size() == 1) {
 		return getNameParser($(name->get(0)));
 	} else {

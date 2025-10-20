@@ -127,6 +127,7 @@ void BasicAttributes::init$($String* attrID, Object$* val, bool ignoreCase) {
 }
 
 $Object* BasicAttributes::clone() {
+	$useLocalCurrentObjectStackCache();
 	$var(BasicAttributes, attrset, nullptr);
 	try {
 		$assign(attrset, $cast(BasicAttributes, $Attributes::clone()));
@@ -147,6 +148,7 @@ int32_t BasicAttributes::size() {
 }
 
 $Attribute* BasicAttributes::get($String* attrID) {
+	$useLocalCurrentObjectStackCache();
 	$init($Locale);
 	$var($Attribute, attr, $cast($Attribute, $nc(this->attrs)->get(this->ignoreCase ? $($of($nc(attrID)->toLowerCase($Locale::ENGLISH))) : $of(attrID))));
 	return (attr);
@@ -188,6 +190,7 @@ $String* BasicAttributes::toString() {
 }
 
 bool BasicAttributes::equals(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if ((obj != nullptr) && ($instanceOf($Attributes, obj))) {
 		$var($Attributes, target, $cast($Attributes, obj));
 		if (this->ignoreCase != target->isCaseIgnored()) {
@@ -217,6 +220,7 @@ bool BasicAttributes::equals(Object$* obj) {
 }
 
 int32_t BasicAttributes::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	int32_t hash = (this->ignoreCase ? 1 : 0);
 	try {
 		$var($NamingEnumeration, all, getAll());
@@ -230,6 +234,7 @@ int32_t BasicAttributes::hashCode() {
 }
 
 void BasicAttributes::writeObject($ObjectOutputStream* s) {
+	$useLocalCurrentObjectStackCache();
 	$nc(s)->defaultWriteObject();
 	s->writeInt($nc(this->attrs)->size());
 	$var($Enumeration, attrEnum, $nc(this->attrs)->elements());
@@ -239,6 +244,7 @@ void BasicAttributes::writeObject($ObjectOutputStream* s) {
 }
 
 void BasicAttributes::readObject($ObjectInputStream* s) {
+	$useLocalCurrentObjectStackCache();
 	$nc(s)->defaultReadObject();
 	int32_t n = s->readInt();
 	$set(this, attrs, (n >= 1) ? $new($Hashtable, 1 + $cast(int32_t, ($Math::min(768, n) / 0.75f))) : $new($Hashtable, 2));

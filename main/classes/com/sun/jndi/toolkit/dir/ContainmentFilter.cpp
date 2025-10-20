@@ -62,6 +62,7 @@ bool ContainmentFilter::check($Attributes* attrs) {
 
 bool ContainmentFilter::contains($Attributes* superset, $Attributes* subset) {
 	$init(ContainmentFilter);
+	$useLocalCurrentObjectStackCache();
 	if (subset == nullptr) {
 		return true;
 	}

@@ -163,6 +163,7 @@ void LdapCtxFactory::init$() {
 }
 
 $Object* LdapCtxFactory::getObjectInstance(Object$* ref, $Name* name, $Context* nameCtx, $Hashtable* env) {
+	$useLocalCurrentObjectStackCache();
 	if (!isLdapRef(ref)) {
 		return $of(nullptr);
 	}
@@ -172,6 +173,7 @@ $Object* LdapCtxFactory::getObjectInstance(Object$* ref, $Name* name, $Context* 
 }
 
 $Context* LdapCtxFactory::getInitialContext($Hashtable* envprops) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		$init($Context);
 		$var($String, providerUrl, (envprops != nullptr) ? $cast($String, $nc(envprops)->get($Context::PROVIDER_URL)) : ($String*)nullptr);
@@ -199,6 +201,7 @@ $Context* LdapCtxFactory::getInitialContext($Hashtable* envprops) {
 
 bool LdapCtxFactory::isLdapRef(Object$* obj) {
 	$init(LdapCtxFactory);
+	$useLocalCurrentObjectStackCache();
 	if (!($instanceOf($Reference, obj))) {
 		return false;
 	}
@@ -209,6 +212,7 @@ bool LdapCtxFactory::isLdapRef(Object$* obj) {
 
 $StringArray* LdapCtxFactory::getURLs($Reference* ref) {
 	$init(LdapCtxFactory);
+	$useLocalCurrentObjectStackCache();
 	int32_t size = 0;
 	$var($StringArray, urls, $new($StringArray, $nc(ref)->size()));
 	$var($Enumeration, addrs, ref->getAll());
@@ -242,6 +246,7 @@ $DirContext* LdapCtxFactory::getLdapCtxInstance(Object$* urlInfo, $Hashtable* en
 
 $DirContext* LdapCtxFactory::getUsingURL($String* url, $Hashtable* env) {
 	$init(LdapCtxFactory);
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($LdapDnsProviderResult, r, $nc($($LdapDnsProviderService::getInstance()))->lookupEndpoints(url, env));
 		$var($LdapCtx, ctx, nullptr);
@@ -281,6 +286,7 @@ $DirContext* LdapCtxFactory::getUsingURL($String* url, $Hashtable* env) {
 
 $LdapCtx* LdapCtxFactory::getLdapCtxFromUrl($String* domain, $String* url, $LdapURL* u, $Hashtable* env) {
 	$init(LdapCtxFactory);
+	$useLocalCurrentObjectStackCache();
 	$var($String, dn, $nc(u)->getDN());
 	$var($String, host, u->getHost());
 	int32_t port = u->getPort();
@@ -292,6 +298,7 @@ $LdapCtx* LdapCtxFactory::getLdapCtxFromUrl($String* domain, $String* url, $Ldap
 
 $DirContext* LdapCtxFactory::getUsingURLs($StringArray* urls, $Hashtable* env) {
 	$init(LdapCtxFactory);
+	$useLocalCurrentObjectStackCache();
 	$var($NamingException, ex, nullptr);
 	{
 		$var($StringArray, arr$, urls);
@@ -315,6 +322,7 @@ $DirContext* LdapCtxFactory::getUsingURLs($StringArray* urls, $Hashtable* env) {
 
 $Attribute* LdapCtxFactory::createTypeNameAttr($Class* cl) {
 	$init(LdapCtxFactory);
+	$useLocalCurrentObjectStackCache();
 	$var($Vector, v, $new($Vector, 10));
 	$var($StringArray, types, getTypeNames(cl, v));
 	if ($nc(types)->length > 0) {
@@ -330,6 +338,7 @@ $Attribute* LdapCtxFactory::createTypeNameAttr($Class* cl) {
 
 $StringArray* LdapCtxFactory::getTypeNames($Class* currentClass, $Vector* v) {
 	$init(LdapCtxFactory);
+	$useLocalCurrentObjectStackCache();
 	getClassesAux(currentClass, v);
 	$var($ClassArray, members, $nc(currentClass)->getInterfaces());
 	for (int32_t i = 0; i < members->length; ++i) {
@@ -351,6 +360,7 @@ $StringArray* LdapCtxFactory::getTypeNames($Class* currentClass, $Vector* v) {
 
 void LdapCtxFactory::getClassesAux($Class* currentClass, $Vector* v) {
 	$init(LdapCtxFactory);
+	$useLocalCurrentObjectStackCache();
 	if (!$nc(v)->contains($($nc(currentClass)->getName()))) {
 		v->addElement($($nc(currentClass)->getName()));
 	}

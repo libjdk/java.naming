@@ -151,6 +151,7 @@ void Rdn::finalize() {
 $String* Rdn::escapees = nullptr;
 
 void Rdn::init$($Attributes* attrSet) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(attrSet)->size() == 0) {
 		$throwNew($InvalidNameException, "Attributes cannot be empty"_s);
 	}
@@ -230,6 +231,7 @@ $String* Rdn::getType() {
 }
 
 $String* Rdn::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuilder, builder, $new($StringBuilder));
 	int32_t size = $nc(this->entries)->size();
 	if (size > 0) {
@@ -243,6 +245,7 @@ $String* Rdn::toString() {
 }
 
 int32_t Rdn::compareTo(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if (!($instanceOf(Rdn, obj))) {
 		$throwNew($ClassCastException, "The obj is not a Rdn"_s);
 	}
@@ -263,6 +266,7 @@ int32_t Rdn::compareTo(Object$* obj) {
 }
 
 bool Rdn::equals(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if ($equals(obj, this)) {
 		return true;
 	}
@@ -283,6 +287,7 @@ bool Rdn::equals(Object$* obj) {
 }
 
 int32_t Rdn::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	int32_t hash = 0;
 	for (int32_t i = 0; i < $nc(this->entries)->size(); ++i) {
 		hash += $nc(($cast($Rdn$RdnEntry, $($nc(this->entries)->get(i)))))->hashCode();
@@ -291,6 +296,7 @@ int32_t Rdn::hashCode() {
 }
 
 $Attributes* Rdn::toAttributes() {
+	$useLocalCurrentObjectStackCache();
 	$var($Attributes, attrs, $new($BasicAttributes, true));
 	for (int32_t i = 0; i < $nc(this->entries)->size(); ++i) {
 		$var($Rdn$RdnEntry, entry, $cast($Rdn$RdnEntry, $nc(this->entries)->get(i)));
@@ -315,6 +321,7 @@ $String* Rdn::escapeValue(Object$* val) {
 
 $String* Rdn::escapeStringValue($String* val) {
 	$init(Rdn);
+	$useLocalCurrentObjectStackCache();
 	$var($chars, chars, $nc(val)->toCharArray());
 	$var($StringBuilder, builder, $new($StringBuilder, 2 * val->length()));
 	int32_t lead = 0;
@@ -353,6 +360,7 @@ $String* Rdn::escapeBinaryValue($bytes* val) {
 
 $Object* Rdn::unescapeValue($String* val) {
 	$init(Rdn);
+	$useLocalCurrentObjectStackCache();
 	$var($chars, chars, $nc(val)->toCharArray());
 	int32_t beg = 0;
 	int32_t end = chars->length;
@@ -409,6 +417,7 @@ $Object* Rdn::unescapeValue($String* val) {
 
 $bytes* Rdn::decodeHexPairs($chars* chars, int32_t beg, int32_t end) {
 	$init(Rdn);
+	$useLocalCurrentObjectStackCache();
 	$var($bytes, bytes, $new($bytes, (end - beg) / 2));
 	for (int32_t i = 0; beg + 1 < end; ++i) {
 		int32_t hi = $Character::digit($nc(chars)->get(beg), 16);
@@ -427,6 +436,7 @@ $bytes* Rdn::decodeHexPairs($chars* chars, int32_t beg, int32_t end) {
 
 $bytes* Rdn::getUtf8Octets($chars* chars, int32_t beg, int32_t end) {
 	$init(Rdn);
+	$useLocalCurrentObjectStackCache();
 	$var($bytes, utf8, $new($bytes, (end - beg) / 3));
 	int32_t len = 0;
 	while (true) {
@@ -463,6 +473,7 @@ void Rdn::writeObject($ObjectOutputStream* s) {
 }
 
 void Rdn::readObject($ObjectInputStream* s) {
+	$useLocalCurrentObjectStackCache();
 	$nc(s)->defaultReadObject();
 	$set(this, entries, $new($ArrayList, Rdn::DEFAULT_SIZE));
 	$var($String, unparsed, $cast($String, s->readObject()));

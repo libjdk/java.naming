@@ -87,6 +87,7 @@ void LdapPoolManager$1::init$() {
 }
 
 $Object* LdapPoolManager$1::run() {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$init($LdapPoolManager);
 	$var($Thread, t, $InnocuousThread::newSystemThread("LDAP PoolCleaner"_s, $$new($PoolCleaner, $LdapPoolManager::idleTimeout, $LdapPoolManager::pools)));

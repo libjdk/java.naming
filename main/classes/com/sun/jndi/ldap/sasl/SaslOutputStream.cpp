@@ -71,6 +71,7 @@ $Object* allocate$SaslOutputStream($Class* clazz) {
 }
 
 void SaslOutputStream::init$($SaslClient* sc, $OutputStream* out) {
+	$useLocalCurrentObjectStackCache();
 	$FilterOutputStream::init$(out);
 	$set(this, lenBuf, $new($bytes, 4));
 	this->rawSendSize = 0x00010000;
@@ -94,6 +95,7 @@ void SaslOutputStream::write(int32_t b) {
 }
 
 void SaslOutputStream::write($bytes* buffer, int32_t offset, int32_t total) {
+	$useLocalCurrentObjectStackCache();
 	int32_t count = 0;
 	$var($bytes, wrappedToken, nullptr);
 	$var($bytes, saslBuffer, nullptr);
@@ -107,6 +109,7 @@ void SaslOutputStream::write($bytes* buffer, int32_t offset, int32_t total) {
 }
 
 void SaslOutputStream::close() {
+	$useLocalCurrentObjectStackCache();
 	$var($SaslException, save, nullptr);
 	try {
 		$nc(this->sc)->dispose();

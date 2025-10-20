@@ -165,6 +165,7 @@ $ResolveResult* PartialCompositeContext::resolveToClass($String* name, $Class* c
 }
 
 $ResolveResult* PartialCompositeContext::resolveToClass($Name* name, $Class* contextType) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -193,6 +194,7 @@ $Object* PartialCompositeContext::lookup($String* name) {
 }
 
 $Object* PartialCompositeContext::lookup($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -218,6 +220,7 @@ void PartialCompositeContext::bind($String* name, Object$* newObj) {
 }
 
 void PartialCompositeContext::bind($Name* name, Object$* newObj) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeContext, ctx, this);
 	$var($Name, nm, name);
 	$var($Hashtable, env, p_getEnvironment());
@@ -241,6 +244,7 @@ void PartialCompositeContext::rebind($String* name, Object$* newObj) {
 }
 
 void PartialCompositeContext::rebind($Name* name, Object$* newObj) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeContext, ctx, this);
 	$var($Name, nm, name);
 	$var($Hashtable, env, p_getEnvironment());
@@ -264,6 +268,7 @@ void PartialCompositeContext::unbind($String* name) {
 }
 
 void PartialCompositeContext::unbind($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeContext, ctx, this);
 	$var($Name, nm, name);
 	$var($Hashtable, env, p_getEnvironment());
@@ -283,11 +288,13 @@ void PartialCompositeContext::unbind($Name* name) {
 }
 
 void PartialCompositeContext::rename($String* oldName, $String* newName) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, var$0, static_cast<$Name*>($new($CompositeName, oldName)));
 	rename(var$0, static_cast<$Name*>($$new($CompositeName, newName)));
 }
 
 void PartialCompositeContext::rename($Name* oldName, $Name* newName$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, newName, newName$renamed);
 	$var(PartialCompositeContext, ctx, this);
 	$var($Name, nm, oldName);
@@ -315,6 +322,7 @@ $NamingEnumeration* PartialCompositeContext::list($String* name) {
 }
 
 $NamingEnumeration* PartialCompositeContext::list($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeContext, ctx, this);
 	$var($Name, nm, name);
 	$var($NamingEnumeration, answer, nullptr);
@@ -340,6 +348,7 @@ $NamingEnumeration* PartialCompositeContext::listBindings($String* name) {
 }
 
 $NamingEnumeration* PartialCompositeContext::listBindings($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeContext, ctx, this);
 	$var($Name, nm, name);
 	$var($NamingEnumeration, answer, nullptr);
@@ -365,6 +374,7 @@ void PartialCompositeContext::destroySubcontext($String* name) {
 }
 
 void PartialCompositeContext::destroySubcontext($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeContext, ctx, this);
 	$var($Name, nm, name);
 	$var($Hashtable, env, p_getEnvironment());
@@ -388,6 +398,7 @@ $Context* PartialCompositeContext::createSubcontext($String* name) {
 }
 
 $Context* PartialCompositeContext::createSubcontext($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeContext, ctx, this);
 	$var($Name, nm, name);
 	$var($Context, answer, nullptr);
@@ -413,6 +424,7 @@ $Object* PartialCompositeContext::lookupLink($String* name) {
 }
 
 $Object* PartialCompositeContext::lookupLink($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeContext, ctx, this);
 	$var($Hashtable, env, p_getEnvironment());
 	$var($Continuation, cont, $new($Continuation, name, env));
@@ -438,6 +450,7 @@ $NameParser* PartialCompositeContext::getNameParser($String* name) {
 }
 
 $NameParser* PartialCompositeContext::getNameParser($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var(PartialCompositeContext, ctx, this);
 	$var($Name, nm, name);
 	$var($NameParser, answer, nullptr);
@@ -459,12 +472,14 @@ $NameParser* PartialCompositeContext::getNameParser($Name* name) {
 }
 
 $String* PartialCompositeContext::composeName($String* name, $String* prefix) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, var$0, static_cast<$Name*>($new($CompositeName, name)));
 	$var($Name, fullName, composeName(var$0, static_cast<$Name*>($$new($CompositeName, prefix))));
 	return $nc($of(fullName))->toString();
 }
 
 $Name* PartialCompositeContext::composeName($Name* name, $Name* prefix) {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, res, $cast($Name, $nc(prefix)->clone()));
 	if (name == nullptr) {
 		return res;
@@ -488,6 +503,7 @@ $Name* PartialCompositeContext::composeName($Name* name, $Name* prefix) {
 
 bool PartialCompositeContext::allEmpty($Name* name) {
 	$init(PartialCompositeContext);
+	$useLocalCurrentObjectStackCache();
 	$var($Enumeration, enum_, $nc(name)->getAll());
 	while ($nc(enum_)->hasMoreElements()) {
 		if (!$nc(($cast($String, $(enum_->nextElement()))))->isEmpty()) {
@@ -499,6 +515,7 @@ bool PartialCompositeContext::allEmpty($Name* name) {
 
 PartialCompositeContext* PartialCompositeContext::getPCContext($Continuation* cont) {
 	$init(PartialCompositeContext);
+	$useLocalCurrentObjectStackCache();
 	$var($Object, obj, $nc(cont)->getResolvedObj());
 	$var(PartialCompositeContext, pctx, nullptr);
 	if ($instanceOf(PartialCompositeContext, obj)) {

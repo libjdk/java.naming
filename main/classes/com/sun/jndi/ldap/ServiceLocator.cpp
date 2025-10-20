@@ -108,6 +108,7 @@ void ServiceLocator::init$() {
 
 $String* ServiceLocator::mapDnToDomainName($String* dn) {
 	$init(ServiceLocator);
+	$useLocalCurrentObjectStackCache();
 	if (dn == nullptr) {
 		return nullptr;
 	}
@@ -152,6 +153,7 @@ $StringArray* ServiceLocator::getLdapService($String* domainName, $Map* environm
 
 $StringArray* ServiceLocator::getLdapService($String* domainName, $Hashtable* environment) {
 	$init(ServiceLocator);
+	$useLocalCurrentObjectStackCache();
 	if (domainName == nullptr || $nc(domainName)->length() == 0) {
 		return nullptr;
 	}
@@ -198,6 +200,7 @@ $StringArray* ServiceLocator::getLdapService($String* domainName, $Hashtable* en
 
 $StringArray* ServiceLocator::extractHostports($ServiceLocator$SrvRecordArray* srvRecords) {
 	$init(ServiceLocator);
+	$useLocalCurrentObjectStackCache();
 	$var($StringArray, hostports, nullptr);
 	int32_t head = 0;
 	int32_t tail = 0;

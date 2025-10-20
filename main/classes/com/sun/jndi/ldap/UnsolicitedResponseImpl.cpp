@@ -63,6 +63,7 @@ $Object* allocate$UnsolicitedResponseImpl($Class* clazz) {
 }
 
 void UnsolicitedResponseImpl::init$($String* oid, $bytes* berVal, $Vector* ref, int32_t status, $String* msg, $String* matchedDN, $ControlArray* controls) {
+	$useLocalCurrentObjectStackCache();
 	$set(this, oid, oid);
 	$set(this, extensionValue, berVal);
 	if (ref != nullptr && ref->size() > 0) {

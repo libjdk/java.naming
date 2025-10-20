@@ -133,6 +133,7 @@ $Object* allocate$JdkLDAP($Class* clazz) {
 }
 
 void JdkLDAP::init$() {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$init($SecurityConstants);
 	$Provider::init$("JdkLDAP"_s, $SecurityConstants::PROVIDER_VER, "JdkLDAP Provider (implements LDAP CertStore)"_s);
@@ -142,6 +143,7 @@ void JdkLDAP::init$() {
 }
 
 $Void* JdkLDAP::lambda$new$0($Provider* p) {
+	$useLocalCurrentObjectStackCache();
 	$var($HashMap, attrs, $new($HashMap, 2));
 	attrs->put("LDAPSchema"_s, "RFC2587"_s);
 	attrs->put("ImplementedIn"_s, "Software"_s);

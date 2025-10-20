@@ -63,6 +63,7 @@ $Object* allocate$DigestClientId($Class* clazz) {
 $StringArray* DigestClientId::SASL_PROPS = nullptr;
 
 void DigestClientId::init$(int32_t version, $String* hostname, int32_t port, $String* protocol, $ControlArray* bindCtls, $OutputStream* trace, $String* socketFactory, $String* username, Object$* passwd, $Hashtable* env) {
+	$useLocalCurrentObjectStackCache();
 	$SimpleClientId::init$(version, hostname, port, protocol, bindCtls, trace, socketFactory, username, passwd);
 	if (env == nullptr) {
 		$set(this, propvals, nullptr);
@@ -90,6 +91,7 @@ int32_t DigestClientId::hashCode() {
 }
 
 $String* DigestClientId::toString() {
+	$useLocalCurrentObjectStackCache();
 	if (this->propvals != nullptr) {
 		$var($StringBuilder, sb, $new($StringBuilder));
 		for (int32_t i = 0; i < $nc(this->propvals)->length; ++i) {

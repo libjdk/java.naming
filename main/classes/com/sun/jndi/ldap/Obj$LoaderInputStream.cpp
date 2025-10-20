@@ -91,6 +91,7 @@ void Obj$LoaderInputStream::init$($InputStream* in, $ClassLoader* cl) {
 }
 
 $Class* Obj$LoaderInputStream::resolveClass($ObjectStreamClass* desc) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		return $nc(this->classLoader)->loadClass($($nc(desc)->getName()));
 	} catch ($ClassNotFoundException&) {
@@ -101,6 +102,7 @@ $Class* Obj$LoaderInputStream::resolveClass($ObjectStreamClass* desc) {
 }
 
 $Class* Obj$LoaderInputStream::resolveProxyClass($StringArray* interfaces) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($ClassLoader, nonPublicLoader, nullptr);
 	bool hasNonPublicInterface = false;

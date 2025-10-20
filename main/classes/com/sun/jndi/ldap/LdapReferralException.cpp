@@ -158,6 +158,7 @@ $Context* LdapReferralException::getReferralContext($Hashtable* newProps, $Contr
 }
 
 $Object* LdapReferralException::getReferralInfo() {
+	$useLocalCurrentObjectStackCache();
 	if (this->debug) {
 		$init($System);
 		$nc($System::out)->println("LdapReferralException.getReferralInfo"_s);
@@ -196,6 +197,7 @@ bool LdapReferralException::skipReferral() {
 }
 
 void LdapReferralException::setReferralInfo($Vector* referrals, bool continuationRef) {
+	$useLocalCurrentObjectStackCache();
 	if (this->debug) {
 		$init($System);
 		$nc($System::out)->println("LdapReferralException.setReferralInfo"_s);
@@ -230,6 +232,7 @@ $String* LdapReferralException::getNextReferral() {
 }
 
 LdapReferralException* LdapReferralException::appendUnprocessedReferrals(LdapReferralException* back$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var(LdapReferralException, back, back$renamed);
 	if (this->debug) {
 		$init($System);
@@ -342,6 +345,7 @@ void LdapReferralException::dump() {
 }
 
 void LdapReferralException::dumpState() {
+	$useLocalCurrentObjectStackCache();
 	$init($System);
 	$nc($System::out)->println("LdapReferralException.dumpState"_s);
 	$nc($System::out)->println($$str({"  hashCode="_s, $$str(hashCode())}));

@@ -126,6 +126,7 @@ void Continuation::setSuccess() {
 }
 
 $NamingException* Continuation::fillInException($NamingException* e) {
+	$useLocalCurrentObjectStackCache();
 	$nc(e)->setRemainingName(this->remainingName);
 	e->setResolvedObj(this->resolvedObj);
 	if (this->starter == nullptr || $nc(this->starter)->isEmpty()) {
@@ -240,6 +241,7 @@ void Continuation::setContinue(Object$* obj, $Name* relResName, $Context* currCt
 }
 
 void Continuation::setContinue(Object$* obj, $String* relResName, $Context* currCtx, $String* remain) {
+	$useLocalCurrentObjectStackCache();
 	$var($CompositeName, relname, $new($CompositeName));
 	if (!$nc(relResName)->isEmpty()) {
 		try {

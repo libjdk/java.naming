@@ -104,6 +104,7 @@ bool NotifierArgs::equals(Object$* obj) {
 }
 
 bool NotifierArgs::checkControls($SearchControls* ctls) {
+	$useLocalCurrentObjectStackCache();
 	if (this->controls == nullptr || ctls == nullptr) {
 		return ctls == this->controls;
 	}

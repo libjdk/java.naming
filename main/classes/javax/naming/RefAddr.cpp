@@ -56,6 +56,7 @@ $String* RefAddr::getType() {
 }
 
 bool RefAddr::equals(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if ((obj != nullptr) && ($instanceOf(RefAddr, obj))) {
 		$var(RefAddr, target, $cast(RefAddr, obj));
 		if ($nc(this->addrType)->compareTo(target->addrType) == 0) {
@@ -84,6 +85,7 @@ int32_t RefAddr::hashCode() {
 }
 
 $String* RefAddr::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuilder, str, $new($StringBuilder, $$str({"Type: "_s, this->addrType, "\n"_s})));
 	str->append($$str({"Content: "_s, $(getContent()), "\n"_s}));
 	return (str->toString());

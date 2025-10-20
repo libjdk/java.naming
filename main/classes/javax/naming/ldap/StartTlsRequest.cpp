@@ -193,6 +193,7 @@ $bytes* StartTlsRequest::getEncodedValue() {
 }
 
 $ExtendedResponse* StartTlsRequest::createExtendedResponse($String* id, $bytes* berValue, int32_t offset, int32_t length) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	if ((id != nullptr) && (!id->equals(StartTlsRequest::OID))) {
 		$throwNew($ConfigurationException, $$str({"Start TLS received the following response instead of "_s, StartTlsRequest::OID, ": "_s, id}));
@@ -231,6 +232,7 @@ $ConfigurationException* StartTlsRequest::wrapException($Exception* e) {
 }
 
 $ClassLoader* StartTlsRequest::getContextClassLoader() {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($PrivilegedAction, pa, static_cast<$PrivilegedAction*>($new(StartTlsRequest$$Lambda$getContextClassLoader, static_cast<$Thread*>($($Thread::currentThread())))));
 	return $cast($ClassLoader, $AccessController::doPrivileged(pa));
@@ -238,6 +240,7 @@ $ClassLoader* StartTlsRequest::getContextClassLoader() {
 
 bool StartTlsRequest::privilegedHasNext($Iterator* iter) {
 	$init(StartTlsRequest);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($PrivilegedAction, pa, static_cast<$PrivilegedAction*>($new(StartTlsRequest$$Lambda$hasNext$1, static_cast<$Iterator*>($nc(iter)))));
 	return $nc(($cast($Boolean, $($AccessController::doPrivileged(pa)))))->booleanValue();

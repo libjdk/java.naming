@@ -107,6 +107,7 @@ void NameClassPair::setNameInNamespace($String* fullName) {
 }
 
 $String* NameClassPair::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($String, var$2, (isRelative() ? ""_s : "(not relative)"_s));
 	$var($String, var$1, $$concat(var$2, $(getName())));
 	$var($String, var$0, $$concat(var$1, ": "));

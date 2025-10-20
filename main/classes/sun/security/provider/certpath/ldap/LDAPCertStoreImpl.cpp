@@ -311,6 +311,7 @@ void LDAPCertStoreImpl::init$($String* serverName, int32_t port) {
 }
 
 void LDAPCertStoreImpl::createInitialDirContext($String* server, int32_t port) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($String, url, $str({"ldap://"_s, server, ":"_s, $$str(port)}));
 	$var($Hashtable, env, $new($Hashtable));
@@ -340,6 +341,7 @@ void LDAPCertStoreImpl::createInitialDirContext($String* server, int32_t port) {
 }
 
 $Collection* LDAPCertStoreImpl::getCertificates($LDAPCertStoreImpl$LDAPRequest* request, $String* id, $X509CertSelector* sel) {
+	$useLocalCurrentObjectStackCache();
 	$var($byteArray2, encodedCert, nullptr);
 	try {
 		$assign(encodedCert, $nc(request)->getValues(id));
@@ -372,6 +374,7 @@ $Collection* LDAPCertStoreImpl::getCertificates($LDAPCertStoreImpl$LDAPRequest* 
 }
 
 $Collection* LDAPCertStoreImpl::getCertPairs($LDAPCertStoreImpl$LDAPRequest* request, $String* id) {
+	$useLocalCurrentObjectStackCache();
 	$var($byteArray2, encodedCertPair, nullptr);
 	try {
 		$assign(encodedCertPair, $nc(request)->getValues(id));
@@ -401,6 +404,7 @@ $Collection* LDAPCertStoreImpl::getCertPairs($LDAPCertStoreImpl$LDAPRequest* req
 }
 
 $Collection* LDAPCertStoreImpl::getMatchingCrossCerts($LDAPCertStoreImpl$LDAPRequest* request, $X509CertSelector* forward, $X509CertSelector* reverse) {
+	$useLocalCurrentObjectStackCache();
 	$var($Collection, certPairs, getCertPairs(request, LDAPCertStoreImpl::CROSS_CERT));
 	$var($ArrayList, matchingCerts, $new($ArrayList));
 	{
@@ -429,6 +433,7 @@ $Collection* LDAPCertStoreImpl::getMatchingCrossCerts($LDAPCertStoreImpl$LDAPReq
 
 $Collection* LDAPCertStoreImpl::getCertificates($X509CertSelector* xsel, $String* ldapDN$renamed) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($String, ldapDN, ldapDN$renamed);
 		if (ldapDN == nullptr) {
 			$var($X500Principal, subject, $nc(xsel)->getSubject());
@@ -511,6 +516,7 @@ $Collection* LDAPCertStoreImpl::getCertificates($X509CertSelector* xsel, $String
 }
 
 $Collection* LDAPCertStoreImpl::getCRLs($LDAPCertStoreImpl$LDAPRequest* request, $String* id, $X509CRLSelector* sel) {
+	$useLocalCurrentObjectStackCache();
 	$var($byteArray2, encodedCRL, nullptr);
 	try {
 		$assign(encodedCRL, $nc(request)->getValues(id));
@@ -543,6 +549,7 @@ $Collection* LDAPCertStoreImpl::getCRLs($LDAPCertStoreImpl$LDAPRequest* request,
 
 $Collection* LDAPCertStoreImpl::getCRLs($X509CRLSelector* xsel, $String* ldapDN) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($HashSet, crls, $new($HashSet));
 		$var($Collection, issuerNames, nullptr);
 		$var($X509Certificate, certChecking, $nc(xsel)->getCertificateChecking());
@@ -626,6 +633,7 @@ $String* LDAPCertStoreImpl::lambda$static$0() {
 }
 
 void clinit$LDAPCertStoreImpl($Class* class$) {
+	$useLocalCurrentObjectStackCache();
 	$assignStatic(LDAPCertStoreImpl::USER_CERT, "userCertificate;binary"_s);
 	$assignStatic(LDAPCertStoreImpl::CA_CERT, "cACertificate;binary"_s);
 	$assignStatic(LDAPCertStoreImpl::CROSS_CERT, "crossCertificatePair;binary"_s);

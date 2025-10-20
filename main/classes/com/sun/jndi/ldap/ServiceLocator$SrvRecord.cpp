@@ -70,6 +70,7 @@ $Object* allocate$ServiceLocator$SrvRecord($Class* clazz) {
 }
 
 void ServiceLocator$SrvRecord::init$($String* srvRecord) {
+	$useLocalCurrentObjectStackCache();
 	$var($StringTokenizer, tokenizer, $new($StringTokenizer, srvRecord, " "_s));
 	$var($String, port, nullptr);
 	if (tokenizer->countTokens() == 4) {

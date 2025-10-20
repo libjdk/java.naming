@@ -135,6 +135,7 @@ void LdapName::init$($String* name) {
 }
 
 void LdapName::init$($List* rdns) {
+	$useLocalCurrentObjectStackCache();
 	$set(this, rdns, $new($ArrayList, $nc(rdns)->size()));
 	for (int32_t i = 0; i < $nc(rdns)->size(); ++i) {
 		$var($Object, obj, rdns->get(i));
@@ -173,6 +174,7 @@ $Rdn* LdapName::getRdn(int32_t posn) {
 }
 
 $Name* LdapName::getPrefix(int32_t posn) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		return $new(LdapName, nullptr, this->rdns, 0, posn);
 	} catch ($IllegalArgumentException&) {
@@ -183,6 +185,7 @@ $Name* LdapName::getPrefix(int32_t posn) {
 }
 
 $Name* LdapName::getSuffix(int32_t posn) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		return $new(LdapName, nullptr, this->rdns, posn, $nc(this->rdns)->size());
 	} catch ($IllegalArgumentException&) {
@@ -229,6 +232,7 @@ bool LdapName::endsWith($List* rdns) {
 }
 
 bool LdapName::doesListMatch(int32_t beg, int32_t end, $List* rdns) {
+	$useLocalCurrentObjectStackCache();
 	for (int32_t i = beg; i < end; ++i) {
 		if (!$nc(($cast($Rdn, $($nc(this->rdns)->get(i)))))->equals($($nc(rdns)->get(i - beg)))) {
 			return false;
@@ -238,6 +242,7 @@ bool LdapName::doesListMatch(int32_t beg, int32_t end, $List* rdns) {
 }
 
 bool LdapName::matches(int32_t beg, int32_t end, $Name* n) {
+	$useLocalCurrentObjectStackCache();
 	if ($instanceOf(LdapName, n)) {
 		$var(LdapName, ln, $cast(LdapName, n));
 		return doesListMatch(beg, end, $nc(ln)->rdns);
@@ -268,6 +273,7 @@ $Name* LdapName::addAll($List* suffixRdns) {
 }
 
 $Name* LdapName::addAll(int32_t posn, $Name* suffix) {
+	$useLocalCurrentObjectStackCache();
 	$set(this, unparsed, nullptr);
 	if ($instanceOf(LdapName, suffix)) {
 		$var(LdapName, s, $cast(LdapName, suffix));
@@ -282,6 +288,7 @@ $Name* LdapName::addAll(int32_t posn, $Name* suffix) {
 }
 
 $Name* LdapName::addAll(int32_t posn, $List* suffixRdns) {
+	$useLocalCurrentObjectStackCache();
 	$set(this, unparsed, nullptr);
 	for (int32_t i = 0; i < $nc(suffixRdns)->size(); ++i) {
 		$var($Object, obj, suffixRdns->get(i));
@@ -302,6 +309,7 @@ $Name* LdapName::add($Rdn* comp) {
 }
 
 $Name* LdapName::add(int32_t posn, $String* comp) {
+	$useLocalCurrentObjectStackCache();
 	$var($Rdn, rdn, ($$new($Rfc2253Parser, comp))->parseRdn());
 	$nc(this->rdns)->add(posn, rdn);
 	$set(this, unparsed, nullptr);
@@ -331,6 +339,7 @@ $Object* LdapName::clone() {
 }
 
 $String* LdapName::toString() {
+	$useLocalCurrentObjectStackCache();
 	if (this->unparsed != nullptr) {
 		return this->unparsed;
 	}
@@ -348,6 +357,7 @@ $String* LdapName::toString() {
 }
 
 bool LdapName::equals(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if ($equals(obj, this)) {
 		return true;
 	}
@@ -373,6 +383,7 @@ bool LdapName::equals(Object$* obj) {
 }
 
 int32_t LdapName::compareTo(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if (!($instanceOf(LdapName, obj))) {
 		$throwNew($ClassCastException, "The obj is not a LdapName"_s);
 	}
@@ -398,6 +409,7 @@ int32_t LdapName::compareTo(Object$* obj) {
 }
 
 int32_t LdapName::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	int32_t hash = 0;
 	for (int32_t i = 0; i < $nc(this->rdns)->size(); ++i) {
 		$var($Rdn, rdn, $cast($Rdn, $nc(this->rdns)->get(i)));
@@ -412,6 +424,7 @@ void LdapName::writeObject($ObjectOutputStream* s) {
 }
 
 void LdapName::readObject($ObjectInputStream* s) {
+	$useLocalCurrentObjectStackCache();
 	$nc(s)->defaultReadObject();
 	$set(this, unparsed, $cast($String, s->readObject()));
 	try {

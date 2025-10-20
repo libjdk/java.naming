@@ -140,6 +140,7 @@ $Object* allocate$LdapSchemaCtx($Class* clazz) {
 
 $DirContext* LdapSchemaCtx::createSchemaTree($Hashtable* env, $String* subschemasubentry, $LdapCtx* schemaEntry, $Attributes* schemaAttrs, bool netscapeBug) {
 	$init(LdapSchemaCtx);
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($LdapSchemaParser, parser, $new($LdapSchemaParser, netscapeBug));
 		$var($LdapSchemaCtx$SchemaInfo, allinfo, $new($LdapSchemaCtx$SchemaInfo, subschemasubentry, schemaEntry, parser));
@@ -203,6 +204,7 @@ void LdapSchemaCtx::doRebind($Name* name, Object$* obj, $Attributes* attrs, bool
 }
 
 void LdapSchemaCtx::doUnbind($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (!this->setupMode) {
 		try {
 			$var(LdapSchemaCtx, target, $cast(LdapSchemaCtx, doLookup(name, false)));
@@ -224,6 +226,7 @@ void LdapSchemaCtx::doRename($Name* oldname, $Name* newname) {
 }
 
 void LdapSchemaCtx::doDestroySubcontext($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if (!this->setupMode) {
 		try {
 			$var(LdapSchemaCtx, target, $cast(LdapSchemaCtx, doLookup(name, false)));
@@ -237,6 +240,7 @@ void LdapSchemaCtx::doDestroySubcontext($Name* name) {
 }
 
 LdapSchemaCtx* LdapSchemaCtx::setup(int32_t objectType, $String* name, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	{
 		$var($Throwable, var$0, nullptr);
 		$var(LdapSchemaCtx, var$2, nullptr);
@@ -277,6 +281,7 @@ $DirContext* LdapSchemaCtx::doCreateSubcontext($Name* name, $Attributes* attrs) 
 
 $Attributes* LdapSchemaCtx::deepClone($Attributes* orig) {
 	$init(LdapSchemaCtx);
+	$useLocalCurrentObjectStackCache();
 	$var($BasicAttributes, copy, $new($BasicAttributes, true));
 	$var($NamingEnumeration, attrs, $nc(orig)->getAll());
 	while ($nc(attrs)->hasMore()) {
@@ -302,6 +307,7 @@ $HierMemDirCtx* LdapSchemaCtx::createNewCtx() {
 }
 
 void LdapSchemaCtx::addServerSchema($Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($Attribute, schemaAttr, nullptr);
 	switch (this->objectType) {
 	case LdapSchemaCtx::OBJECTCLASS_ROOT:
@@ -339,6 +345,7 @@ void LdapSchemaCtx::addServerSchema($Attributes* attrs) {
 }
 
 void LdapSchemaCtx::deleteServerSchema($Attributes* origAttrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($Attribute, origAttrVal, nullptr);
 	switch (this->objectType) {
 	case LdapSchemaCtx::OBJECTCLASS_ROOT:
@@ -376,6 +383,7 @@ void LdapSchemaCtx::deleteServerSchema($Attributes* origAttrs) {
 }
 
 void LdapSchemaCtx::modifyServerSchema($Attributes* origAttrs, $Attributes* newAttrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($Attribute, newAttrVal, nullptr);
 	$var($Attribute, origAttrVal, nullptr);
 	switch (this->objectType) {

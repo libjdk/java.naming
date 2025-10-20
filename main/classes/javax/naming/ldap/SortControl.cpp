@@ -63,11 +63,13 @@ $Object* allocate$SortControl($Class* clazz) {
 $String* SortControl::OID = nullptr;
 
 void SortControl::init$($String* sortBy, bool criticality) {
+	$useLocalCurrentObjectStackCache();
 	$BasicControl::init$(SortControl::OID, criticality, nullptr);
 	$set(this, value, setEncodedValue($$new($SortKeyArray, {$$new($SortKey, sortBy)})));
 }
 
 void SortControl::init$($StringArray* sortBy, bool criticality) {
+	$useLocalCurrentObjectStackCache();
 	$BasicControl::init$(SortControl::OID, criticality, nullptr);
 	$var($SortKeyArray, sortKeys, $new($SortKeyArray, $nc(sortBy)->length));
 	for (int32_t i = 0; i < sortBy->length; ++i) {
@@ -82,6 +84,7 @@ void SortControl::init$($SortKeyArray* sortBy, bool criticality) {
 }
 
 $bytes* SortControl::setEncodedValue($SortKeyArray* sortKeys) {
+	$useLocalCurrentObjectStackCache();
 	$var($BerEncoder, ber, $new($BerEncoder, 30 * $nc(sortKeys)->length + 10));
 	$var($String, matchingRule, nullptr);
 	ber->beginSeq($Ber::ASN_SEQUENCE | $Ber::ASN_CONSTRUCTOR);

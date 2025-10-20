@@ -82,6 +82,7 @@ void LdapName$Rdn::init$() {
 }
 
 void LdapName$Rdn::add($LdapName$TypeAndValue* tv) {
+	$useLocalCurrentObjectStackCache();
 	int32_t i = 0;
 	for (i = 0; i < $nc(this->tvs)->size(); ++i) {
 		int32_t diff = $nc(tv)->compareTo($($nc(this->tvs)->elementAt(i)));
@@ -95,6 +96,7 @@ void LdapName$Rdn::add($LdapName$TypeAndValue* tv) {
 }
 
 $String* LdapName$Rdn::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuffer, buf, $new($StringBuffer));
 	for (int32_t i = 0; i < $nc(this->tvs)->size(); ++i) {
 		if (i > 0) {
@@ -110,6 +112,7 @@ bool LdapName$Rdn::equals(Object$* obj) {
 }
 
 int32_t LdapName$Rdn::compareTo(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	$var(LdapName$Rdn, that, $cast(LdapName$Rdn, obj));
 	int32_t var$0 = $nc(this->tvs)->size();
 	int32_t minSize = $Math::min(var$0, $nc($nc(that)->tvs)->size());
@@ -125,6 +128,7 @@ int32_t LdapName$Rdn::compareTo(Object$* obj) {
 }
 
 int32_t LdapName$Rdn::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	int32_t hash = 0;
 	for (int32_t i = 0; i < $nc(this->tvs)->size(); ++i) {
 		hash += $nc(($cast($LdapName$TypeAndValue, $($nc(this->tvs)->elementAt(i)))))->hashCode();
@@ -133,6 +137,7 @@ int32_t LdapName$Rdn::hashCode() {
 }
 
 $Attributes* LdapName$Rdn::toAttributes() {
+	$useLocalCurrentObjectStackCache();
 	$var($Attributes, attrs, $new($BasicAttributes, true));
 	$var($LdapName$TypeAndValue, tv, nullptr);
 	$var($Attribute, attr, nullptr);

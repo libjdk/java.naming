@@ -96,6 +96,7 @@ void HierarchicalName::init$($String* n, $Properties* syntax) {
 }
 
 int32_t HierarchicalName::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	if (this->hashValue == -1) {
 		$init($Locale);
 		$var($String, name, $nc($(toString()))->toUpperCase($Locale::ENGLISH));
@@ -111,11 +112,13 @@ int32_t HierarchicalName::hashCode() {
 }
 
 $Name* HierarchicalName::getPrefix(int32_t posn) {
+	$useLocalCurrentObjectStackCache();
 	$var($Enumeration, comps, $nc($($CompoundName::getPrefix(posn)))->getAll());
 	return ($new(HierarchicalName, comps, this->mySyntax));
 }
 
 $Name* HierarchicalName::getSuffix(int32_t posn) {
+	$useLocalCurrentObjectStackCache();
 	$var($Enumeration, comps, $nc($($CompoundName::getSuffix(posn)))->getAll());
 	return ($new(HierarchicalName, comps, this->mySyntax));
 }

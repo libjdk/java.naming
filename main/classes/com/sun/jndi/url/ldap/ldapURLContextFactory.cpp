@@ -76,6 +76,7 @@ $Object* ldapURLContextFactory::getObjectInstance(Object$* urlInfo, $Name* name,
 
 $ResolveResult* ldapURLContextFactory::getUsingURLIgnoreRootDN($String* url, $Hashtable* env) {
 	$init(ldapURLContextFactory);
+	$useLocalCurrentObjectStackCache();
 	$var($LdapURL, ldapUrl, $new($LdapURL, url));
 	$var($String, var$0, ""_s);
 	$var($String, var$1, ldapUrl->getHost());

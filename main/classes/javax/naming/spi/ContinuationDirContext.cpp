@@ -276,6 +276,7 @@ void ContinuationDirContext::init$($CannotProceedException* cpe, $Hashtable* env
 }
 
 $DirContextNamePair* ContinuationDirContext::getTargetContext($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(this->cpe)->getResolvedObj() == nullptr) {
 		$throw($cast($NamingException, $($nc(this->cpe)->fillInStackTrace())));
 	}
@@ -303,6 +304,7 @@ $DirContextNamePair* ContinuationDirContext::getTargetContext($Name* name) {
 }
 
 $DirContextStringPair* ContinuationDirContext::getTargetContext($String* name) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(this->cpe)->getResolvedObj() == nullptr) {
 		$throw($cast($NamingException, $($nc(this->cpe)->fillInStackTrace())));
 	}
@@ -329,131 +331,157 @@ $DirContextStringPair* ContinuationDirContext::getTargetContext($String* name) {
 }
 
 $Attributes* ContinuationDirContext::getAttributes($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->getAttributes($(res->getString()));
 }
 
 $Attributes* ContinuationDirContext::getAttributes($String* name, $StringArray* attrIds) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->getAttributes($(res->getString()), attrIds);
 }
 
 $Attributes* ContinuationDirContext::getAttributes($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->getAttributes($(res->getName()));
 }
 
 $Attributes* ContinuationDirContext::getAttributes($Name* name, $StringArray* attrIds) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->getAttributes($(res->getName()), attrIds);
 }
 
 void ContinuationDirContext::modifyAttributes($Name* name, int32_t mod_op, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	$nc($($nc(res)->getDirContext()))->modifyAttributes($(res->getName()), mod_op, attrs);
 }
 
 void ContinuationDirContext::modifyAttributes($String* name, int32_t mod_op, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	$nc($($nc(res)->getDirContext()))->modifyAttributes($(res->getString()), mod_op, attrs);
 }
 
 void ContinuationDirContext::modifyAttributes($Name* name, $ModificationItemArray* mods) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	$nc($($nc(res)->getDirContext()))->modifyAttributes($(res->getName()), mods);
 }
 
 void ContinuationDirContext::modifyAttributes($String* name, $ModificationItemArray* mods) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	$nc($($nc(res)->getDirContext()))->modifyAttributes($(res->getString()), mods);
 }
 
 void ContinuationDirContext::bind($Name* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	$nc($($nc(res)->getDirContext()))->bind($(res->getName()), obj, attrs);
 }
 
 void ContinuationDirContext::bind($String* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	$nc($($nc(res)->getDirContext()))->bind($(res->getString()), obj, attrs);
 }
 
 void ContinuationDirContext::rebind($Name* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	$nc($($nc(res)->getDirContext()))->rebind($(res->getName()), obj, attrs);
 }
 
 void ContinuationDirContext::rebind($String* name, Object$* obj, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	$nc($($nc(res)->getDirContext()))->rebind($(res->getString()), obj, attrs);
 }
 
 $DirContext* ContinuationDirContext::createSubcontext($Name* name, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->createSubcontext($(res->getName()), attrs);
 }
 
 $DirContext* ContinuationDirContext::createSubcontext($String* name, $Attributes* attrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->createSubcontext($(res->getString()), attrs);
 }
 
 $NamingEnumeration* ContinuationDirContext::search($Name* name, $Attributes* matchingAttributes, $StringArray* attributesToReturn) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->search($(res->getName()), matchingAttributes, attributesToReturn);
 }
 
 $NamingEnumeration* ContinuationDirContext::search($String* name, $Attributes* matchingAttributes, $StringArray* attributesToReturn) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->search($(res->getString()), matchingAttributes, attributesToReturn);
 }
 
 $NamingEnumeration* ContinuationDirContext::search($Name* name, $Attributes* matchingAttributes) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->search($(res->getName()), matchingAttributes);
 }
 
 $NamingEnumeration* ContinuationDirContext::search($String* name, $Attributes* matchingAttributes) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->search($(res->getString()), matchingAttributes);
 }
 
 $NamingEnumeration* ContinuationDirContext::search($Name* name, $String* filter, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->search($(res->getName()), filter, cons);
 }
 
 $NamingEnumeration* ContinuationDirContext::search($String* name, $String* filter, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->search($(res->getString()), filter, cons);
 }
 
 $NamingEnumeration* ContinuationDirContext::search($Name* name, $String* filterExpr, $ObjectArray* args, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->search($(res->getName()), filterExpr, args, cons);
 }
 
 $NamingEnumeration* ContinuationDirContext::search($String* name, $String* filterExpr, $ObjectArray* args, $SearchControls* cons) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->search($(res->getString()), filterExpr, args, cons);
 }
 
 $DirContext* ContinuationDirContext::getSchema($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->getSchema($(res->getString()));
 }
 
 $DirContext* ContinuationDirContext::getSchema($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->getSchema($(res->getName()));
 }
 
 $DirContext* ContinuationDirContext::getSchemaClassDefinition($String* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextStringPair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->getSchemaClassDefinition($(res->getString()));
 }
 
 $DirContext* ContinuationDirContext::getSchemaClassDefinition($Name* name) {
+	$useLocalCurrentObjectStackCache();
 	$var($DirContextNamePair, res, getTargetContext(name));
 	return $nc($($nc(res)->getDirContext()))->getSchemaClassDefinition($(res->getName()));
 }

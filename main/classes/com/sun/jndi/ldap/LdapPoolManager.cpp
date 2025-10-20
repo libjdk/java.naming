@@ -348,6 +348,7 @@ int32_t LdapPoolManager::findPool($String* mech) {
 
 bool LdapPoolManager::isPoolingAllowed($String* socketFactory, $OutputStream* trace, $String* authMech, $String* protocol, $Hashtable* env) {
 	$init(LdapPoolManager);
+	$useLocalCurrentObjectStackCache();
 	if (trace != nullptr && !LdapPoolManager::debug || (protocol == nullptr && !LdapPoolManager::supportPlainProtocol) || ("ssl"_s->equalsIgnoreCase(protocol) && !LdapPoolManager::supportSslProtocol)) {
 		d("Pooling disallowed due to tracing or unsupported pooling of protocol"_s);
 		return false;
@@ -398,6 +399,7 @@ bool LdapPoolManager::isPoolingAllowed($String* socketFactory, $OutputStream* tr
 
 $LdapClient* LdapPoolManager::getLdapClient($String* host, int32_t port, $String* socketFactory, int32_t connTimeout, int32_t readTimeout, $OutputStream* trace, int32_t version, $String* authMech, $ControlArray* ctls, $String* protocol, $String* user, Object$* passwd, $Hashtable* env) {
 	$init(LdapPoolManager);
+	$useLocalCurrentObjectStackCache();
 	$var($ClientId, id, nullptr);
 	$var($Pool, pool, nullptr);
 	int32_t p = findPool(authMech);
@@ -426,6 +428,7 @@ $LdapClient* LdapPoolManager::getLdapClient($String* host, int32_t port, $String
 
 void LdapPoolManager::showStats($PrintStream* out) {
 	$init(LdapPoolManager);
+	$useLocalCurrentObjectStackCache();
 	$nc(out)->println("***** start *****"_s);
 	out->println($$str({"idle timeout: "_s, $$str(LdapPoolManager::idleTimeout)}));
 	out->println($$str({"maximum pool size: "_s, $$str(LdapPoolManager::maxSize)}));
@@ -476,6 +479,7 @@ $String* LdapPoolManager::getProperty($String* propName, $String* defVal) {
 
 int32_t LdapPoolManager::getInteger($String* propName, int32_t defVal) {
 	$init(LdapPoolManager);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($PrivilegedAction, pa, static_cast<$PrivilegedAction*>($new(LdapPoolManager$$Lambda$lambda$getInteger$1$1, propName, defVal)));
 	return $nc(($cast($Integer, $($AccessController::doPrivileged(pa)))))->intValue();
@@ -483,6 +487,7 @@ int32_t LdapPoolManager::getInteger($String* propName, int32_t defVal) {
 
 int64_t LdapPoolManager::getLong($String* propName, int64_t defVal) {
 	$init(LdapPoolManager);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($PrivilegedAction, pa, static_cast<$PrivilegedAction*>($new(LdapPoolManager$$Lambda$lambda$getLong$2$2, propName, defVal)));
 	return $nc(($cast($Long, $($AccessController::doPrivileged(pa)))))->longValue();
@@ -504,6 +509,7 @@ $String* LdapPoolManager::lambda$getProperty$0($String* propName, $String* defVa
 }
 
 void clinit$LdapPoolManager($Class* class$) {
+	$useLocalCurrentObjectStackCache();
 	$assignStatic(LdapPoolManager::DEBUG, "com.sun.jndi.ldap.connect.pool.debug"_s);
 	$assignStatic(LdapPoolManager::POOL_AUTH, "com.sun.jndi.ldap.connect.pool.authentication"_s);
 	$assignStatic(LdapPoolManager::POOL_PROTOCOL, "com.sun.jndi.ldap.connect.pool.protocol"_s);

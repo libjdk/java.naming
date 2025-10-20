@@ -413,6 +413,7 @@ bool LdapClient::authenticateCalled() {
 
 $LdapResult* LdapClient::authenticate(bool initial, $String* name$renamed, Object$* pw$renamed, int32_t version, $String* authMechanism, $ControlArray* ctls, $Hashtable* env) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		$var($Object, pw, pw$renamed);
 		$var($String, name, name$renamed);
 		int32_t readTimeout = $nc(this->conn)->readTimeout;
@@ -576,6 +577,7 @@ $LdapResult* LdapClient::authenticate(bool initial, $String* name$renamed, Objec
 
 $LdapResult* LdapClient::ldapBind($String* dn, $bytes* toServer, $ControlArray* bindCtls, $String* auth, bool pauseAfterReceipt) {
 	$synchronized(this) {
+		$useLocalCurrentObjectStackCache();
 		ensureOpen();
 		$nc(this->conn)->abandonOutstandingReqs(nullptr);
 		$var($BerEncoder, ber, $new($BerEncoder));
@@ -692,6 +694,7 @@ void LdapClient::closeConnection() {
 }
 
 void LdapClient::processConnectionClosure() {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(this->unsolicited)->size() > 0) {
 		$var($String, msg, nullptr);
 		if (this->conn != nullptr) {
@@ -707,6 +710,7 @@ void LdapClient::processConnectionClosure() {
 }
 
 $LdapResult* LdapClient::search($String* dn, int32_t scope, int32_t deref, int32_t sizeLimit, int32_t timeLimit, bool attrsOnly, $StringArray* attrs, $String* filter, int32_t batchSize, $ControlArray* reqCtls, $Hashtable* binaryAttrs, bool waitFirstReply, int32_t replyQueueCapacity) {
+	$useLocalCurrentObjectStackCache();
 	ensureOpen();
 	$var($LdapResult, res, $new($LdapResult));
 	$var($BerEncoder, ber, $new($BerEncoder));
@@ -762,6 +766,7 @@ $LdapResult* LdapClient::getSearchReply(int32_t batchSize, $LdapResult* res, $Ha
 }
 
 $LdapResult* LdapClient::getSearchReply($LdapRequest* req, int32_t batchSize, $LdapResult* res, $Hashtable* binaryAttrs) {
+	$useLocalCurrentObjectStackCache();
 	if (batchSize == 0) {
 		batchSize = $Integer::MAX_VALUE;
 	}
@@ -838,6 +843,7 @@ $LdapResult* LdapClient::getSearchReply($LdapRequest* req, int32_t batchSize, $L
 }
 
 $Attribute* LdapClient::parseAttribute($BerDecoder* ber, $Hashtable* binaryAttrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($ints, len, $new($ints, 1));
 	int32_t seq = $nc(ber)->parseSeq(nullptr);
 	$var($String, attrid, ber->parseString(this->isLdapv3));
@@ -861,6 +867,7 @@ $Attribute* LdapClient::parseAttribute($BerDecoder* ber, $Hashtable* binaryAttrs
 }
 
 int32_t LdapClient::parseAttributeValue($BerDecoder* ber, $Attribute* la, bool hasBinaryValues) {
+	$useLocalCurrentObjectStackCache();
 	$var($ints, len, $new($ints, 1));
 	if (hasBinaryValues) {
 		$nc(la)->add($($nc(ber)->parseOctetString(ber->peekByte(), len)));
@@ -880,6 +887,7 @@ bool LdapClient::isBinaryValued($String* attrid, $Hashtable* binaryAttrs) {
 
 void LdapClient::parseResult($BerDecoder* replyBer, $LdapResult* res, bool isLdapv3) {
 	$init(LdapClient);
+	$useLocalCurrentObjectStackCache();
 	$nc(res)->status = $nc(replyBer)->parseEnumeration();
 	$set(res, matchedDN, replyBer->parseString(isLdapv3));
 	$set(res, errorMessage, replyBer->parseString(isLdapv3));
@@ -907,6 +915,7 @@ void LdapClient::parseResult($BerDecoder* replyBer, $LdapResult* res, bool isLda
 
 $Vector* LdapClient::parseControls($BerDecoder* replyBer) {
 	$init(LdapClient);
+	$useLocalCurrentObjectStackCache();
 	bool var$0 = ($nc(replyBer)->bytesLeft() > 0);
 	if (var$0 && (replyBer->peekByte() == LdapClient::LDAP_CONTROLS)) {
 		$var($Vector, ctls, $new($Vector, 4));
@@ -958,6 +967,7 @@ void LdapClient::parseExtResponse($BerDecoder* replyBer, $LdapResult* res) {
 
 void LdapClient::encodeControls($BerEncoder* ber, $ControlArray* reqCtls) {
 	$init(LdapClient);
+	$useLocalCurrentObjectStackCache();
 	if ((reqCtls == nullptr) || ($nc(reqCtls)->length == 0)) {
 		return;
 	}
@@ -992,6 +1002,7 @@ $LdapResult* LdapClient::processReply($LdapRequest* req, $LdapResult* res, int32
 }
 
 $LdapResult* LdapClient::modify($String* dn, $ints* operations, $AttributeArray* attrs, $ControlArray* reqCtls) {
+	$useLocalCurrentObjectStackCache();
 	ensureOpen();
 	$var($LdapResult, res, $new($LdapResult));
 	res->status = LdapClient::LDAP_OPERATIONS_ERROR;
@@ -1026,6 +1037,7 @@ $LdapResult* LdapClient::modify($String* dn, $ints* operations, $AttributeArray*
 }
 
 void LdapClient::encodeAttribute($BerEncoder* ber, $Attribute* attr) {
+	$useLocalCurrentObjectStackCache();
 	$nc(ber)->beginSeq($Ber::ASN_SEQUENCE | $Ber::ASN_CONSTRUCTOR);
 	ber->encodeString($($nc(attr)->getID()), this->isLdapv3);
 	ber->beginSeq(($Ber::ASN_SEQUENCE | $Ber::ASN_CONSTRUCTOR) | 1);
@@ -1057,6 +1069,7 @@ bool LdapClient::hasNoValue($Attribute* attr) {
 }
 
 $LdapResult* LdapClient::add($LdapEntry* entry, $ControlArray* reqCtls) {
+	$useLocalCurrentObjectStackCache();
 	ensureOpen();
 	$var($LdapResult, res, $new($LdapResult));
 	res->status = LdapClient::LDAP_OPERATIONS_ERROR;
@@ -1091,6 +1104,7 @@ $LdapResult* LdapClient::add($LdapEntry* entry, $ControlArray* reqCtls) {
 }
 
 $LdapResult* LdapClient::delete$($String* DN, $ControlArray* reqCtls) {
+	$useLocalCurrentObjectStackCache();
 	ensureOpen();
 	$var($LdapResult, res, $new($LdapResult));
 	res->status = LdapClient::LDAP_OPERATIONS_ERROR;
@@ -1111,6 +1125,7 @@ $LdapResult* LdapClient::delete$($String* DN, $ControlArray* reqCtls) {
 }
 
 $LdapResult* LdapClient::moddn($String* DN, $String* newrdn, bool deleteOldRdn, $String* newSuperior, $ControlArray* reqCtls) {
+	$useLocalCurrentObjectStackCache();
 	ensureOpen();
 	bool changeSuperior = (newSuperior != nullptr && newSuperior->length() > 0);
 	$var($LdapResult, res, $new($LdapResult));
@@ -1139,6 +1154,7 @@ $LdapResult* LdapClient::moddn($String* DN, $String* newrdn, bool deleteOldRdn, 
 }
 
 $LdapResult* LdapClient::compare($String* DN, $String* type, $String* value, $ControlArray* reqCtls) {
+	$useLocalCurrentObjectStackCache();
 	ensureOpen();
 	$var($LdapResult, res, $new($LdapResult));
 	res->status = LdapClient::LDAP_OPERATIONS_ERROR;
@@ -1166,6 +1182,7 @@ $LdapResult* LdapClient::compare($String* DN, $String* type, $String* value, $Co
 }
 
 $LdapResult* LdapClient::extendedOp($String* id, $bytes* request, $ControlArray* reqCtls, bool pauseAfterReceipt) {
+	$useLocalCurrentObjectStackCache();
 	ensureOpen();
 	$var($LdapResult, res, $new($LdapResult));
 	res->status = LdapClient::LDAP_OPERATIONS_ERROR;
@@ -1199,6 +1216,7 @@ $LdapResult* LdapClient::extendedOp($String* id, $bytes* request, $ControlArray*
 
 $String* LdapClient::getErrorMessage(int32_t errorCode, $String* errorMessage) {
 	$init(LdapClient);
+	$useLocalCurrentObjectStackCache();
 	$var($String, message, $str({"[LDAP: error code "_s, $$str(errorCode)}));
 	if ((errorMessage != nullptr) && (errorMessage->length() != 0)) {
 		$assign(message, $str({message, " - "_s, errorMessage, "]"_s}));
@@ -1224,6 +1242,7 @@ void LdapClient::removeUnsolicited($LdapCtx* ctx) {
 }
 
 void LdapClient::processUnsolicited($BerDecoder* ber) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($LdapResult, res, $new($LdapResult));
 		$nc(ber)->parseSeq(nullptr);
@@ -1262,6 +1281,7 @@ void LdapClient::processUnsolicited($BerDecoder* ber) {
 }
 
 void LdapClient::notifyUnsolicited(Object$* e) {
+	$useLocalCurrentObjectStackCache();
 	$var($Vector, unsolicitedCopy, nullptr);
 	$synchronized(this->unsolicited) {
 		$assign(unsolicitedCopy, $new($Vector, static_cast<$Collection*>(static_cast<$AbstractCollection*>(static_cast<$AbstractList*>(this->unsolicited)))));

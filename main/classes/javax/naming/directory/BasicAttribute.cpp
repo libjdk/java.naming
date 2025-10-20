@@ -115,6 +115,7 @@ $Object* allocate$BasicAttribute($Class* clazz) {
 }
 
 $Object* BasicAttribute::clone() {
+	$useLocalCurrentObjectStackCache();
 	$var(BasicAttribute, attr, nullptr);
 	try {
 		$assign(attr, $cast(BasicAttribute, $Attribute::clone()));
@@ -127,6 +128,7 @@ $Object* BasicAttribute::clone() {
 }
 
 bool BasicAttribute::equals(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if ((obj != nullptr) && ($instanceOf($Attribute, obj))) {
 		$var($Attribute, target, $cast($Attribute, obj));
 		bool var$0 = isOrdered();
@@ -167,6 +169,7 @@ bool BasicAttribute::equals(Object$* obj) {
 }
 
 int32_t BasicAttribute::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	int32_t hash = $nc(this->attrID)->hashCode();
 	int32_t num = $nc(this->values)->size();
 	$var($Object, val, nullptr);
@@ -191,6 +194,7 @@ int32_t BasicAttribute::hashCode() {
 }
 
 $String* BasicAttribute::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuilder, answer, $new($StringBuilder, $$str({this->attrID, ": "_s})));
 	if ($nc(this->values)->size() == 0) {
 		answer->append("No values"_s);
@@ -235,6 +239,7 @@ $NamingEnumeration* BasicAttribute::getAll() {
 }
 
 $Object* BasicAttribute::get() {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(this->values)->size() == 0) {
 		$throwNew($NoSuchElementException, $$str({"Attribute "_s, $(getID()), " has no value"_s}));
 	} else {
@@ -296,6 +301,7 @@ bool BasicAttribute::valueEquals(Object$* obj1, Object$* obj2) {
 
 bool BasicAttribute::arrayEquals(Object$* a1, Object$* a2) {
 	$init(BasicAttribute);
+	$useLocalCurrentObjectStackCache();
 	int32_t len = 0;
 	int32_t var$0 = (len = $1Array::getLength(a1));
 	if (var$0 != $1Array::getLength(a2)) {
@@ -381,6 +387,7 @@ $DirContext* BasicAttribute::getAttributeDefinition() {
 }
 
 void BasicAttribute::writeObject($ObjectOutputStream* s) {
+	$useLocalCurrentObjectStackCache();
 	$nc(s)->defaultWriteObject();
 	s->writeInt($nc(this->values)->size());
 	for (int32_t i = 0; i < $nc(this->values)->size(); ++i) {
@@ -389,6 +396,7 @@ void BasicAttribute::writeObject($ObjectOutputStream* s) {
 }
 
 void BasicAttribute::readObject($ObjectInputStream* s) {
+	$useLocalCurrentObjectStackCache();
 	$nc(s)->defaultReadObject();
 	int32_t n = s->readInt();
 	$set(this, values, $new($Vector, $Math::min(1024, n)));

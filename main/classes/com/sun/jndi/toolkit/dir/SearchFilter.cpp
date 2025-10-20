@@ -155,6 +155,7 @@ bool SearchFilter::check($Attributes* targetAttrs) {
 }
 
 void SearchFilter::normalizeFilter() {
+	$useLocalCurrentObjectStackCache();
 	skipWhiteSpace();
 	if (getCurrentChar() != SearchFilter::BEGIN_FILTER_TOKEN) {
 		$set(this, filter, $str({$$str(SearchFilter::BEGIN_FILTER_TOKEN), this->filter, $$str(SearchFilter::END_FILTER_TOKEN)}));
@@ -168,6 +169,7 @@ void SearchFilter::skipWhiteSpace() {
 }
 
 $SearchFilter$StringFilter* SearchFilter::createNextFilter() {
+	$useLocalCurrentObjectStackCache();
 	$var($SearchFilter$StringFilter, filter, nullptr);
 	skipWhiteSpace();
 	try {
@@ -243,6 +245,7 @@ $String* SearchFilter::relSubstring(int32_t beginIndex, int32_t endIndex) {
 
 $String* SearchFilter::format($Attributes* attrs) {
 	$init(SearchFilter);
+	$useLocalCurrentObjectStackCache();
 	if (attrs == nullptr || $nc(attrs)->size() == 0) {
 		return "objectClass=*"_s;
 	}
@@ -279,6 +282,7 @@ $String* SearchFilter::format($Attributes* attrs) {
 
 $String* SearchFilter::getEncodedStringRep(Object$* obj) {
 	$init(SearchFilter);
+	$useLocalCurrentObjectStackCache();
 	$var($String, str, nullptr);
 	if (obj == nullptr) {
 		return nullptr;
@@ -347,6 +351,7 @@ int32_t SearchFilter::findUnescaped(char16_t ch, $String* val, int32_t start) {
 
 $String* SearchFilter::format($String* expr, $ObjectArray* args) {
 	$init(SearchFilter);
+	$useLocalCurrentObjectStackCache();
 	int32_t param = 0;
 	int32_t where = 0;
 	int32_t start = 0;
@@ -377,6 +382,7 @@ $String* SearchFilter::format($String* expr, $ObjectArray* args) {
 
 $Attributes* SearchFilter::selectAttributes($Attributes* originals, $StringArray* attrIDs) {
 	$init(SearchFilter);
+	$useLocalCurrentObjectStackCache();
 	if (attrIDs == nullptr) {
 		return originals;
 	}

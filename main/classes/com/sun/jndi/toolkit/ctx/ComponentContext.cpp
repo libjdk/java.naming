@@ -149,6 +149,7 @@ void ComponentContext::init$() {
 }
 
 $HeadTail* ComponentContext::p_parseComponent($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	int32_t separator = 0;
 	bool var$0 = $nc(name)->isEmpty();
 	if (var$0 || $nc($($nc(name)->get(0)))->isEmpty()) {
@@ -175,6 +176,7 @@ $HeadTail* ComponentContext::p_parseComponent($Name* name, $Continuation* cont) 
 }
 
 $Object* ComponentContext::c_resolveIntermediate_nns($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($Object, obj, c_lookup(name, cont));
 		if (obj != nullptr && $of(this)->getClass()->isInstance(obj)) {
@@ -249,6 +251,7 @@ $NameParser* ComponentContext::c_getNameParser_nns($Name* name, $Continuation* c
 }
 
 void ComponentContext::c_processJunction_nns($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(name)->isEmpty()) {
 		$var($RefAddr, addr, $new($ComponentContext$2, this, "nns"_s));
 		$var($Reference, ref, $new($Reference, "java.lang.Object"_s, addr));
@@ -271,6 +274,7 @@ void ComponentContext::c_processJunction_nns($Name* name, $Continuation* cont) {
 }
 
 $HeadTail* ComponentContext::p_resolveIntermediate($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	int32_t ret = ComponentContext::USE_CONTINUATION;
 	$nc(cont)->setSuccess();
 	$var($HeadTail, p, p_parseComponent(name, cont));
@@ -341,6 +345,7 @@ void ComponentContext::checkAndAdjustRemainingName($Name* rname) {
 }
 
 bool ComponentContext::isAllEmpty($Name* n) {
+	$useLocalCurrentObjectStackCache();
 	int32_t count = $nc(n)->size();
 	for (int32_t i = 0; i < count; ++i) {
 		if (!$nc($(n->get(i)))->isEmpty()) {
@@ -351,6 +356,7 @@ bool ComponentContext::isAllEmpty($Name* n) {
 }
 
 $ResolveResult* ComponentContext::p_resolveToClass($Name* name, $Class* contextType, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(contextType)->isInstance(this)) {
 		$nc(cont)->setSuccess();
 		return ($new($ResolveResult, $of(this), name));
@@ -385,6 +391,7 @@ $ResolveResult* ComponentContext::p_resolveToClass($Name* name, $Class* contextT
 }
 
 $Object* ComponentContext::p_lookup($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($Object, ret, nullptr);
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
@@ -415,6 +422,7 @@ $Object* ComponentContext::p_lookup($Name* name, $Continuation* cont) {
 }
 
 $NamingEnumeration* ComponentContext::p_list($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($NamingEnumeration, ret, nullptr);
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
@@ -445,6 +453,7 @@ $NamingEnumeration* ComponentContext::p_list($Name* name, $Continuation* cont) {
 }
 
 $NamingEnumeration* ComponentContext::p_listBindings($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($NamingEnumeration, ret, nullptr);
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
@@ -467,6 +476,7 @@ $NamingEnumeration* ComponentContext::p_listBindings($Name* name, $Continuation*
 }
 
 void ComponentContext::p_bind($Name* name, Object$* obj, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
 	case ComponentContext::TERMINAL_NNS_COMPONENT:
@@ -487,6 +497,7 @@ void ComponentContext::p_bind($Name* name, Object$* obj, $Continuation* cont) {
 }
 
 void ComponentContext::p_rebind($Name* name, Object$* obj, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
 	case ComponentContext::TERMINAL_NNS_COMPONENT:
@@ -507,6 +518,7 @@ void ComponentContext::p_rebind($Name* name, Object$* obj, $Continuation* cont) 
 }
 
 void ComponentContext::p_unbind($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
 	case ComponentContext::TERMINAL_NNS_COMPONENT:
@@ -527,6 +539,7 @@ void ComponentContext::p_unbind($Name* name, $Continuation* cont) {
 }
 
 void ComponentContext::p_destroySubcontext($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
 	case ComponentContext::TERMINAL_NNS_COMPONENT:
@@ -547,6 +560,7 @@ void ComponentContext::p_destroySubcontext($Name* name, $Continuation* cont) {
 }
 
 $Context* ComponentContext::p_createSubcontext($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($Context, ret, nullptr);
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
@@ -569,6 +583,7 @@ $Context* ComponentContext::p_createSubcontext($Name* name, $Continuation* cont)
 }
 
 void ComponentContext::p_rename($Name* oldName, $Name* newName, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($HeadTail, res, p_resolveIntermediate(oldName, cont));
 	switch ($nc(res)->getStatus()) {
 	case ComponentContext::TERMINAL_NNS_COMPONENT:
@@ -589,6 +604,7 @@ void ComponentContext::p_rename($Name* oldName, $Name* newName, $Continuation* c
 }
 
 $NameParser* ComponentContext::p_getNameParser($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($NameParser, ret, nullptr);
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {
@@ -611,6 +627,7 @@ $NameParser* ComponentContext::p_getNameParser($Name* name, $Continuation* cont)
 }
 
 $Object* ComponentContext::p_lookupLink($Name* name, $Continuation* cont) {
+	$useLocalCurrentObjectStackCache();
 	$var($Object, ret, nullptr);
 	$var($HeadTail, res, p_resolveIntermediate(name, cont));
 	switch ($nc(res)->getStatus()) {

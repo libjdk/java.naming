@@ -98,6 +98,7 @@ void SearchFilter$AtomicFilter::init$($SearchFilter* this$0) {
 }
 
 void SearchFilter$AtomicFilter::parse() {
+	$useLocalCurrentObjectStackCache();
 	this->this$0->skipWhiteSpace();
 	try {
 		int32_t endPos = this->this$0->relIndexOf(u')');
@@ -149,6 +150,7 @@ void SearchFilter$AtomicFilter::parse() {
 }
 
 bool SearchFilter$AtomicFilter::check($Attributes* targetAttrs) {
+	$useLocalCurrentObjectStackCache();
 	$var($Enumeration, candidates, nullptr);
 	try {
 		$var($Attribute, attr, $nc(targetAttrs)->get(this->attrID));
@@ -195,6 +197,7 @@ bool SearchFilter$AtomicFilter::check($Attributes* targetAttrs) {
 }
 
 bool SearchFilter$AtomicFilter::substringMatch($String* proto, $String* value) {
+	$useLocalCurrentObjectStackCache();
 	if ($nc(proto)->equals($($Character::toString(u'*')))) {
 		return true;
 	}

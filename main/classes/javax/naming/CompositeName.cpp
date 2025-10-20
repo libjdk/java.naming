@@ -162,6 +162,7 @@ bool CompositeName::endsWith($Name* n) {
 }
 
 $Name* CompositeName::addAll($Name* suffix) {
+	$useLocalCurrentObjectStackCache();
 	if ($instanceOf(CompositeName, suffix)) {
 		$nc(this->impl)->addAll($($nc(suffix)->getAll()));
 		return this;
@@ -171,6 +172,7 @@ $Name* CompositeName::addAll($Name* suffix) {
 }
 
 $Name* CompositeName::addAll(int32_t posn, $Name* n) {
+	$useLocalCurrentObjectStackCache();
 	if ($instanceOf(CompositeName, n)) {
 		$nc(this->impl)->addAll(posn, $($nc(n)->getAll()));
 		return this;
@@ -194,6 +196,7 @@ $Object* CompositeName::remove(int32_t posn) {
 }
 
 void CompositeName::writeObject($ObjectOutputStream* s) {
+	$useLocalCurrentObjectStackCache();
 	$nc(s)->writeInt(size());
 	$var($Enumeration, comps, getAll());
 	while ($nc(comps)->hasMoreElements()) {
@@ -202,6 +205,7 @@ void CompositeName::writeObject($ObjectOutputStream* s) {
 }
 
 void CompositeName::readObject($ObjectInputStream* s) {
+	$useLocalCurrentObjectStackCache();
 	$set(this, impl, $new($NameImpl, nullptr));
 	int32_t n = $nc(s)->readInt();
 	try {

@@ -128,6 +128,7 @@ void LdapSasl::init$() {
 
 $LdapResult* LdapSasl::saslBind($LdapClient* clnt, $Connection* conn, $String* server, $String* dn, Object$* pw, $String* authMech, $Hashtable* env, $ControlArray* bindCtls) {
 	$init(LdapSasl);
+	$useLocalCurrentObjectStackCache();
 	$var($SaslClient, saslClnt, nullptr);
 	bool cleanupHandler = false;
 	$var($CallbackHandler, cbh, (env != nullptr) ? $cast($CallbackHandler, $nc(env)->get(LdapSasl::SASL_CALLBACK)) : ($CallbackHandler*)nullptr);
@@ -226,6 +227,7 @@ $LdapResult* LdapSasl::saslBind($LdapClient* clnt, $Connection* conn, $String* s
 
 $StringArray* LdapSasl::getSaslMechanismNames($String* str) {
 	$init(LdapSasl);
+	$useLocalCurrentObjectStackCache();
 	$var($StringTokenizer, parser, $new($StringTokenizer, str));
 	$var($Vector, mechs, $new($Vector, 10));
 	while (parser->hasMoreTokens()) {

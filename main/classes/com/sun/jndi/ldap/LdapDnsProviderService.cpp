@@ -175,6 +175,7 @@ $volatile(LdapDnsProviderService*) LdapDnsProviderService::service = nullptr;
 $Object* LdapDnsProviderService::LOCK = nullptr;
 
 void LdapDnsProviderService::init$() {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($SecurityManager, sm, $System::getSecurityManager());
 	if (sm == nullptr) {
@@ -205,6 +206,7 @@ LdapDnsProviderService* LdapDnsProviderService::getInstance() {
 }
 
 $LdapDnsProviderResult* LdapDnsProviderService::lookupEndpoints($String* url, $Hashtable* env) {
+	$useLocalCurrentObjectStackCache();
 	$var($LdapDnsProviderResult, result, nullptr);
 	$var($Hashtable, envCopy, $new($Hashtable, static_cast<$Map*>(env)));
 	$synchronized(LdapDnsProviderService::LOCK) {

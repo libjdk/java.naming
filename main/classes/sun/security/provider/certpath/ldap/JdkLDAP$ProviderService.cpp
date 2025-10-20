@@ -83,6 +83,7 @@ void JdkLDAP$ProviderService::init$($Provider* p, $String* type, $String* algo, 
 }
 
 $Object* JdkLDAP$ProviderService::newInstance(Object$* ctrParamObj) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, type, getType());
 	$var($String, algo, getAlgorithm());
 	bool var$0 = $nc(type)->equals("CertStore"_s);

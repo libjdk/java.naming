@@ -57,6 +57,7 @@ $String* LinkRef::linkClassName = nullptr;
 $String* LinkRef::linkAddrType = nullptr;
 
 void LinkRef::init$($Name* linkName) {
+	$useLocalCurrentObjectStackCache();
 	$Reference::init$(LinkRef::linkClassName, $$new($StringRefAddr, LinkRef::linkAddrType, $($nc($of(linkName))->toString())));
 }
 

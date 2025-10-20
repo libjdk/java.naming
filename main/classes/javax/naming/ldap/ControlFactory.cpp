@@ -53,6 +53,7 @@ void ControlFactory::init$() {
 }
 
 $Control* ControlFactory::getControlInstance($Control* ctl, $Context* ctx, $Hashtable* env) {
+	$useLocalCurrentObjectStackCache();
 	$init($LdapContext);
 	$var($FactoryEnumeration, factories, $ResourceManager::getFactories($LdapContext::CONTROL_FACTORIES, env, ctx));
 	if (factories == nullptr) {

@@ -79,6 +79,7 @@ void LdapResult::init$() {
 }
 
 bool LdapResult::compareToSearchResult($String* name) {
+	$useLocalCurrentObjectStackCache();
 	bool successful = false;
 	{
 		$var($Attributes, attrs, nullptr)

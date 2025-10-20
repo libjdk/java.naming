@@ -91,6 +91,7 @@ void LdapName$DnParser::init$($String* name, bool valuesCaseSensitive) {
 }
 
 $Vector* LdapName$DnParser::getDn() {
+	$useLocalCurrentObjectStackCache();
 	this->cur = 0;
 	$var($Vector, rdns, $new($Vector, this->len / 3 + 10));
 	if (this->len == 0) {
@@ -109,6 +110,7 @@ $Vector* LdapName$DnParser::getDn() {
 }
 
 $LdapName$Rdn* LdapName$DnParser::getRdn() {
+	$useLocalCurrentObjectStackCache();
 	$var($LdapName$Rdn, rdn, parseRdn());
 	if (this->cur < this->len) {
 		$throwNew($InvalidNameException, $$str({"Invalid RDN: "_s, this->name}));
@@ -117,6 +119,7 @@ $LdapName$Rdn* LdapName$DnParser::getRdn() {
 }
 
 $LdapName$Rdn* LdapName$DnParser::parseRdn() {
+	$useLocalCurrentObjectStackCache();
 	$var($LdapName$Rdn, rdn, $new($LdapName$Rdn));
 	while (this->cur < this->len) {
 		consumeWhitespace();

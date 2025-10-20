@@ -364,6 +364,7 @@ $ObjectFactoryBuilder* NamingManager::getObjectFactoryBuilder() {
 
 $ObjectFactory* NamingManager::getObjectFactoryFromReference($Reference* ref, $String* factoryName) {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$Class* clas = nullptr;
 	try {
@@ -391,6 +392,7 @@ $ObjectFactory* NamingManager::getObjectFactoryFromReference($Reference* ref, $S
 
 $Object* NamingManager::createObjectFromFactories(Object$* obj, $Name* name, $Context* nameCtx, $Hashtable* environment) {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	$init($Context);
 	$var($FactoryEnumeration, factories, $ResourceManager::getFactories($Context::OBJECT_FACTORIES, environment, nameCtx));
 	if (factories == nullptr) {
@@ -417,6 +419,7 @@ $String* NamingManager::getURLScheme($String* str) {
 
 $Object* NamingManager::getObjectInstance(Object$* refInfo, $Name* name, $Context* nameCtx, $Hashtable* environment) {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	$var($ObjectFactory, factory, nullptr);
 	$var($ObjectFactoryBuilder, builder, getObjectFactoryBuilder());
 	if (builder != nullptr) {
@@ -451,6 +454,7 @@ $Object* NamingManager::getObjectInstance(Object$* refInfo, $Name* name, $Contex
 
 $Object* NamingManager::processURLAddrs($Reference* ref, $Name* name, $Context* nameCtx, $Hashtable* environment) {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	for (int32_t i = 0; i < $nc(ref)->size(); ++i) {
 		$var($RefAddr, addr, ref->get(i));
 		if ($instanceOf($StringRefAddr, addr) && $nc($($nc(addr)->getType()))->equalsIgnoreCase("URL"_s)) {
@@ -466,6 +470,7 @@ $Object* NamingManager::processURLAddrs($Reference* ref, $Name* name, $Context* 
 
 $Object* NamingManager::processURL(Object$* refInfo, $Name* name, $Context* nameCtx, $Hashtable* environment) {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	$var($Object, answer, nullptr);
 	if ($instanceOf($String, refInfo)) {
 		$var($String, url, $cast($String, refInfo));
@@ -494,6 +499,7 @@ $Object* NamingManager::processURL(Object$* refInfo, $Name* name, $Context* name
 
 $Context* NamingManager::getContext(Object$* obj, $Name* name, $Context* nameCtx, $Hashtable* environment) {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	$var($Object, answer, nullptr);
 	if ($instanceOf($Context, obj)) {
 		return $cast($Context, obj);
@@ -514,6 +520,7 @@ $Context* NamingManager::getContext(Object$* obj, $Name* name, $Context* nameCtx
 
 $Resolver* NamingManager::getResolver(Object$* obj, $Name* name, $Context* nameCtx, $Hashtable* environment) {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	$var($Object, answer, nullptr);
 	if ($instanceOf($Resolver, obj)) {
 		return $cast($Resolver, obj);
@@ -544,6 +551,7 @@ $Context* NamingManager::getURLContext($String* scheme, $Hashtable* environment)
 
 $Object* NamingManager::getURLObject($String* scheme, Object$* urlInfo, $Name* name, $Context* nameCtx, $Hashtable* environment) {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	$init($Context);
 	$var($ObjectFactory, factory, $cast($ObjectFactory, $ResourceManager::getFactory($Context::URL_PKG_PREFIXES, environment, nameCtx, $$str({"."_s, scheme, "."_s, scheme, "URLContextFactory"_s}), NamingManager::defaultPkgPrefix)));
 	if (factory == nullptr) {
@@ -573,6 +581,7 @@ $InitialContextFactoryBuilder* NamingManager::getInitialContextFactoryBuilder() 
 
 $Context* NamingManager::getInitialContext($Hashtable* env) {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($ClassLoader, loader, nullptr);
 	$var($InitialContextFactory, factory, nullptr);
@@ -608,6 +617,7 @@ $Context* NamingManager::getInitialContext($Hashtable* env) {
 
 $InitialContextFactory* NamingManager::getFactory($String* className) {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($InitialContextFactory, factory, nullptr);
 	try {
@@ -656,6 +666,7 @@ bool NamingManager::hasInitialContextFactoryBuilder() {
 
 $Context* NamingManager::getContinuationContext($CannotProceedException* cpe) {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	$var($Hashtable, env, $nc(cpe)->getEnvironment());
 	if (env == nullptr) {
 		$assign(env, $new($Hashtable, 7));
@@ -669,6 +680,7 @@ $Context* NamingManager::getContinuationContext($CannotProceedException* cpe) {
 
 $Object* NamingManager::getStateToBind(Object$* obj, $Name* name, $Context* nameCtx, $Hashtable* environment) {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	$init($Context);
 	$var($FactoryEnumeration, factories, $ResourceManager::getFactories($Context::STATE_FACTORIES, environment, nameCtx));
 	if (factories == nullptr) {
@@ -695,6 +707,7 @@ $InitialContextFactory* NamingManager::lambda$getInitialContext$1($ClassLoader* 
 
 $ClassLoader* NamingManager::lambda$getInitialContext$0() {
 	$init(NamingManager);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($ClassLoader, cl, $($Thread::currentThread())->getContextClassLoader());
 	return (cl == nullptr) ? $ClassLoader::getSystemClassLoader() : cl;

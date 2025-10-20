@@ -89,6 +89,7 @@ $Object* allocate$ClientId($Class* clazz) {
 }
 
 void ClientId::init$(int32_t version, $String* hostname, int32_t port, $String* protocol, $ControlArray* bindCtls, $OutputStream* trace, $String* socketFactory) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$set(this, factory, nullptr);
 	$set(this, sockComparator, nullptr);
@@ -141,6 +142,7 @@ int32_t ClientId::hashCode() {
 }
 
 int32_t ClientId::hashCodeControls($ControlArray* c) {
+	$useLocalCurrentObjectStackCache();
 	if (c == nullptr) {
 		return 0;
 	}
@@ -152,6 +154,7 @@ int32_t ClientId::hashCodeControls($ControlArray* c) {
 }
 
 bool ClientId::equalsControls($ControlArray* a, $ControlArray* b) {
+	$useLocalCurrentObjectStackCache();
 	if (a == b) {
 		return true;
 	}
@@ -190,6 +193,7 @@ bool ClientId::equalsSockFactory(ClientId* other) {
 }
 
 bool ClientId::invokeComparator(ClientId* c1, ClientId* c2) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($Object, ret, nullptr);
 	try {
@@ -208,6 +212,7 @@ bool ClientId::invokeComparator(ClientId* c1, ClientId* c2) {
 }
 
 $String* ClientId::toStringControls($ControlArray* ctls) {
+	$useLocalCurrentObjectStackCache();
 	if (ctls == nullptr) {
 		return ""_s;
 	}
@@ -220,6 +225,7 @@ $String* ClientId::toStringControls($ControlArray* ctls) {
 }
 
 $String* ClientId::toString() {
+	$useLocalCurrentObjectStackCache();
 	return ($str({this->hostname, ":"_s, $$str(this->port), ":"_s, (this->protocol != nullptr ? this->protocol : ""_s), ":"_s, $(toStringControls(this->bindCtls)), ":"_s, this->socketFactory}));
 }
 

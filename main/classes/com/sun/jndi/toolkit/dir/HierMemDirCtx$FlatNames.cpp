@@ -76,6 +76,7 @@ void HierMemDirCtx$FlatNames::init$($HierMemDirCtx* this$0, $Enumeration* names)
 }
 
 $Object* HierMemDirCtx$FlatNames::next() {
+	$useLocalCurrentObjectStackCache();
 	$var($Name, name, $cast($Name, $nc(this->names)->nextElement()));
 	$var($String, className, $nc($of($($nc(this->this$0->bindings)->get(name))))->getClass()->getName());
 	return $of($new($NameClassPair, $($nc($of(name))->toString()), className));

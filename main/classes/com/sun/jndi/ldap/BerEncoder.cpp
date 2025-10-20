@@ -118,6 +118,7 @@ $bytes* BerEncoder::getBuf() {
 }
 
 $bytes* BerEncoder::getTrimmedBuf() {
+	$useLocalCurrentObjectStackCache();
 	int32_t len = getDataLen();
 	$var($bytes, trimBuf, $new($bytes, len));
 	$System::arraycopy($(getBuf()), 0, trimBuf, 0, len);
@@ -225,6 +226,7 @@ void BerEncoder::encodeString($String* str, bool encodeUTF8) {
 }
 
 void BerEncoder::encodeString($String* str, int32_t tag, bool encodeUTF8) {
+	$useLocalCurrentObjectStackCache();
 	encodeByte(tag);
 	int32_t i = 0;
 	int32_t count = 0;

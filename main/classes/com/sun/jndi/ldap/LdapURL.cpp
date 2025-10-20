@@ -82,6 +82,7 @@ $Object* allocate$LdapURL($Class* clazz) {
 }
 
 void LdapURL::init$($String* url) {
+	$useLocalCurrentObjectStackCache();
 	$Uri::init$();
 	this->useSsl$ = false;
 	$set(this, DN, nullptr);
@@ -135,6 +136,7 @@ $String* LdapURL::getExtensions() {
 
 $StringArray* LdapURL::fromList($String* urlList) {
 	$init(LdapURL);
+	$useLocalCurrentObjectStackCache();
 	$var($StringArray, urls, $new($StringArray, ($nc(urlList)->length() + 1) / 2));
 	int32_t i = 0;
 	$var($StringTokenizer, st, $new($StringTokenizer, urlList, " "_s));
@@ -153,6 +155,7 @@ bool LdapURL::hasQueryComponents($String* url) {
 
 $String* LdapURL::toUrlString($String* host, int32_t port, $String* dn, bool useSsl) {
 	$init(LdapURL);
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($String, h, (host != nullptr) ? host : ""_s);
 		bool var$0 = ($nc(h)->indexOf((int32_t)u':') != -1);

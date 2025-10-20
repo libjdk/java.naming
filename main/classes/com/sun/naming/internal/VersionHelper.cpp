@@ -454,6 +454,7 @@ $Class* VersionHelper::loadClassWithoutInit($String* className) {
 }
 
 $Class* VersionHelper::loadClass($String* className, $String* codebase) {
+	$useLocalCurrentObjectStackCache();
 	if (VersionHelper::TRUST_URL_CODE_BASE) {
 		$var($ClassLoader, parent, getContextClassLoader());
 		$var($ClassLoader, cl, $URLClassLoader::newInstance($(getUrlArray(codebase)), parent));
@@ -480,6 +481,7 @@ $String* VersionHelper::getJndiProperty(int32_t i) {
 }
 
 $StringArray* VersionHelper::getJndiProperties() {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($PrivilegedAction, act, static_cast<$PrivilegedAction*>($new(VersionHelper$$Lambda$lambda$getJndiProperties$2$1)));
 	$var($Properties, sysProps, $cast($Properties, $AccessController::doPrivileged(act)));
@@ -495,6 +497,7 @@ $StringArray* VersionHelper::getJndiProperties() {
 
 $String* VersionHelper::resolveName($Class* c, $String* name$renamed) {
 	$init(VersionHelper);
+	$useLocalCurrentObjectStackCache();
 	$var($String, name, name$renamed);
 	if (name == nullptr) {
 		return name;
@@ -525,6 +528,7 @@ $InputStream* VersionHelper::getJavaHomeConfStream($String* filename) {
 }
 
 $NamingEnumeration* VersionHelper::getResources($ClassLoader* cl, $String* name) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($Enumeration, urls, nullptr);
 	$var($PrivilegedExceptionAction, act, static_cast<$PrivilegedExceptionAction*>($new(VersionHelper$$Lambda$lambda$getResources$5$4, cl, name)));
@@ -545,6 +549,7 @@ $ClassLoader* VersionHelper::getContextClassLoader() {
 
 $URLArray* VersionHelper::getUrlArray($String* codebase) {
 	$init(VersionHelper);
+	$useLocalCurrentObjectStackCache();
 	$var($StringTokenizer, parser, $new($StringTokenizer, codebase));
 	$var($List, list, $new($ArrayList));
 	while (parser->hasMoreTokens()) {
@@ -555,6 +560,7 @@ $URLArray* VersionHelper::getUrlArray($String* codebase) {
 
 $ClassLoader* VersionHelper::lambda$getContextClassLoader$6() {
 	$init(VersionHelper);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$var($ClassLoader, loader, $($Thread::currentThread())->getContextClassLoader());
 	if (loader == nullptr) {
@@ -570,6 +576,7 @@ $Enumeration* VersionHelper::lambda$getResources$5($ClassLoader* cl, $String* na
 
 $InputStream* VersionHelper::lambda$getJavaHomeConfStream$4($String* filename) {
 	$init(VersionHelper);
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($String, javahome, $System::getProperty("java.home"_s));
 		if (javahome == nullptr) {
@@ -588,6 +595,7 @@ $InputStream* VersionHelper::lambda$getJavaHomeConfStream$4($String* filename) {
 
 $InputStream* VersionHelper::lambda$getResourceAsStream$3($Class* c, $String* name) {
 	$init(VersionHelper);
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	try {
 		return $nc($($nc(c)->getModule()))->getResourceAsStream($(resolveName(c, name)));
@@ -626,6 +634,7 @@ $String* VersionHelper::lambda$static$0() {
 }
 
 void clinit$VersionHelper($Class* class$) {
+	$useLocalCurrentObjectStackCache();
 	$beforeCallerSensitive();
 	$assignStatic(VersionHelper::helper, $new(VersionHelper));
 	{

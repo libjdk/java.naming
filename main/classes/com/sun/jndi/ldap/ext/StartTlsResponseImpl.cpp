@@ -141,6 +141,7 @@ $SSLSession* StartTlsResponseImpl::negotiate() {
 }
 
 $SSLSession* StartTlsResponseImpl::negotiate($SSLSocketFactory* factory$renamed) {
+	$useLocalCurrentObjectStackCache();
 	$var($SSLSocketFactory, factory, factory$renamed);
 	if (this->isClosed && this->sslSocket != nullptr) {
 		$throwNew($IOException, "TLS connection is closed."_s);
@@ -195,6 +196,7 @@ $SSLSocketFactory* StartTlsResponseImpl::getDefaultFactory() {
 }
 
 $SSLSocket* StartTlsResponseImpl::startHandshake($SSLSocketFactory* factory) {
+	$useLocalCurrentObjectStackCache();
 	if (this->ldapConnection == nullptr) {
 		$throwNew($IllegalStateException, "LDAP connection has not been set. TLS requires an existing LDAP connection."_s);
 	}
@@ -220,6 +222,7 @@ $SSLSocket* StartTlsResponseImpl::startHandshake($SSLSocketFactory* factory) {
 }
 
 bool StartTlsResponseImpl::verify($String* hostname$renamed, $SSLSession* session) {
+	$useLocalCurrentObjectStackCache();
 	$var($String, hostname, hostname$renamed);
 	$var($CertificateArray, certs, nullptr);
 	bool var$0 = hostname != nullptr && hostname->startsWith("["_s);
@@ -253,6 +256,7 @@ bool StartTlsResponseImpl::verify($String* hostname$renamed, $SSLSession* sessio
 
 $Principal* StartTlsResponseImpl::getPeerPrincipal($SSLSession* session) {
 	$init(StartTlsResponseImpl);
+	$useLocalCurrentObjectStackCache();
 	$var($Principal, principal, nullptr);
 	try {
 		$assign(principal, $nc(session)->getPeerPrincipal());

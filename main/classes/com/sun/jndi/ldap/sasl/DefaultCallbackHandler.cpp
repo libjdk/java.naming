@@ -81,6 +81,7 @@ void DefaultCallbackHandler::init$($String* principal, Object$* cred, $String* r
 }
 
 void DefaultCallbackHandler::handle($CallbackArray* callbacks) {
+	$useLocalCurrentObjectStackCache();
 	for (int32_t i = 0; i < $nc(callbacks)->length; ++i) {
 		if ($instanceOf($NameCallback, callbacks->get(i))) {
 			$nc(($cast($NameCallback, callbacks->get(i))))->setName(this->authenticationID);

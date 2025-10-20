@@ -129,6 +129,7 @@ void LdapName::init$($String* name, $Vector* rdns) {
 }
 
 void LdapName::init$($String* name, $Vector* rdns, int32_t beg, int32_t end) {
+	$useLocalCurrentObjectStackCache();
 	this->valuesCaseSensitive = false;
 	$set(this, unparsed, name);
 	$set(this, rdns, $new($Vector));
@@ -142,6 +143,7 @@ $Object* LdapName::clone() {
 }
 
 $String* LdapName::toString() {
+	$useLocalCurrentObjectStackCache();
 	if (this->unparsed != nullptr) {
 		return this->unparsed;
 	}
@@ -162,6 +164,7 @@ bool LdapName::equals(Object$* obj) {
 }
 
 int32_t LdapName::compareTo(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	$var(LdapName, that, $cast(LdapName, obj));
 	if (($equals(obj, this)) || (this->unparsed != nullptr && $nc(this->unparsed)->equals($nc(that)->unparsed))) {
 		return 0;
@@ -181,6 +184,7 @@ int32_t LdapName::compareTo(Object$* obj) {
 }
 
 int32_t LdapName::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	int32_t hash = 0;
 	for (int32_t i = 0; i < $nc(this->rdns)->size(); ++i) {
 		$var($LdapName$Rdn, rdn, $cast($LdapName$Rdn, $nc(this->rdns)->elementAt(i)));
@@ -227,6 +231,7 @@ bool LdapName::endsWith($Name* n) {
 }
 
 void LdapName::setValuesCaseSensitive(bool caseSensitive) {
+	$useLocalCurrentObjectStackCache();
 	toString();
 	$set(this, rdns, nullptr);
 	try {
@@ -239,6 +244,7 @@ void LdapName::setValuesCaseSensitive(bool caseSensitive) {
 }
 
 bool LdapName::matches(int32_t beg, int32_t end, $Name* n) {
+	$useLocalCurrentObjectStackCache();
 	for (int32_t i = beg; i < end; ++i) {
 		$var($LdapName$Rdn, rdn, nullptr);
 		if ($instanceOf(LdapName, n)) {
@@ -265,6 +271,7 @@ $Name* LdapName::addAll($Name* suffix) {
 }
 
 $Name* LdapName::addAll(int32_t pos, $Name* suffix) {
+	$useLocalCurrentObjectStackCache();
 	if ($instanceOf(LdapName, suffix)) {
 		$var(LdapName, s, $cast(LdapName, suffix));
 		for (int32_t i = 0; i < $nc($nc(s)->rdns)->size(); ++i) {
@@ -286,6 +293,7 @@ $Name* LdapName::add($String* comp) {
 }
 
 $Name* LdapName::add(int32_t pos, $String* comp) {
+	$useLocalCurrentObjectStackCache();
 	$var($LdapName$Rdn, rdn, ($$new($LdapName$DnParser, comp, this->valuesCaseSensitive))->getRdn());
 	$nc(this->rdns)->insertElementAt(rdn, pos);
 	$set(this, unparsed, nullptr);
@@ -324,6 +332,7 @@ void LdapName::writeObject($ObjectOutputStream* s) {
 }
 
 void LdapName::readObject($ObjectInputStream* s) {
+	$useLocalCurrentObjectStackCache();
 	$set(this, unparsed, $cast($String, $nc(s)->readObject()));
 	this->valuesCaseSensitive = s->readBoolean();
 	try {

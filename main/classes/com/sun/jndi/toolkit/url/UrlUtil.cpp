@@ -70,6 +70,7 @@ $String* UrlUtil::decode($String* s) {
 }
 
 $String* UrlUtil::decode($String* s, $String* enc) {
+	$useLocalCurrentObjectStackCache();
 	try {
 		return $URLDecoder::decode(s, enc);
 	} catch ($IllegalArgumentException&) {
@@ -82,6 +83,7 @@ $String* UrlUtil::decode($String* s, $String* enc) {
 }
 
 $String* UrlUtil::encode($String* s, $String* enc) {
+	$useLocalCurrentObjectStackCache();
 	$var($bytes, bytes, $nc(s)->getBytes(enc));
 	int32_t count = bytes->length;
 	$var($String, allowed, "=,+;.\'-@&/$_()!~*:"_s);

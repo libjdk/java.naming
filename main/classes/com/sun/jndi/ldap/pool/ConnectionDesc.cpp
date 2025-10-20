@@ -148,6 +148,7 @@ int64_t ConnectionDesc::getUseCount() {
 }
 
 void ConnectionDesc::d($String* msg) {
+	$useLocalCurrentObjectStackCache();
 	if (ConnectionDesc::debug) {
 		$init($System);
 		$nc($System::err)->println($$str({"ConnectionDesc."_s, msg, " "_s, $(toString())}));

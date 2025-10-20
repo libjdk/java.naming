@@ -118,6 +118,7 @@ $String* Reference::getFactoryClassLocation() {
 }
 
 $RefAddr* Reference::get($String* addrType) {
+	$useLocalCurrentObjectStackCache();
 	int32_t len = $nc(this->addrs)->size();
 	$var($RefAddr, addr, nullptr);
 	for (int32_t i = 0; i < len; ++i) {
@@ -160,6 +161,7 @@ void Reference::clear() {
 }
 
 bool Reference::equals(Object$* obj) {
+	$useLocalCurrentObjectStackCache();
 	if ((obj != nullptr) && ($instanceOf(Reference, obj))) {
 		$var(Reference, target, $cast(Reference, obj));
 		bool var$0 = $nc(target->className)->equals(this->className);
@@ -182,6 +184,7 @@ bool Reference::equals(Object$* obj) {
 }
 
 int32_t Reference::hashCode() {
+	$useLocalCurrentObjectStackCache();
 	int32_t hash = $nc(this->className)->hashCode();
 	{
 		$var($Enumeration, e, getAll());
@@ -193,6 +196,7 @@ int32_t Reference::hashCode() {
 }
 
 $String* Reference::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($StringBuilder, sb, $new($StringBuilder, $$str({"Reference Class Name: "_s, this->className, "\n"_s})));
 	int32_t len = $nc(this->addrs)->size();
 	for (int32_t i = 0; i < len; ++i) {
@@ -202,6 +206,7 @@ $String* Reference::toString() {
 }
 
 $Object* Reference::clone() {
+	$useLocalCurrentObjectStackCache();
 	$var(Reference, r, $new(Reference, this->className, this->classFactory, this->classFactoryLocation));
 	$var($Enumeration, a, getAll());
 	$set(r, addrs, $new($Vector));

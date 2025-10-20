@@ -104,6 +104,7 @@ $String* Uri::toString() {
 }
 
 void Uri::parse($String* uri) {
+	$useLocalCurrentObjectStackCache();
 	int32_t i = 0;
 	i = $nc(uri)->indexOf((int32_t)u':');
 	if (i < 0) {

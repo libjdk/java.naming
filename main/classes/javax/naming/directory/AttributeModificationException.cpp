@@ -70,6 +70,7 @@ $ModificationItemArray* AttributeModificationException::getUnexecutedModificatio
 }
 
 $String* AttributeModificationException::toString() {
+	$useLocalCurrentObjectStackCache();
 	$var($String, orig, $NamingException::toString());
 	if (this->unexecs != nullptr) {
 		$plusAssign(orig, ($$str({"First unexecuted modification: "_s, $($nc($nc(this->unexecs)->get(0))->toString())})));

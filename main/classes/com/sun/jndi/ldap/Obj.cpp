@@ -201,6 +201,7 @@ void Obj::init$() {
 
 $Attributes* Obj::encodeObject(char16_t separator, Object$* obj, $Attributes* attrs$renamed, $Attribute* objectClass, bool cloned) {
 	$init(Obj);
+	$useLocalCurrentObjectStackCache();
 	$var($Attributes, attrs, attrs$renamed);
 	bool var$0 = $nc(objectClass)->size() == 0;
 	if (!var$0) {
@@ -256,6 +257,7 @@ $Attributes* Obj::encodeObject(char16_t separator, Object$* obj, $Attributes* at
 
 $StringArray* Obj::getCodebases($Attribute* codebaseAttr) {
 	$init(Obj);
+	$useLocalCurrentObjectStackCache();
 	if (codebaseAttr == nullptr) {
 		return nullptr;
 	} else {
@@ -274,6 +276,7 @@ $StringArray* Obj::getCodebases($Attribute* codebaseAttr) {
 
 $Object* Obj::decodeObject($Attributes* attrs) {
 	$init(Obj);
+	$useLocalCurrentObjectStackCache();
 	$var($Attribute, attr, nullptr);
 	$var($StringArray, codebases, getCodebases($($nc(attrs)->get($nc(Obj::JAVA_ATTRIBUTES)->get(Obj::CODEBASE)))));
 	try {
@@ -310,6 +313,7 @@ $Object* Obj::decodeObject($Attributes* attrs) {
 
 $Attributes* Obj::encodeReference(char16_t separator, $Reference* ref, $Attributes* attrs, Object$* orig) {
 	$init(Obj);
+	$useLocalCurrentObjectStackCache();
 	if (ref == nullptr) {
 		return attrs;
 	}
@@ -359,6 +363,7 @@ $Object* Obj::decodeRmiObject($String* className, $String* rmiName, $StringArray
 
 $Reference* Obj::decodeReference($Attributes* attrs, $StringArray* codebases) {
 	$init(Obj);
+	$useLocalCurrentObjectStackCache();
 	$var($Attribute, attr, nullptr);
 	$var($String, className, nullptr);
 	$var($String, factory, nullptr);
@@ -435,6 +440,7 @@ $Reference* Obj::decodeReference($Attributes* attrs, $StringArray* codebases) {
 
 $bytes* Obj::serializeObject(Object$* obj) {
 	$init(Obj);
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($ByteArrayOutputStream, bytes, $new($ByteArrayOutputStream));
 		{
@@ -476,6 +482,7 @@ $bytes* Obj::serializeObject(Object$* obj) {
 
 $Object* Obj::deserializeObject($bytes* obj, $ClassLoader* cl) {
 	$init(Obj);
+	$useLocalCurrentObjectStackCache();
 	try {
 		$var($ByteArrayInputStream, bytes, $new($ByteArrayInputStream, obj));
 		try {
@@ -532,6 +539,7 @@ $Object* Obj::deserializeObject($bytes* obj, $ClassLoader* cl) {
 
 $Attributes* Obj::determineBindAttrs(char16_t separator, Object$* obj$renamed, $Attributes* attrs$renamed, bool cloned, $Name* name, $Context* ctx, $Hashtable* env) {
 	$init(Obj);
+	$useLocalCurrentObjectStackCache();
 	$var($Object, obj, obj$renamed);
 	$var($Attributes, attrs, attrs$renamed);
 	$var($DirStateFactory$Result, res, $DirectoryManager::getStateToBind(obj, name, ctx, env, attrs));
